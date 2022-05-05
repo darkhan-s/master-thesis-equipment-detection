@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesistemplate.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 19 items.
+Database file #1: references_library.bib
+Warning--empty journal in Li2020
+Warning--empty journal in Oza2021
+You've used 2 entries,
+            2118 wiz_defined-function locations,
+            507 strings with 4295 characters,
+and the built_in function-call counts, 657 in all, are:
+= -- 54
+> -- 51
+< -- 0
++ -- 20
+- -- 18
+* -- 52
+:= -- 127
+add.period$ -- 6
+call.type$ -- 2
+change.case$ -- 15
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 20
+empty$ -- 35
+format.name$ -- 18
+if$ -- 120
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 2
+newline$ -- 13
+num.names$ -- 4
+pop$ -- 19
+preamble$ -- 1
+purify$ -- 13
+quote$ -- 0
+skip$ -- 14
+stack$ -- 0
+substring$ -- 10
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 2
+while$ -- 4
+width$ -- 3
+write$ -- 20
+(There were 2 warnings)

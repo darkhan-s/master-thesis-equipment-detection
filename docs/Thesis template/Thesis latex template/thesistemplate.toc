@@ -1,0 +1,14 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{Abstract{} }{3}{section*.1}%
+\contentsline {section}{Preface}{4}{section*.2}%
+\contentsline {section}{Contents}{5}{section*.3}%
+\contentsline {section}{Symbols and abbreviations}{8}{section*.7}%
+\contentsline {section}{\numberline {1}Introduction}{9}{section.1}%
+\contentsline {section}{\numberline {2}Related work}{11}{section.2}%
+\contentsline {section}{\numberline {3}Research Methodology}{12}{section.3}%
+\contentsline {section}{\numberline {4}Validation and Results}{14}{section.4}%
+\contentsline {section}{\numberline {5}Analysis and Discussion}{15}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion and Future Work}{16}{section.6}%
+\contentsline {section}{\numberline {A}Appendices}{18}{appendix.A}%
+\contentsline {section}{\numberline {B}Appendices2}{19}{appendix.B}%
+\contentsline {section}{\numberline {C}Temp}{20}{appendix.C}%
