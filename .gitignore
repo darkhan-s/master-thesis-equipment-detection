@@ -1,6 +1,4 @@
-adaptive_teacher/
-detr/
-pytorch-YOLOv4
+misc/
 
 
 
@@ -28,3 +26,21 @@ log
 *.jpg
 *.json
 data/outcome
+
+.nfs*
+*.ipynb
+*.pyc
+.dumbo.json
+.DS_Store
+.*.swp
+*.pth
+**/__pycache__/**
+.ipynb_checkpoints/
+datasets/data/
+experiment-*
+*.tmp
+*.pkl
+**/.mypy_cache/*
+.mypy_cache/*
+not_tracked_dir/
+.vscode
