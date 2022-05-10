@@ -1,6 +1,6 @@
 misc/
-
-
+output/
+slurm*.txt
 
 **/__pycache__/
 
