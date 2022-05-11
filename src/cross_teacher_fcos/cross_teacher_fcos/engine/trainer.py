@@ -273,7 +273,7 @@ class BaselineTrainer(DefaultTrainer):
 
 
 # Adaptive Teacher Trainer
-class cross_teacher_fcosTrainer(DefaultTrainer):
+class CrossTrainer(DefaultTrainer):
     def __init__(self, cfg):
         """
         Args:

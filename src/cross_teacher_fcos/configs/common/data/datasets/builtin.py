@@ -6,11 +6,11 @@ from fvcore.common.timer import Timer
 from iopath.common.file_io import PathManager
 import logging
 
-from tless_voc import register_tless_voc
+from .tless_voc import register_tless_voc
 
 logger = logging.getLogger(__name__)
 
-_root = "/scratch/project_2005695/PyTorch-CycleGAN/datasets/"
+## _root = "/scratch/project_2005695/PyTorch-CycleGAN/datasets/"
 # ==== Predefined splits for TLess (PASCAL VOC format) ===========
 def register_all_tless(root):
     logger.info("Registering happened here")
