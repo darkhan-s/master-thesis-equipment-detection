@@ -65,7 +65,6 @@ def do_train(args, cfg, trainer_mockup):
                 checkpointer (dict)
                 ddp (dict)
     """
-
     model = instantiate(cfg.model)
     logger = logging.getLogger("detectron2")
     logger.info("Model:\n{}".format(model))

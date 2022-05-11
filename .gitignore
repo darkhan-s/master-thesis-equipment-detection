@@ -2,6 +2,7 @@ misc/
 output/
 slurm*.txt
 temp*
+
 **/__pycache__/
 
 
