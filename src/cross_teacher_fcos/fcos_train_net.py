@@ -31,8 +31,8 @@ from detectron2.utils import comm
 
 from configs.common.data.datasets.builtin import register_all_tless
 
-from cross_teacher_fcos.cross_teacher_fcos.modeling.meta_arch.ts_ensemble import EnsembleTSModel
-from cross_teacher_fcos.engine.trainer import CrossTrainer, BaselineTrainer
+from cross_teacher_fcos.modeling.meta_arch.ts_ensemble import EnsembleTSModel
+from cross_teacher_fcos.engine.fcos_trainer import CrossTrainer, BaselineTrainer
 
 logger = logging.getLogger("detectron2")
 
@@ -69,7 +69,6 @@ def do_train(args, cfg, trainer_mockup):
     logger = logging.getLogger("detectron2")
     logger.info("Model:\n{}".format(model))
     model.to(cfg.train.device)
-    register_all_tless("/scratch/project_2005695/PyTorch-CycleGAN/datasets/")
 
     cfg.optimizer.params.model = model
     optim = instantiate(cfg.optimizer)
@@ -78,10 +77,6 @@ def do_train(args, cfg, trainer_mockup):
 
     model = create_ddp_model(model, **cfg.train.ddp)
 
-
-    # trainer = trainer_mockup(cfg)
-    # trainer.resume_or_load(resume=args.resume)
-    # trainer.train()
     
     trainer = (AMPTrainer if cfg.train.amp.enabled else SimpleTrainer)(model, train_loader, optim)
     checkpointer = DetectionCheckpointer(
@@ -121,16 +116,18 @@ def main(args):
     cfg = LazyConfig.apply_overrides(cfg, args.opts)
     default_setup(cfg, args)
 
-    if cfg.SEMISUPNET.Trainer == "crossteacher":
+    register_all_tless("/scratch/project_2005695/PyTorch-CycleGAN/datasets/")
+
+    if cfg.semisupnet.trainer == "crossteacher":
         trainer = CrossTrainer
-    elif cfg.SEMISUPNET.Trainer == "baseline":
+    elif cfg.semisupnet.trainer == "baseline":
         trainer = BaselineTrainer
     else:
         raise ValueError("Trainer Name is not found.")
 
 
     if args.eval_only:
-        if cfg.SEMISUPNET.Trainer == "crossteacher":
+        if cfg.semisupnet.trainer == "crossteacher":
             model = instantiate(cfg.model)
             model.to(cfg.train.device)
             model = create_ddp_model(model)
@@ -152,7 +149,10 @@ def main(args):
             DetectionCheckpointer(model).load(cfg.train.init_checkpoint)
             print(do_test(cfg, model))
     else:
-        do_train(args, cfg, trainer)
+        Trainer = trainer(cfg)
+        Trainer.resume_or_load(resume=args.resume)
+        Trainer.train()
+        #do_train(args, cfg, trainer)
 
 
 if __name__ == "__main__":

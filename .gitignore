@@ -1,4 +1,5 @@
 misc/
+bin/
 output/
 slurm*.txt
 temp*

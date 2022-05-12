@@ -4,7 +4,7 @@ from detectron2.structures import pairwise_iou
 class OpenMatchTrainerProbe:
     def __init__(self, cfg):
         self.BOX_AP = 0.5
-        self.NUM_CLASSES = cfg.MODEL.ROI_HEADS.NUM_CLASSES
+        self.NUM_CLASSES = cfg.model.num_classes
        # self.bbox_stat_list = ['compute_fp_gtoutlier', 'compute_num_box', 'compute_ood_acc']
  
     def bbox_stat(self, unlabel_gt, unlabel_pseudo, name, bbox_stat_list):
@@ -301,13 +301,13 @@ def probe(
     """
     # [probe] roi result from weak branch (before pseudo-labeling)
     record_roih = probe_roih_bbox(
-        proposals_roih_unsup_k, cfg.MODEL.ROI_HEADS.NUM_CLASSES, "roih"
+        proposals_roih_unsup_k, cfg.MODEL.NUM_CLASSES, "roih"
     )
     record_dict.update(record_roih)
 
     # [probe] roi result after pseudo-labeling from weak branch
     record_roih_pseudo = probe_roih_bbox(
-        pesudo_proposals_roih_unsup_k, cfg.MODEL.ROI_HEADS.NUM_CLASSES, "roih_pseudo"
+        pesudo_proposals_roih_unsup_k, cfg.MODEL.NUM_CLASSES, "roih_pseudo"
     )
     record_dict.update(record_roih_pseudo)
 

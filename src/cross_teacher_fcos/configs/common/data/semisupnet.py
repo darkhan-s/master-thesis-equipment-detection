@@ -14,4 +14,7 @@ semisupnet.loss_weight_type = "standard"
 semisupnet.dis_type = "res4"
 semisupnet.dis_loss_weight = 0.1
 
+semisupnet.ema_keep_rate = 0.9996
 
+test = OmegaConf.create()
+test.eval_period = 1000

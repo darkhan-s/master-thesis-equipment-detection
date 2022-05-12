@@ -15,7 +15,7 @@ from detectron2.engine.train_loop import AMPTrainer
 from detectron2.utils.events import EventStorage
 from detectron2.evaluation import COCOEvaluator, verify_results, DatasetEvaluators
 from detectron2.data.dataset_mapper import DatasetMapper
-from detectron2.engine import hooks
+from detectron2.engine import hooks, default_writers
 from detectron2.structures.boxes import Boxes
 from detectron2.structures.instances import Instances
 from detectron2.utils.env import TORCH_VERSION
@@ -27,15 +27,17 @@ from cross_teacher_fcos.data.build import (
     build_detection_semisup_train_loader_two_crops,
 )
 from cross_teacher_fcos.data.dataset_mapper import DatasetMapperTwoCropSeparate
-from cross_teacher_fcos.engine.hooks import LossEvalHook
 from cross_teacher_fcos.modeling.meta_arch.ts_ensemble import EnsembleTSModel
 from cross_teacher_fcos.checkpoint.detection_checkpoint import DetectionTSCheckpointer
 from cross_teacher_fcos.solver.build import build_lr_scheduler
 from cross_teacher_fcos.evaluation import PascalVOCDetectionEvaluator
 
+from detectron2.config import LazyConfig, instantiate
+from detectron2.engine.defaults import create_ddp_model
+from detectron2.evaluation import inference_on_dataset
+
 from .probe import OpenMatchTrainerProbe
 import copy
-
 
 # Supervised-only Trainer
 class BaselineTrainer(DefaultTrainer):
@@ -47,29 +49,34 @@ class BaselineTrainer(DefaultTrainer):
         with matching heuristics.
         """
         cfg = DefaultTrainer.auto_scale_workers(cfg, comm.get_world_size())
-        model = self.build_model(cfg)
-        optimizer = self.build_optimizer(cfg, model)
-        data_loader = self.build_train_loader(cfg)
 
-        if comm.get_world_size() > 1:
-            model = DistributedDataParallel(
-                model, device_ids=[comm.get_local_rank()], broadcast_buffers=False
-            )
+        model = instantiate(cfg.model)
+        logger = logging.getLogger("detectron2")
+        logger.info("Model:\n{}".format(model))
+        model.to(cfg.train.device)
+
+        cfg.optimizer.params.model = model
+        self.optimizer = instantiate(cfg.optimizer)
+
+        self.data_loader = instantiate(cfg.dataloader.train)
+
+        model = create_ddp_model(model, **cfg.train.ddp)
 
         TrainerBase.__init__(self)
         self._trainer = (AMPTrainer if cfg.SOLVER.AMP.ENABLED else SimpleTrainer)(
-            model, data_loader, optimizer
+            model, self.data_loader, self.optimizer
         )
-
-        self.scheduler = self.build_lr_scheduler(cfg, optimizer)
+        self.scheduler=instantiate(cfg.lr_multiplier)
         self.checkpointer = DetectionCheckpointer(
             model,
-            cfg.OUTPUT_DIR,
-            optimizer=optimizer,
+            cfg.train.output_dir,
+            trainer=self._trainer,
+            optimizer=self.optimizer,
             scheduler=self.scheduler,
         )
+
         self.start_iter = 0
-        self.max_iter = cfg.SOLVER.MAX_ITER
+        self.max_iter = cfg.train.max_iter
         self.cfg = cfg
 
         self.register_hooks(self.build_hooks())
@@ -87,19 +94,23 @@ class BaselineTrainer(DefaultTrainer):
             resume (bool): whether to do resume or not
         """
         checkpoint = self.checkpointer.resume_or_load(
-            self.cfg.MODEL.WEIGHTS, resume=resume
+            self.cfg.train.init_checkpoint, resume=resume
         )
         if resume and self.checkpointer.has_checkpoint():
             self.start_iter = checkpoint.get("iteration", -1) + 1
             # The checkpoint stores the training iteration that just finished, thus we start
             # at the next iteration (or iter zero if there's no checkpoint).
+        else:
+            self.start_iter = 0
+        #TODO: check if this is needed
         if isinstance(self.model, DistributedDataParallel):
             # broadcast loaded data/model from the first rank, because other
             # machines may not have access to the checkpoint file
             if TORCH_VERSION >= (1, 7):
                 self.model._sync_params_and_buffers()
             self.start_iter = comm.all_gather(self.start_iter)[0]
-
+        
+        
     def train_loop(self, start_iter: int, max_iter: int):
         """
         Args:
@@ -203,7 +214,8 @@ class BaselineTrainer(DefaultTrainer):
         """
         cfg = self.cfg.clone()
         cfg.defrost()
-        cfg.DATALOADER.NUM_WORKERS = 0
+        cfg.dataloader.train.num_workers = 0
+        #cfg.DATALOADER.NUM_WORKERS = 0
 
         ret = [
             hooks.IterationTimer(),
@@ -211,7 +223,7 @@ class BaselineTrainer(DefaultTrainer):
             hooks.PreciseBN(
                 cfg.TEST.EVAL_PERIOD,
                 self.model,
-                self.build_train_loader(cfg),
+                instantiate(cfg.dataloader.train),
                 cfg.TEST.PRECISE_BN.NUM_ITER,
             )
             if cfg.TEST.PRECISE_BN.ENABLED and get_bn_modules(self.model)
@@ -221,19 +233,27 @@ class BaselineTrainer(DefaultTrainer):
         if comm.is_main_process():
             ret.append(
                 hooks.PeriodicCheckpointer(
-                    self.checkpointer, cfg.SOLVER.CHECKPOINT_PERIOD
+                    self.checkpointer, cfg.train.checkpointer.period
                 )
             )
-
+        #FIXME: Possibly have to use only one of them
+        # def test_and_save_results():
+        #     self._last_eval_results = self.test(self.cfg, self.model)
+        #     return self._last_eval_results
+        
         def test_and_save_results():
-            self._last_eval_results = self.test(self.cfg, self.model)
+            if "evaluator" in cfg.dataloader:
+                self._last_eval_results = inference_on_dataset(
+                    self.model, instantiate(cfg.dataloader.test), instantiate(cfg.dataloader.evaluator)
+                )
             return self._last_eval_results
-
-        ret.append(hooks.EvalHook(cfg.TEST.EVAL_PERIOD, test_and_save_results))
+        ret.append(hooks.EvalHook(cfg.test.eval_period, test_and_save_results))
 
         if comm.is_main_process():
-            ret.append(hooks.PeriodicWriter(self.build_writers(), period=20))
+            ret.append(hooks.PeriodicWriter(default_writers(cfg.train.output_dir, cfg.train.max_iter),
+                period=cfg.train.log_period))
         return ret
+            
 
     def _write_metrics(self, metrics_dict: dict):
         """
@@ -282,41 +302,45 @@ class CrossTrainer(DefaultTrainer):
         with matching heuristics.
         """
         cfg = DefaultTrainer.auto_scale_workers(cfg, comm.get_world_size())
-        data_loader = self.build_train_loader(cfg)
 
-        # create an student model
-        model = self.build_model(cfg)
-        optimizer = self.build_optimizer(cfg, model)
+        # create a student model
+        model = instantiate(cfg.model)
+        logger = logging.getLogger("detectron2")
+        logger.info("Model:\n{}".format(model))
+        model.to(cfg.train.device)
+
+        cfg.optimizer.params.model = model
+        self.optimizer = instantiate(cfg.optimizer)
+
+        self.data_loader = instantiate(cfg.dataloader.train)
+
+        model = create_ddp_model(model, **cfg.train.ddp)
 
         # create an teacher model
-        model_teacher = self.build_model(cfg)
+        model_teacher = instantiate(cfg.model)
+        model_teacher.to(cfg.train.device)
         self.model_teacher = model_teacher
-
-        # For training, wrap with DDP. But don't need this for inference.
-        if comm.get_world_size() > 1:
-            model = DistributedDataParallel(
-                model, device_ids=[comm.get_local_rank()], broadcast_buffers=False
-            )
 
         TrainerBase.__init__(self)
         self._trainer = (AMPTrainer if cfg.SOLVER.AMP.ENABLED else SimpleTrainer)(
-            model, data_loader, optimizer
+            model, self.data_loader, self.optimizer
         )
-        self.scheduler = self.build_lr_scheduler(cfg, optimizer)
+        self.scheduler=instantiate(cfg.lr_multiplier)
 
         # Ensemble teacher and student model is for model saving and loading
         ensem_ts_model = EnsembleTSModel(model_teacher, model)
 
         self.checkpointer = DetectionTSCheckpointer(
             ensem_ts_model,
-            cfg.OUTPUT_DIR,
-            optimizer=optimizer,
+            cfg.train.output_dir,
+            optimizer=self.optimizer,
             scheduler=self.scheduler,
         )
         self.start_iter = 0
-        self.max_iter = cfg.SOLVER.MAX_ITER
+        self.max_iter = cfg.train.max_iter
         self.cfg = cfg
 
+        #FIXME: To check!
         self.probe = OpenMatchTrainerProbe(cfg)
         self.register_hooks(self.build_hooks()) 
 
@@ -333,12 +357,15 @@ class CrossTrainer(DefaultTrainer):
             resume (bool): whether to do resume or not
         """
         checkpoint = self.checkpointer.resume_or_load(
-            self.cfg.MODEL.WEIGHTS, resume=resume
+            self.cfg.train.init_checkpoint, resume=resume
         )
         if resume and self.checkpointer.has_checkpoint():
             self.start_iter = checkpoint.get("iteration", -1) + 1
             # The checkpoint stores the training iteration that just finished, thus we start
             # at the next iteration (or iter zero if there's no checkpoint).
+        else:
+            self.start_iter = 0
+        #TODO: check if this is needed
         if isinstance(self.model, DistributedDataParallel):
             # broadcast loaded data/model from the first rank, because other
             # machines may not have access to the checkpoint file
@@ -408,7 +435,7 @@ class CrossTrainer(DefaultTrainer):
                 self.after_train()
 
     # =====================================================
-    # ================== Pseduo-labeling ==================
+    # ================== Pseudo-labeling ==================
     # =====================================================
     def threshold_bbox(self, proposal_bbox_inst, thres=0.7, proposal_type="roih"):
         if proposal_type == "rpn":
@@ -481,12 +508,7 @@ class CrossTrainer(DefaultTrainer):
                 label_list.append(copy.deepcopy(label_datum["instances"]))
         
         return label_list
-    
-    # def get_label_test(self, label_data):
-    #     label_list = []
-    #     for label_datum in label_data:
-    #         if "instances" in label_datum.keys():
-    #             label_list.append(label_datum["instances"])
+
 
     # =====================================================
     # =================== Training Flow ===================
@@ -733,17 +755,19 @@ class CrossTrainer(DefaultTrainer):
     def build_hooks(self):
         cfg = self.cfg.clone()
         cfg.defrost()
-        cfg.DATALOADER.NUM_WORKERS = 0  # save some memory and time for PreciseBN
+        cfg.dataloader.train.num_workers = 0
+        #cfg.DATALOADER.NUM_WORKERS = 0  # save some memory and time for PreciseBN
 
+        #FIXME: Probably has to be checked
         ret = [
             hooks.IterationTimer(),
             hooks.LRScheduler(self.optimizer, self.scheduler),
             hooks.PreciseBN(
                 # Run at the same freq as (but before) evaluation.
-                cfg.TEST.EVAL_PERIOD,
+                cfg.test.eval_period,
                 self.model,
                 # Build a new data loader to not affect training
-                self.build_train_loader(cfg),
+                instantiate(cfg.dataloader.train),
                 cfg.TEST.PRECISE_BN.NUM_ITER,
             )
             if cfg.TEST.PRECISE_BN.ENABLED and get_bn_modules(self.model)
@@ -757,29 +781,49 @@ class CrossTrainer(DefaultTrainer):
         if comm.is_main_process():
             ret.append(
                 hooks.PeriodicCheckpointer(
-                    self.checkpointer, cfg.SOLVER.CHECKPOINT_PERIOD
+                    self.checkpointer, cfg.train.checkpointer.period
                 )
             )
 
         def test_and_save_results_student():
-            self._last_eval_results_student = self.test(self.cfg, self.model)
-            _last_eval_results_student = {
-                k + "_student": self._last_eval_results_student[k]
-                for k in self._last_eval_results_student.keys()
-            }
+            if "evaluator" in cfg.dataloader:
+                self._last_eval_results_student = inference_on_dataset(
+                    self.model, instantiate(cfg.dataloader.test), instantiate(cfg.dataloader.evaluator)
+                )
+                _last_eval_results_student = {
+                    k + "_student": self._last_eval_results_student[k]
+                    for k in self._last_eval_results_student.keys()
+                }
             return _last_eval_results_student
 
+        # def test_and_save_results_student():
+        #     self._last_eval_results_student = self.test(self.cfg, self.model)
+        #     _last_eval_results_student = {
+        #         k + "_student": self._last_eval_results_student[k]
+        #         for k in self._last_eval_results_student.keys()
+        #     }
+        #     return _last_eval_results_student
+
         def test_and_save_results_teacher():
-            self._last_eval_results_teacher = self.test(
-                self.cfg, self.model_teacher)
+            if "evaluator" in cfg.dataloader:
+                self._last_eval_results_teacher = inference_on_dataset(
+                    self.model_teacher, instantiate(cfg.dataloader.test), instantiate(cfg.dataloader.evaluator)
+                )
             return self._last_eval_results_teacher
 
-        ret.append(hooks.EvalHook(cfg.TEST.EVAL_PERIOD,
+        # def test_and_save_results_teacher():
+        #     self._last_eval_results_teacher = self.test(
+        #         self.cfg, self.model_teacher)
+        #     return self._last_eval_results_teacher
+
+        ret.append(hooks.EvalHook(cfg.test.eval_period,
                    test_and_save_results_student))
-        ret.append(hooks.EvalHook(cfg.TEST.EVAL_PERIOD,
+        ret.append(hooks.EvalHook(cfg.test.eval_period,
                    test_and_save_results_teacher))
 
-        if comm.is_main_process():
-            # run writers in the end, so that evaluation metrics are written
-            ret.append(hooks.PeriodicWriter(self.build_writers(), period=20))
+
+        if comm.is_main_process():            
+        # run writers in the end, so that evaluation metrics are written
+            ret.append(hooks.PeriodicWriter(default_writers(cfg.train.output_dir, cfg.train.max_iter),
+                period=cfg.train.log_period))
         return ret
