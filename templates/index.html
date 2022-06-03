@@ -22,37 +22,37 @@ style="color: #000000">
 		<h2>Upload an image of a spare part</h2>
 		<div class="row">
 			<div class="column">
-				<p>Original image</p>
-				<img src="{{user_image}}" alt="User Image" style="display: flex">
+				<p>Original image: </p>
+				<img src="{{user_image}}" alt="User Image" style="display: flex" onerror="this.onerror=null; this.remove();">
 			</div>
 			<div class="column">
-				<p>Predictions</p>
-				<img src="{{return_image}}" alt="Predictions" style="display: flex">
+				<p>Predictions: </p>
+				<img src="{{return_image}}" alt="Predictions" style="display: flex" onerror="this.onerror=null; this.remove();">
 			</div>
 		</div>
 		
 		
-		<form method="POST" enctype=multipart/form-data style="color: darkblue">
+		<form method="POST" enctype=multipart/form-data>
 			<dl>
 				<p>
-					<input type="file" name="file" class="form-control" autocomplete="off" required>
+					<input type="file" name="file" autocomplete="off" required>
 				</p>
 			</dl>
 			<input type="submit" name="upload">
 		</form>
 		
 	</div>
-    <div>
-		<p class="footer" style="margin-top:90px;
-		font-size: 1.2em;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		color: #000000
-	">
+	<!-- <footer>
+        <div class="footer">
 			© 2022 Darkhan Saidnassimov, Aalto University
-		</p>
+        </div>
+    </footer> -->
+	<div class="footerholder">
+		<div class="footer">
+			<p style="color: white;">© 2022 Darkhan Saidnassimov, Aalto University</p>
+		</div>
 	</div>
+
+		
 </body>
 </html>

@@ -14,6 +14,9 @@ UPLOAD_FOLDER = os.path.join('static', 'uploads')
 PREDICTIONS_FOLDER = os.path.join('static', 'predictions')
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
+## Some of the ideas taken from https://spiyer99.github.io/Detectron2-Web-App/
+## https://medium.com/@arkachkrbrty/deploying-a-pytorch-ml-model-in-a-flask-based-web-application-ab7aa585200e
+## and https://github.com/avinassh/pytorch-flask-api
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -23,6 +26,12 @@ detector = Detector()
 import logging
 logging.basicConfig(level=logging.INFO)
 
+def clean_storage(folder):
+	import glob
+	files = glob.glob(folder)
+	for f in files:
+		print(f"Removing old file: {f}")
+		os.remove(f)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -66,7 +75,8 @@ def entry_point():
 			print('File read, attempting to run inference', file=sys.stdout)
 			# run inference
 			result_img = run_inference(image)
-			clone_image = cv2.cvtColor(np.array(result_img), cv2.COLOR_RGB2BGR)
+			#clone_image = cv2.cvtColor(np.array(result_img), cv2.COLOR_RGB2BGR)
+			clone_image = np.array(result_img)
 			cv2.imwrite(os.path.join(app.config['PREDICTIONS_FOLDER'], file.filename), clone_image)
 			# create file-object in memory
 			file_object = io.BytesIO()
@@ -105,4 +115,6 @@ def run_inference(image):
 
 
 if __name__ == '__main__':
+	clean_storage(os.path.join(UPLOAD_FOLDER, '*'))
+	clean_storage(os.path.join(PREDICTIONS_FOLDER, '*'))
 	app.run(debug=True,port=os.getenv('PORT',5000))

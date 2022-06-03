@@ -20,12 +20,27 @@ from adapteacher import add_ateacher_config
 from adapteacher.engine.trainer import ATeacherTrainer, BaselineTrainer
 
 # hacky way to register
-from adapteacher.modeling.meta_arch.rcnn import TwoStagePseudoLabGeneralizedRCNN, DAobjTwoStagePseudoLabGeneralizedRCNN
+from adapteacher.modeling.meta_arch.rcnn import DAobjTwoStagePseudoLabGeneralizedRCNN
 from adapteacher.modeling.meta_arch.vgg import build_vgg_backbone  # noqa
 from adapteacher.modeling.proposal_generator.rpn import PseudoLabRPN
 from adapteacher.modeling.roi_heads.roi_heads import StandardROIHeadsPseudoLab
 import adapteacher.data.datasets.builtin
+from adapteacher.data.datasets.builtin import register_all_tless
 from adapteacher.modeling.meta_arch.ts_ensemble import EnsembleTSModel
+
+TLESS_CLASS_NAMES = ["Model 1", "Model 2", "Model 3", "Model 4", "Model 5",
+        "Model 6", "Model 7", "Model 8", "Model 9", "Model 10", "Model 11",
+        "Model 12", "Model 13", "Model 14", "Model 15", "Model 16", "Model 17",
+        "Model 18", "Model 19", "Model 20", "Model 21", "Model 22", "Model 23",
+        "Model 24", "Model 25", "Model 26", "Model 27", "Model 28", "Model 29", "Model 30"
+        ]
+
+class Metadata:
+    def get(self, _):
+        return TLESS_CLASS_NAMES #your class labels
+
+register_all_tless("/scratch/project_2005695/PyTorch-CycleGAN/datasets/", debug_limit = 0, class_limit = (0,20))
+    
 
 class Detector:
 
@@ -46,9 +61,11 @@ class Detector:
         cfg = get_cfg()
         add_ateacher_config(cfg)
         cfg.merge_from_file('configs/' + self.modelpath)
-        cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.3 
+        cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5 
         cfg.MODEL.DEVICE = 'cpu' 
-        cfg.MODEL.WEIGHTS = 'output-original/model_0029999.pth'
+        #cfg.MODEL.WEIGHTS = 'output-stable/model_best.pth'
+        cfg.MODEL.WEIGHTS = 'output-mymodel-classes-0-20/model_best.pth'
+        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 20
         cfg.freeze()
         
         print('Model cfg is all set', file=sys.stdout)
@@ -70,14 +87,16 @@ class Detector:
 
             DetectionCheckpointer(
                 ensem_ts_model, save_dir=self.cfg.OUTPUT_DIR
-            ).load('output-original/model_0029999.pth')
+            #).load('output-original/model_0029999.pth')
+            ).load('output-mymodel-classes-0-20/model_best.pth')
             self.model = ensem_ts_model.modelTeacher
             
 
         else:
             self.model = Trainer.build_model(self.cfg)
             DetectionCheckpointer(self.model, save_dir=self.cfg.OUTPUT_DIR).load(
-                'output/model_0004999.pth'
+            #    'output/model_0004999.pth'
+            'output-mymodel-classes-0-20/model_best.pth'
             )
         self.model.eval()
         
@@ -104,7 +123,7 @@ class Detector:
 
                 print(predictions, file=sys.stdout)
 
-                v = Visualizer(im)
+                v = Visualizer(im, metadata=Metadata)
                 v = v.draw_instance_predictions(predictions["instances"].to("cpu"))
                 #cv2.imwrite("/scratch/project_2005695/master-thesis-equipment-detection/misc/adaptive_teacher/output/TLessReal_predictions/predictions.jpg", out.get_image()[..., ::-1][..., ::-1])
                 
