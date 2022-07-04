@@ -65,11 +65,12 @@
    <dc:title><rdf:Alt><rdf:li xml:lang="x-default">Equipment identification through image recognition</rdf:li></rdf:Alt></dc:title>
    <dc:creator><rdf:Seq><rdf:li>Saidnassimov Darkhan</rdf:li></rdf:Seq></dc:creator>
    <dc:rights><rdf:Alt><rdf:li xml:lang="x-default">Copyright © 2022 Saidnassimov Darkhan</rdf:li></rdf:Alt></dc:rights>
-   <dc:description><rdf:Alt><rdf:li xml:lang="x-default"> Your abstract in English. Keep the abstract short. The abstract explains your research topic, the methods you have used, and the results you obtained. In the PDF/A format of this thesis, in addition to the abstract page, the abstract text is written into the pdf file's metadata. Write here the text that goes into the metadata. The metadata cannot contain special characters, linebreak or paragraph break characters, so these must not be used here. If your abstract does not contain special characters and it does not require paragraphs, you may take advantage of the abstracttext macro (see the comment below). Otherwise, the metadata abstract text must be identical to the text on the abstract page. </rdf:li></rdf:Alt></dc:description>
+   <dc:description><rdf:Alt><rdf:li xml:lang="x-default"> TODO </rdf:li></rdf:Alt></dc:description>
    <dc:subject><rdf:Bag><rdf:li>Computer vision</rdf:li>
-     <rdf:li>domain adaptation</rdf:li>
      <rdf:li>object detection</rdf:li>
-     <rdf:li>3D models</rdf:li></rdf:Bag></dc:subject>
+     <rdf:li>transfer learning</rdf:li>
+     <rdf:li>domain adaptation</rdf:li>
+     <rdf:li>continual learning</rdf:li></rdf:Bag></dc:subject>
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:prism="http://prismstandard.org/namespaces/basic/2.2/"> 
   </rdf:Description> 
@@ -81,9 +82,9 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> 
    <xmp:CreatorTool>LaTeX with hyperref</xmp:CreatorTool> 
-   <xmp:ModifyDate>2022-05-03T15:56:47+03:00</xmp:ModifyDate> 
-   <xmp:CreateDate>2022-05-03T15:56:47+03:00</xmp:CreateDate> 
-   <xmp:MetadataDate>2022-05-03T15:56:47+03:00</xmp:MetadataDate> 
+   <xmp:ModifyDate>2022-07-04T18:57:37+03:00</xmp:ModifyDate> 
+   <xmp:CreateDate>2022-07-04T18:57:37+03:00</xmp:CreateDate> 
+   <xmp:MetadataDate>2022-07-04T18:57:37+03:00</xmp:MetadataDate> 
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpRights = "http://ns.adobe.com/xap/1.0/rights/"> 
    <xmpRights:Marked>True</xmpRights:Marked>
@@ -91,7 +92,7 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"> 
    <xmpMM:DocumentID>uuid:0885F996-E94A-0AD9-F4DD-B029EB238190</xmpMM:DocumentID> 
-   <xmpMM:InstanceID>uuid:1CDB5752-0BA1-960A-650B-9208A699A7CC</xmpMM:InstanceID> 
+   <xmpMM:InstanceID>uuid:67D52571-6559-6A28-522A-B25417721D5F</xmpMM:InstanceID> 
   </rdf:Description> 
  </rdf:RDF> 
 </x:xmpmeta> 

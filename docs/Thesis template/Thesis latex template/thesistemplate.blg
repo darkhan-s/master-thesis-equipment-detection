@@ -1,51 +1,117 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesistemplate.aux
-Reallocating 'name_of_file' (item size: 1) to 6 items.
-The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 7 items.
+The style file: ieeetr.bst
 Reallocating 'name_of_file' (item size: 1) to 19 items.
 Database file #1: references_library.bib
-Warning--empty journal in Li2020
+Warning--entry type for "metso_outotec_2022_1" isn't style-file defined
+--line 239 of file references_library.bib
+Warning--entry type for "metso_outotec_2022" isn't style-file defined
+--line 309 of file references_library.bib
+Warning--entry type for "metso_outotec_2022_2" isn't style-file defined
+--line 317 of file references_library.bib
+Warning--entry type for "paperswithcode:2022" isn't style-file defined
+--line 425 of file references_library.bib
+Warning--entry type for "resnet50" isn't style-file defined
+--line 518 of file references_library.bib
+Warning--entry type for "paperswithcode_1:2022" isn't style-file defined
+--line 652 of file references_library.bib
+Warning--entry type for "navisworks" isn't style-file defined
+--line 1045 of file references_library.bib
+Warning--entry type for "mAp_blog" isn't style-file defined
+--line 1079 of file references_library.bib
+Warning--empty journal in Awalgaonkar2020
+Warning--empty journal in Janai2017
+Warning--empty journal in Banf2022
+Warning--empty journal in Li2021
+Warning--empty journal in ima
+Warning--empty journal in Parisi2018
+Warning--empty journal in Etiemble2022
+Warning--empty journal in Hwang2018
+Warning--empty journal in Janiesch2021
+Warning--empty journal in Dubey2021
+Warning--empty journal in OShea2015
+Warning--empty journal in Albarghouthi2021
+Warning--empty journal in Alber2018
+Warning--empty journal in lecun-mnisthandwrittendigit-2010
+Warning--empty journal in Liu2016
+Warning--empty journal in Russakovsky2014
+Warning--empty journal in Lin2014
+Warning--can't use both volume and number fields in lecun-gradientbased-learning-applied-1998
+Warning--empty journal in Simonyan2014
+Warning--empty journal in He2015
+Warning--empty journal in Zaidi2021
+Warning--empty journal in Lin2017
+Warning--empty journal in Liu2015
+Warning--empty journal in Redmon2015a
+Warning--empty journal in Girshick2013
+Warning--empty journal in Girshick2015
+Warning--empty journal in Tian2019
+Warning--empty journal in He2017
+Warning--empty journal in Carion2020
+Warning--empty journal in Hosang2017
+Warning--empty journal in Redmon2018a
+Warning--empty journal in Redmon2016
+Warning--empty journal in Zhang2021b
+Warning--empty journal in Zhuang2019
+Warning--empty journal in Zhang2021
 Warning--empty journal in Oza2021
-You've used 2 entries,
-            2118 wiz_defined-function locations,
-            507 strings with 4295 characters,
-and the built_in function-call counts, 657 in all, are:
-= -- 54
-> -- 51
+Warning--empty journal in Chen2018
+Warning--empty journal in Rezaeianaran2021
+Warning--empty journal in Khodabandeh2019
+Warning--empty journal in Hsu2019
+Warning--empty journal in Zhu2017
+Warning--empty journal in Kim2019
+Warning--empty journal in Cai2019
+Warning--empty journal in Liu2021
+Warning--empty journal in Zhang2021a
+Warning--empty journal in Vidit2021
+Warning--empty journal in Razavian2014
+Warning--empty journal in Donahue2013
+Warning--empty journal in Rusu2016
+Warning--empty journal in Yoon2017
+Warning--empty journal in Chen2020
+Warning--empty journal in Arruda2019
+You've used 86 entries,
+            1876 wiz_defined-function locations,
+            875 strings with 18651 characters,
+and the built_in function-call counts, 17229 in all, are:
+= -- 1207
+> -- 1355
 < -- 0
-+ -- 20
-- -- 18
-* -- 52
-:= -- 127
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 15
++ -- 484
+- -- 398
+* -- 1512
+:= -- 2884
+add.period$ -- 96
+call.type$ -- 86
+change.case$ -- 85
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 20
-empty$ -- 35
-format.name$ -- 18
-if$ -- 120
+cite$ -- 138
+duplicate$ -- 749
+empty$ -- 1518
+format.name$ -- 398
+if$ -- 3783
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 2
-newline$ -- 13
-num.names$ -- 4
-pop$ -- 19
+int.to.str$ -- 86
+missing$ -- 75
+newline$ -- 272
+num.names$ -- 84
+pop$ -- 420
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 0
 quote$ -- 0
-skip$ -- 14
+skip$ -- 312
 stack$ -- 0
-substring$ -- 10
-swap$ -- 0
+substring$ -- 274
+swap$ -- 100
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 2
-while$ -- 4
-width$ -- 3
-write$ -- 20
-(There were 2 warnings)
+type$ -- 0
+warning$ -- 52
+while$ -- 104
+width$ -- 88
+write$ -- 668
+(There were 60 warnings)

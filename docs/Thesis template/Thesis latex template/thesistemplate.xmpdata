@@ -1,5 +1,5 @@
 \Title {Equipment identification through image recognition}
 \Author {Saidnassimov Darkhan}
 \Copyright {Copyright \copyright \ 2022\ Saidnassimov Darkhan}
-\Subject { Your abstract in English. Keep the abstract short. The abstract explains your research topic, the methods you have used, and the results you obtained. In the PDF/A format of this thesis, in addition to the abstract page, the abstract text is written into the pdf file's metadata. Write here the text that goes into the metadata. The metadata cannot contain special characters, linebreak or paragraph break characters, so these must not be used here. If your abstract does not contain special characters and it does not require paragraphs, you may take advantage of the abstracttext macro (see the comment below). Otherwise, the metadata abstract text must be identical to the text on the abstract page. }
-\Keywords {Computer vision\sep domain adaptation\sep object detection\sep 3D models}
+\Subject { TODO }
+\Keywords {Computer vision\sep object detection\sep transfer learning\sep domain adaptation\sep continual learning}
