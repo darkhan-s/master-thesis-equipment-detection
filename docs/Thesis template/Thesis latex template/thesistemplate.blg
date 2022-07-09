@@ -23,6 +23,7 @@ Warning--entry type for "mAp_blog" isn't style-file defined
 --line 1079 of file references_library.bib
 Warning--empty journal in Awalgaonkar2020
 Warning--empty journal in Janai2017
+Warning--empty journal in Shan2018
 Warning--empty journal in Banf2022
 Warning--empty journal in Li2021
 Warning--empty journal in ima
@@ -73,45 +74,47 @@ Warning--empty journal in Rusu2016
 Warning--empty journal in Yoon2017
 Warning--empty journal in Chen2020
 Warning--empty journal in Arruda2019
-You've used 86 entries,
+Warning--empty journal in Loshchilov2016
+Warning--empty journal in Xu2020
+You've used 90 entries,
             1876 wiz_defined-function locations,
-            875 strings with 18651 characters,
-and the built_in function-call counts, 17229 in all, are:
-= -- 1207
-> -- 1355
+            894 strings with 19225 characters,
+and the built_in function-call counts, 18033 in all, are:
+= -- 1274
+> -- 1399
 < -- 0
-+ -- 484
-- -- 398
-* -- 1512
-:= -- 2884
-add.period$ -- 96
-call.type$ -- 86
-change.case$ -- 85
++ -- 500
+- -- 410
+* -- 1576
+:= -- 3009
+add.period$ -- 100
+call.type$ -- 90
+change.case$ -- 89
 chr.to.int$ -- 0
-cite$ -- 138
-duplicate$ -- 749
-empty$ -- 1518
-format.name$ -- 398
-if$ -- 3783
+cite$ -- 145
+duplicate$ -- 790
+empty$ -- 1593
+format.name$ -- 410
+if$ -- 3969
 int.to.chr$ -- 0
-int.to.str$ -- 86
-missing$ -- 75
-newline$ -- 272
-num.names$ -- 84
-pop$ -- 420
+int.to.str$ -- 90
+missing$ -- 79
+newline$ -- 284
+num.names$ -- 88
+pop$ -- 437
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 312
+skip$ -- 333
 stack$ -- 0
-substring$ -- 274
-swap$ -- 100
+substring$ -- 302
+swap$ -- 109
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 52
-while$ -- 104
-width$ -- 88
-write$ -- 668
-(There were 60 warnings)
+warning$ -- 55
+while$ -- 110
+width$ -- 92
+write$ -- 699
+(There were 63 warnings)

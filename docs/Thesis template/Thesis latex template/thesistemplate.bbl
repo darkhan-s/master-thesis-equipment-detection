@@ -15,6 +15,10 @@ N.~Saidnassim, B.~Abdikenov, R.~Kelesbekov, M.~T. Akhtar, and P.~Jamwal,
 J.~Janai, F.~Güney, A.~Behl, and A.~Geiger, ``Computer vision for autonomous
   vehicles: Problems, datasets and state of the art,'' Apr. 2017.
 
+\bibitem{Shan2018}
+Y.~Shan, W.~F. Lu, and C.~M. Chew, ``Pixel and feature level based domain
+  adaption for object detection in autonomous driving,'' Sept. 2018.
+
 \bibitem{Banf2022}
 M.~Banf and G.~Steinhagen, ``Who supervises the supervisor? model monitoring in
   production using deep feature embeddings with applications to workpiece
@@ -394,5 +398,18 @@ C.~Chen, Z.~Zheng, X.~Ding, Y.~Huang, and Q.~Dou, ``Harmonizing transferability
 V.~F. Arruda, T.~M. Paixão, R.~F. Berriel, A.~F.~D. Souza, C.~Badue, N.~Sebe,
   and T.~Oliveira-Santos, ``Cross-domain car detection using unsupervised
   image-to-image translation: From day to night,'' July 2019.
+
+\bibitem{Loshchilov2016}
+I.~Loshchilov and F.~Hutter, ``Sgdr: Stochastic gradient descent with warm
+  restarts,'' Aug. 2016.
+
+\bibitem{Xu2020}
+C.-D. Xu, X.-R. Zhao, X.~Jin, and X.-S. Wei, ``Exploring categorical
+  regularization for domain adaptive object detection,'' Mar. 2020.
+
+\bibitem{Peng2020}
+C.~Peng, K.~Zhao, and B.~C. Lovell, ``Faster ilod: Incremental learning for
+  object detectors based on faster rcnn,'' {\em Pattern Recognition Letters},
+  vol.~140, pp.~109--115, 2020.
 
 \end{thebibliography}

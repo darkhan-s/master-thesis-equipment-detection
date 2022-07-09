@@ -1134,4 +1134,54 @@
   primaryclass  = {cs.CV},
 }
 
+@Article{Loshchilov2016,
+  author        = {Ilya Loshchilov and Frank Hutter},
+  title         = {SGDR: Stochastic Gradient Descent with Warm Restarts},
+  year          = {2016},
+  month         = aug,
+  abstract      = {Restart techniques are common in gradient-free optimization to deal with multimodal functions. Partial warm restarts are also gaining popularity in gradient-based optimization to improve the rate of convergence in accelerated gradient schemes to deal with ill-conditioned functions. In this paper, we propose a simple warm restart technique for stochastic gradient descent to improve its anytime performance when training deep neural networks. We empirically study its performance on the CIFAR-10 and CIFAR-100 datasets, where we demonstrate new state-of-the-art results at 3.14% and 16.21%, respectively. We also demonstrate its advantages on a dataset of EEG recordings and on a downsampled version of the ImageNet dataset. Our source code is available at https://github.com/loshchil/SGDR},
+  archiveprefix = {arXiv},
+  eprint        = {1608.03983},
+  file          = {:Loshchilov2016 - SGDR_ Stochastic Gradient Descent with Warm Restarts.pdf:PDF},
+  keywords      = {cs.LG, cs.NE, math.OC},
+  primaryclass  = {cs.LG},
+}
+
+@Article{Shan2018,
+  author        = {Yuhu Shan and Wen Feng Lu and Chee Meng Chew},
+  title         = {Pixel and Feature Level Based Domain Adaption for Object Detection in Autonomous Driving},
+  year          = {2018},
+  month         = sep,
+  abstract      = {Annotating large scale datasets to train modern convolutional neural networks is prohibitively expensive and time-consuming for many real tasks. One alternative is to train the model on labeled synthetic datasets and apply it in the real scenes. However, this straightforward method often fails to generalize well mainly due to the domain bias between the synthetic and real datasets. Many unsupervised domain adaptation (UDA) methods are introduced to address this problem but most of them only focus on the simple classification task. In this paper, we present a novel UDA model to solve the more complex object detection problem in the context of autonomous driving. Our model integrates both pixel level and feature level based transformtions to fulfill the cross domain detection task and can be further trained end-to-end to pursue better performance. We employ objectives of the generative adversarial network and the cycle consistency loss for image translation in the pixel space. To address the potential semantic inconsistency problem, we propose region proposal based feature adversarial training to preserve the semantics of our target objects as well as further minimize the domain shifts. Extensive experiments are conducted on several different datasets, and the results demonstrate the robustness and superiority of our method.},
+  archiveprefix = {arXiv},
+  eprint        = {1810.00345},
+  file          = {:Shan2018 - Pixel and Feature Level Based Domain Adaption for Object Detection in Autonomous Driving.pdf:PDF},
+  keywords      = {cs.CV},
+  primaryclass  = {cs.CV},
+}
+
+@Article{Chen2021,
+  author  = {Chen, Yuhua and Wang, Haoran and Li, Wen and Sakaridis, Christos and Dai, Dengxin and Gool, Luc},
+  journal = {International Journal of Computer Vision},
+  title   = {Scale-Aware Domain Adaptive Faster R-CNN},
+  year    = {2021},
+  month   = {07},
+  volume  = {129},
+  doi     = {10.1007/s11263-021-01447-x},
+}
+
+@Article{Peng2020,
+  author   = {Can Peng and Kun Zhao and Brian C. Lovell},
+  journal  = {Pattern Recognition Letters},
+  title    = {Faster ILOD: Incremental learning for object detectors based on faster RCNN},
+  year     = {2020},
+  issn     = {0167-8655},
+  pages    = {109-115},
+  volume   = {140},
+  abstract = {The human vision and perception system is inherently incremental where new knowledge is continually learned over time whilst existing knowledge is retained. On the other hand, deep learning networks are ill-equipped for incremental learning. When a well-trained network is adapted to new categories, its performance on the old categories will dramatically degrade. To address this problem, incremental learning methods have been explored which preserve the old knowledge of deep learning models. However, the state-of-the-art incremental object detector employs an external fixed region proposal method that increases overall computation time and reduces accuracy comparing to Region Proposal Network (RPN) based object detectors such as Faster RCNN. The purpose of this paper is to design an efficient end-to-end incremental object detector using knowledge distillation. We first evaluate and analyze the performance of the RPN-based detector with classic distillation on incremental detection tasks. Then, we introduce multi-network adaptive distillation that properly retains knowledge from the old categories when fine-tuning the model for new task. Experiments on the benchmark datasets, PASCAL VOC and COCO, demonstrate that the proposed incremental detector based on Faster RCNN is more accurate as well as being 13 times faster than the baseline detector.},
+  doi      = {https://doi.org/10.1016/j.patrec.2020.09.030},
+  keywords = {Deep learning, Object detection, Incremental learning},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0167865520303627},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

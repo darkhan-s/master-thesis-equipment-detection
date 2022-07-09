@@ -1091,4 +1091,65 @@
   title         = {Decoupled Adaptation for Cross-Domain Object Detection},
   year          = {2021},
   month         = oct,
-  abstract      = {Cross-domain object detection is more challenging than object classification since multiple objects exist in an image and the location of each object is unknown in the unlabeled targ
+  abstract      = {Cross-domain object detection is more challenging than object classification since multiple objects exist in an image and the location of each object is unknown in the unlabeled target domain. As a result, when we adapt features of different objects to enhance the transferability of the detector, the features of the foreground and the background are easy to be confused, which may hurt the discriminability of the detector. Besides, previous methods focused on category adaptation but ignored another important part for object detection, i.e., the adaptation on bounding box regression. To this end, we propose D-adapt, namely Decoupled Adaptation, to decouple the adversarial adaptation and the training of the detector. Besides, we fill the blank of regression domain adaptation in object detection by introducing a bounding box adaptor. Experiments show that D-adapt achieves state-of-the-art results on four cross-domain object detection tasks and yields 17% and 21% relative improvement on benchmark datasets Clipart1k and Comic2k in particular.},
+  archiveprefix = {arXiv},
+  eprint        = {2110.02578},
+  file          = {:Jiang2021 - Decoupled Adaptation for Cross Domain Object Detection.pdf:PDF},
+  keywords      = {cs.CV, cs.LG},
+  primaryclass  = {cs.CV},
+}
+
+@Article{Chen2020,
+  author        = {Chaoqi Chen and Zebiao Zheng and Xinghao Ding and Yue Huang and Qi Dou},
+  title         = {Harmonizing Transferability and Discriminability for Adapting Object Detectors},
+  year          = {2020},
+  month         = mar,
+  abstract      = {Recent advances in adaptive object detection have achieved compelling results in virtue of adversarial feature adaptation to mitigate the distributional shifts along the detection pipeline. Whilst adversarial adaptation significantly enhances the transferability of feature representations, the feature discriminability of object detectors remains less investigated. Moreover, transferability and discriminability may come at a contradiction in adversarial adaptation given the complex combinations of objects and the differentiated scene layouts between domains. In this paper, we propose a Hierarchical Transferability Calibration Network (HTCN) that hierarchically (local-region/image/instance) calibrates the transferability of feature representations for harmonizing transferability and discriminability. The proposed model consists of three components: (1) Importance Weighted Adversarial Training with input Interpolation (IWAT-I), which strengthens the global discriminability by re-weighting the interpolated image-level features; (2) Context-aware Instance-Level Alignment (CILA) module, which enhances the local discriminability by capturing the underlying complementary effect between the instance-level feature and the global context information for the instance-level feature alignment; (3) local feature masks that calibrate the local transferability to provide semantic guidance for the following discriminative pattern alignment. Experimental results show that HTCN significantly outperforms the state-of-the-art methods on benchmark datasets.},
+  archiveprefix = {arXiv},
+  eprint        = {2003.06297},
+  file          = {:Chen2020 - Harmonizing Transferability and Discriminability for Adapting Object Detectors.pdf:PDF},
+  keywords      = {cs.CV},
+  primaryclass  = {cs.CV},
+}
+
+@InProceedings{Inoue_2018_CVPR,
+  author    = {Inoue, Naoto and Furuta, Ryosuke and Yamasaki, Toshihiko and Aizawa, Kiyoharu},
+  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  title     = {Cross-Domain Weakly-Supervised Object Detection Through Progressive Domain Adaptation},
+  year      = {2018},
+  month     = {June},
+}
+
+@Article{Arruda2019,
+  author        = {Vinicius F. Arruda and Thiago M. Paixão and Rodrigo F. Berriel and Alberto F. De Souza and Claudine Badue and Nicu Sebe and Thiago Oliveira-Santos},
+  title         = {Cross-Domain Car Detection Using Unsupervised Image-to-Image Translation: From Day to Night},
+  year          = {2019},
+  month         = jul,
+  abstract      = {Deep learning techniques have enabled the emergence of state-of-the-art models to address object detection tasks. However, these techniques are data-driven, delegating the accuracy to the training dataset which must resemble the images in the target task. The acquisition of a dataset involves annotating images, an arduous and expensive process, generally requiring time and manual effort. Thus, a challenging scenario arises when the target domain of application has no annotated dataset available, making tasks in such situation to lean on a training dataset of a different domain. Sharing this issue, object detection is a vital task for autonomous vehicles where the large amount of driving scenarios yields several domains of application requiring annotated data for the training process. In this work, a method for training a car detection system with annotated data from a source domain (day images) without requiring the image annotations of the target domain (night images) is presented. For that, a model based on Generative Adversarial Networks (GANs) is explored to enable the generation of an artificial dataset with its respective annotations. The artificial dataset (fake dataset) is created translating images from day-time domain to night-time domain. The fake dataset, which comprises annotated images of only the target domain (night images), is then used to train the car detector model. Experimental results showed that the proposed method achieved significant and consistent improvements, including the increasing by more than 10% of the detection performance when compared to the training with only the available annotated data (i.e., day images).},
+  archiveprefix = {arXiv},
+  doi           = {10.1109/IJCNN.2019.8852008},
+  eprint        = {1907.08719},
+  file          = {:Arruda2019 - Cross Domain Car Detection Using Unsupervised Image to Image Translation_ from Day to Night.pdf:PDF},
+  keywords      = {cs.CV},
+  primaryclass  = {cs.CV},
+}
+
+@Article{Loshchilov2016,
+  author        = {Ilya Loshchilov and Frank Hutter},
+  title         = {SGDR: Stochastic Gradient Descent with Warm Restarts},
+  year          = {2016},
+  month         = aug,
+  abstract      = {Restart techniques are common in gradient-free optimization to deal with multimodal functions. Partial warm restarts are also gaining popularity in gradient-based optimization to improve the rate of convergence in accelerated gradient schemes to deal with ill-conditioned functions. In this paper, we propose a simple warm restart technique for stochastic gradient descent to improve its anytime performance when training deep neural networks. We empirically study its performance on the CIFAR-10 and CIFAR-100 datasets, where we demonstrate new state-of-the-art results at 3.14% and 16.21%, respectively. We also demonstrate its advantages on a dataset of EEG recordings and on a downsampled version of the ImageNet dataset. Our source code is available at https://github.com/loshchil/SGDR},
+  archiveprefix = {arXiv},
+  eprint        = {1608.03983},
+  file          = {:Loshchilov2016 - SGDR_ Stochastic Gradient Descent with Warm Restarts.pdf:PDF},
+  keywords      = {cs.LG, cs.NE, math.OC},
+  primaryclass  = {cs.LG},
+}
+
+@Article{Shan2018,
+  author        = {Yuhu Shan and Wen Feng Lu and Chee Meng Chew},
+  title         = {Pixel and Feature Level Based Domain Adaption for Object Detection in Autonomous Driving},
+  year          = {2018},
+  month         = sep,
+  abstract      = {Annotating large scale datasets to train modern convolutional neural networks is prohibitively expensive and time-consuming for many real tasks. One alternative is to train the model on labeled synthetic datasets and apply it in the real scenes. However, this straightforward method often fails to generalize well mainly due to the domain bias between the synthetic and real datasets. Many unsupervised domain adaptation (UDA) methods are introduced to address this problem but most of them only focus on the simple classification task. In this paper, we present a novel UDA model to solve the more complex object detection problem in the context of autonomous driving. Our model integrates both pixel level and feature level ba

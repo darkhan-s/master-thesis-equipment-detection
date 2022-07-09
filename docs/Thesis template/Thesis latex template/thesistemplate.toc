@@ -2,7 +2,7 @@
 \contentsline {section}{Abstract{} }{3}{section*.1}%
 \contentsline {section}{Preface}{4}{section*.3}%
 \contentsline {section}{Contents}{5}{section*.4}%
-\contentsline {section}{Symbols and abbreviations}{10}{section*.8}%
+\contentsline {section}{Symbols and abbreviations}{10}{section*.9}%
 \contentsline {section}{\numberline {1}Introduction}{13}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Problem statement}{13}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Thesis objective}{14}{subsection.1.2}%
@@ -22,25 +22,27 @@
 \contentsline {subsubsection}{\numberline {2.4.2}Fast-RCNN}{27}{subsubsection.2.4.2}%
 \contentsline {subsubsection}{\numberline {2.4.3}Faster-RCNN}{27}{subsubsection.2.4.3}%
 \contentsline {subsubsection}{\numberline {2.4.4}YOLO}{29}{subsubsection.2.4.4}%
-\contentsline {subsubsection}{\numberline {2.4.5}SSD}{29}{subsubsection.2.4.5}%
+\contentsline {subsubsection}{\numberline {2.4.5}SSD}{30}{subsubsection.2.4.5}%
 \contentsline {subsection}{\numberline {2.5}Transfer learning}{32}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Domain adaptation}{33}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.1}Domain adaptation}{34}{subsubsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.6}Domain adaptive object detection}{34}{subsection.2.6}%
 \contentsline {subsubsection}{\numberline {2.6.1}Gradient reversal layer}{35}{subsubsection.2.6.1}%
 \contentsline {subsubsection}{\numberline {2.6.2}Adversarial feature learning}{36}{subsubsection.2.6.2}%
 \contentsline {subsubsection}{\numberline {2.6.3}Pseudo-labeling based methods}{38}{subsubsection.2.6.3}%
 \contentsline {subsubsection}{\numberline {2.6.4}Image-to-Image translation}{39}{subsubsection.2.6.4}%
 \contentsline {subsubsection}{\numberline {2.6.5}Domain randomization}{40}{subsubsection.2.6.5}%
-\contentsline {subsubsection}{\numberline {2.6.6}Mean Teacher and Graph Reasoning}{41}{subsubsection.2.6.6}%
+\contentsline {subsubsection}{\numberline {2.6.6}Mean Teacher and Graph Reasoning}{42}{subsubsection.2.6.6}%
 \contentsline {subsection}{\numberline {2.7}Continual learning}{45}{subsection.2.7}%
 \contentsline {section}{\numberline {3}Research Methodology}{47}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Dataset}{47}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Preliminary experiments}{50}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}Metrics}{50}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}Naive approach}{52}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Experiments with existing domain adaptive methods}{53}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Implementation details}{54}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Validation and Results}{54}{section.4}%
-\contentsline {section}{\numberline {5}Analysis and Discussion}{55}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion and Future Work}{56}{section.6}%
-\contentsline {section}{\numberline {A}Appendices}{63}{appendix.A}%
+\contentsline {subsubsection}{\numberline {3.2.3}Experiments with existing standard domain adaptive methods}{53}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Experiments with an ensembled method}{54}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Further experiments with a custom model}{57}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Experiments with continual learning}{60}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Deployment}{63}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Analysis and Discussion}{65}{section.4}%
+\contentsline {section}{\numberline {5}Conclusion and Future Work}{66}{section.5}%
+\contentsline {section}{\numberline {A}Appendices}{74}{appendix.A}%

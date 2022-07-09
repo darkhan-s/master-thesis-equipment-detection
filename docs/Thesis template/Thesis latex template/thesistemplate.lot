@@ -1,5 +1,7 @@
 \babel@toc {english}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Overview of object detectors\cite {Zaidi2021}\relax }}{31}{table.caption.41}%
-\contentsline {table}{\numberline {2}{\ignorespaces Experiments with a simple Faster-RCNN model. \relax }}{52}{table.caption.68}%
-\contentsline {table}{\numberline {3}{\ignorespaces Results of the experiments with a D-Adapt based method.\relax }}{53}{table.caption.69}%
-\contentsline {table}{\numberline {4}{\ignorespaces Results of the experiments with Cycle-GAN\relax }}{54}{table.caption.70}%
+\contentsline {table}{\numberline {1}{\ignorespaces Overview of object detectors\cite {Zaidi2021}\relax }}{32}{table.caption.44}%
+\contentsline {table}{\numberline {2}{\ignorespaces Definition of confusion matrix and some of its terms, adapted from \cite {mAp_blog}\relax }}{50}{table.caption.69}%
+\contentsline {table}{\numberline {3}{\ignorespaces Experiments with a simple Faster-RCNN model. \relax }}{52}{table.caption.71}%
+\contentsline {table}{\numberline {4}{\ignorespaces Results of the experiments with a D-Adapt based method.\relax }}{53}{table.caption.72}%
+\contentsline {table}{\numberline {5}{\ignorespaces Results of the experiments with Cycle-GAN\relax }}{54}{table.caption.73}%
+\contentsline {table}{\numberline {6}{\ignorespaces The naive fine-tuning results\relax }}{60}{table.caption.81}%

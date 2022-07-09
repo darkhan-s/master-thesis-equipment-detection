@@ -1,40 +1,47 @@
 \babel@toc {english}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Machine learning concepts \cite {Janiesch2021}\relax }}{16}{figure.caption.17}%
-\contentsline {figure}{\numberline {2}{\ignorespaces A biological(a) neuron against artificial(b) and biological synapse(c) against artificial(d)\cite {article1}\relax }}{17}{figure.caption.18}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Backpropogation algorithm, adapted from \relax }}{18}{figure.caption.19}%
-\contentsline {figure}{\numberline {4}{\ignorespaces A simple CNN network with 5 layers for image classification task \cite {Mahony2019}\relax }}{20}{figure.caption.21}%
-\contentsline {figure}{\numberline {5}{\ignorespaces The process of convolution \cite {Liu2016}\relax }}{20}{figure.caption.22}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Evolution of image classifier models evaluated on ImageNet dataset \cite {alom01}\relax }}{21}{figure.caption.23}%
-\contentsline {figure}{\numberline {7}{\ignorespaces LeNet architecture \cite {alom01}\relax }}{22}{figure.caption.24}%
-\contentsline {figure}{\numberline {8}{\ignorespaces AlexNet architecture \cite {alom01}\relax }}{22}{figure.caption.25}%
-\contentsline {figure}{\numberline {9}{\ignorespaces VGG architecture \cite {alom01}\relax }}{23}{figure.caption.26}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Residual block of ResNet\cite {He2015}\relax }}{24}{figure.caption.27}%
-\contentsline {figure}{\numberline {11}{\ignorespaces ResNet architecture\cite {resnet50}\relax }}{24}{figure.caption.28}%
-\contentsline {figure}{\numberline {12}{\ignorespaces A simple single-stage detector(left) compared to a two-stage detector(right)\relax }}{25}{figure.caption.29}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Types of object detectors\relax }}{26}{figure.caption.30}%
-\contentsline {figure}{\numberline {14}{\ignorespaces R-CNN overview\cite {Girshick2013}\relax }}{26}{figure.caption.31}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Fast-RCNN overview\cite {Girshick2015}\relax }}{27}{figure.caption.34}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Faster-RCNN overview and its RPN module\relax }}{28}{figure.caption.36}%
-\contentsline {figure}{\numberline {17}{\ignorespaces The popularity of different detectors according to \cite {paperswithcode_1:2022}\relax }}{28}{figure.caption.37}%
-\contentsline {figure}{\numberline {18}{\ignorespaces YOLO overview\cite {Redmon2015a}\relax }}{29}{figure.caption.38}%
-\contentsline {figure}{\numberline {19}{\ignorespaces SSD compared to YOLO\cite {Liu2015}\relax }}{30}{figure.caption.39}%
-\contentsline {figure}{\numberline {20}{\ignorespaces SSD anchor boxes\cite {Liu2015}\relax }}{31}{figure.caption.40}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Comparison of ML to TL\cite {Pan2010}\relax }}{32}{figure.caption.43}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Distribution alignment types\cite {Zhang2021}\relax }}{34}{figure.caption.45}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Unsupervised Domain Adaptative Object Detection\relax }}{35}{figure.caption.46}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Domain-adversarial neural network and GRL\cite {Ganin2015}\relax }}{36}{figure.caption.47}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Domain Adaptive Faster R-CNN for Object Detection in the Wild\cite {Chen2018}\relax }}{37}{figure.caption.50}%
-\contentsline {figure}{\numberline {26}{\ignorespaces Seeking Similarities over Differences: Similarity-based Domain Alignment for Adaptive Object Detection, adapted from \cite {Rezaeianaran2021}\relax }}{38}{figure.caption.52}%
-\contentsline {figure}{\numberline {27}{\ignorespaces A Robust Learning Approach to Domain Adaptive Object Detection\cite {Khodabandeh2019}\relax }}{39}{figure.caption.53}%
-\contentsline {figure}{\numberline {28}{\ignorespaces Progressive Domain Adaptation for Object Detection and CycleGAN, adapted from \cite {Hsu2019}\relax }}{40}{figure.caption.54}%
-\contentsline {figure}{\numberline {29}{\ignorespaces Diversify and Match: A Domain Adaptive Representation Learning Paradigm for Object Detection, adapted from \cite {Kim2019}\relax }}{41}{figure.caption.55}%
-\contentsline {figure}{\numberline {30}{\ignorespaces Exploring Object Relation in Mean Teacher for Cross-Domain Detection\cite {Cai2019}\relax }}{42}{figure.caption.56}%
-\contentsline {figure}{\numberline {31}{\ignorespaces Unbiased Teacher for Semi-Supervised Object Detection\cite {Liu2021}\relax }}{43}{figure.caption.57}%
-\contentsline {figure}{\numberline {32}{\ignorespaces Cross-Domain Adaptive Teacher for Object Detection \cite {Li2021}\relax }}{44}{figure.caption.58}%
-\contentsline {figure}{\numberline {33}{\ignorespaces Continual learning approaches \cite {Parisi2018}\relax }}{45}{figure.caption.59}%
-\contentsline {figure}{\numberline {34}{\ignorespaces Example of the rendered image of an arbitrary model\relax }}{47}{figure.caption.61}%
-\contentsline {figure}{\numberline {35}{\ignorespaces T-LESS real setup, labelled \cite {hodan2017tless}\relax }}{48}{figure.caption.62}%
-\contentsline {figure}{\numberline {36}{\ignorespaces Distribution of the classes in the rendered subset of T-LESS dataset. 42 500 training images and 7 500 testing images. Total number of object instances: 720443\relax }}{49}{figure.caption.63}%
-\contentsline {figure}{\numberline {37}{\ignorespaces Distribution of the classes in the real subset of T-LESS dataset. Total number of object instances: 10362\relax }}{49}{figure.caption.65}%
-\contentsline {figure}{\numberline {38}{\ignorespaces Definition of confusion matrix and some of its terms, adapted from \cite {mAp_blog}\relax }}{50}{figure.caption.66}%
-\contentsline {figure}{\numberline {39}{\ignorespaces Average precision curve \cite {mAp_blog}\relax }}{51}{figure.caption.67}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Machine learning concepts \cite {Janiesch2021}\relax }}{16}{figure.caption.19}%
+\contentsline {figure}{\numberline {2}{\ignorespaces A biological(a) neuron against artificial(b) and biological synapse(c) against artificial(d)\cite {article1}\relax }}{17}{figure.caption.20}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Backpropogation algorithm, adapted from \relax }}{18}{figure.caption.21}%
+\contentsline {figure}{\numberline {4}{\ignorespaces A simple CNN network with 5 layers for image classification task \cite {Mahony2019}\relax }}{20}{figure.caption.24}%
+\contentsline {figure}{\numberline {5}{\ignorespaces The process of convolution \cite {Liu2016}\relax }}{20}{figure.caption.25}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Evolution of image classifier models evaluated on ImageNet dataset \cite {alom01}\relax }}{21}{figure.caption.26}%
+\contentsline {figure}{\numberline {7}{\ignorespaces LeNet architecture \cite {alom01}\relax }}{22}{figure.caption.27}%
+\contentsline {figure}{\numberline {8}{\ignorespaces AlexNet architecture \cite {alom01}\relax }}{22}{figure.caption.28}%
+\contentsline {figure}{\numberline {9}{\ignorespaces VGG architecture \cite {alom01}\relax }}{23}{figure.caption.29}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Residual block of ResNet\cite {He2015}\relax }}{24}{figure.caption.30}%
+\contentsline {figure}{\numberline {11}{\ignorespaces ResNet architecture\cite {resnet50}\relax }}{24}{figure.caption.31}%
+\contentsline {figure}{\numberline {12}{\ignorespaces A simple single-stage detector(left) compared to a two-stage detector(right)\relax }}{25}{figure.caption.32}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Types of object detectors\relax }}{26}{figure.caption.33}%
+\contentsline {figure}{\numberline {14}{\ignorespaces R-CNN overview\cite {Girshick2013}\relax }}{26}{figure.caption.34}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Fast-RCNN overview\cite {Girshick2015}\relax }}{27}{figure.caption.37}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Faster-RCNN overview and its RPN module\relax }}{28}{figure.caption.39}%
+\contentsline {figure}{\numberline {17}{\ignorespaces The popularity of different detectors according to \cite {paperswithcode_1:2022}\relax }}{29}{figure.caption.40}%
+\contentsline {figure}{\numberline {18}{\ignorespaces YOLO overview\cite {Redmon2015a}\relax }}{30}{figure.caption.41}%
+\contentsline {figure}{\numberline {19}{\ignorespaces SSD compared to YOLO\cite {Liu2015}\relax }}{31}{figure.caption.42}%
+\contentsline {figure}{\numberline {20}{\ignorespaces SSD anchor boxes\cite {Liu2015}\relax }}{31}{figure.caption.43}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Comparison of ML to TL\cite {Pan2010}\relax }}{33}{figure.caption.46}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Distribution alignment types\cite {Zhang2021}\relax }}{34}{figure.caption.48}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Unsupervised Domain Adaptative Object Detection\relax }}{35}{figure.caption.49}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Domain-adversarial neural network and GRL\cite {Ganin2015}\relax }}{36}{figure.caption.50}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Domain Adaptive Faster R-CNN for Object Detection in the Wild\cite {Chen2018}\relax }}{37}{figure.caption.53}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Seeking Similarities over Differences: Similarity-based Domain Alignment for Adaptive Object Detection, adapted from \cite {Rezaeianaran2021}\relax }}{38}{figure.caption.55}%
+\contentsline {figure}{\numberline {27}{\ignorespaces A Robust Learning Approach to Domain Adaptive Object Detection\cite {Khodabandeh2019}\relax }}{39}{figure.caption.56}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Progressive Domain Adaptation for Object Detection and CycleGAN, adapted from \cite {Hsu2019}\relax }}{40}{figure.caption.57}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Diversify and Match: A Domain Adaptive Representation Learning Paradigm for Object Detection, adapted from \cite {Kim2019}\relax }}{41}{figure.caption.58}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Exploring Object Relation in Mean Teacher for Cross-Domain Detection\cite {Cai2019}\relax }}{42}{figure.caption.59}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Unbiased Teacher for Semi-Supervised Object Detection\cite {Liu2021}\relax }}{43}{figure.caption.60}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Cross-Domain Adaptive Teacher for Object Detection \cite {Li2021}\relax }}{44}{figure.caption.61}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Continual learning approaches \cite {Parisi2018}\relax }}{45}{figure.caption.62}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Example of the rendered image of an arbitrary model\relax }}{47}{figure.caption.64}%
+\contentsline {figure}{\numberline {35}{\ignorespaces T-LESS real setup, labelled \cite {hodan2017tless}\relax }}{48}{figure.caption.65}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Distribution of the classes in the rendered subset of T-LESS dataset. 42 500 training images and 7 500 testing images. Total number of object instances: 720443\relax }}{49}{figure.caption.66}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Distribution of the classes in the real subset of T-LESS dataset. Total number of object instances: 10362\relax }}{49}{figure.caption.68}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Average precision curve \cite {mAp_blog}\relax }}{51}{figure.caption.70}%
+\contentsline {figure}{\numberline {39}{\ignorespaces Results of the experiments with Adaptive Teacher as it is\relax }}{55}{figure.caption.74}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Visualization on the source dataset}}}{55}{subfigure.39.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Visualization on the target dataset}}}{55}{subfigure.39.2}%
+\contentsline {figure}{\numberline {40}{\ignorespaces LR scheduler, original (blue) and suggested (red)\relax }}{56}{figure.caption.76}%
+\contentsline {figure}{\numberline {41}{\ignorespaces AP50 performance with original configuration(blue) against the performance of the suggested scheduler + early stoppage (red)\relax }}{57}{figure.caption.78}%
+\contentsline {figure}{\numberline {42}{\ignorespaces A proposed architecture for cross-domain object detection. Blue elements represent standard Faster-RCNN components, purple elements - domain adaptation components and yellow elements are Faster-RCNN modified components for continual learning, which will be addressed later.\relax }}{58}{figure.caption.79}%
+\contentsline {figure}{\numberline {43}{\ignorespaces A proposed architecture for continual learning setup. Blue elements represent standard Faster-RCNN components, yellow elements are modified components for continual learning.\relax }}{62}{figure.caption.82}%
+\contentsline {figure}{\numberline {44}{\ignorespaces A screenshot of the simple web app. The image on the left-hand side is an uploaded target image, and the image on the right-hand side shows a prediction of the objects.\relax }}{64}{figure.caption.86}%

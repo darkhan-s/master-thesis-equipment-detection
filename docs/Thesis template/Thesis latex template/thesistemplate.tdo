@@ -1,16 +1,25 @@
 \contentsline {todo}{fix this}{3}{section*.2}%
-\contentsline {todo}{verify this}{10}{section*.11}%
-\contentsline {todo}{dont forget to disable todos}{11}{section*.13}%
-\contentsline {todo}{Add missing citations}{13}{section*.15}%
-\contentsline {todo}{Refine after all done}{14}{section*.16}%
-\contentsline {todo}{Make sure this formula makes sense with the rest of the text}{18}{section*.20}%
-\contentsline {todo}{Write more about ROI}{27}{section*.32}%
-\contentsline {todo}{Write more about image pyramids}{27}{section*.33}%
-\contentsline {todo}{Perhaps write in greater detail}{27}{section*.35}%
-\contentsline {todo}{mention later: Zhuang2019: TL does not always bring benefit}{32}{section*.42}%
-\contentsline {todo}{Talk about the comment here perhaps}{33}{section*.44}%
-\contentsline {todo}{Perhaps add more math about GRL}{36}{section*.48}%
-\contentsline {todo}{Write more about this as it is key of your method}{36}{section*.49}%
-\contentsline {todo}{This paper review should be rewritten}{37}{section*.51}%
-\contentsline {todo}{perhaps add the final CL graph from Parisi2018}{46}{section*.60}%
-\contentsline {todo}{Talk about this distribution in future work}{49}{section*.64}%
+\contentsline {todo}{fix all tables to have captions above them, not below}{9}{section*.8}%
+\contentsline {todo}{verify this}{10}{section*.12}%
+\contentsline {todo}{dont forget to disable todos}{11}{section*.14}%
+\contentsline {todo}{Add missing citations}{13}{section*.16}%
+\contentsline {todo}{Refine after all done}{14}{section*.17}%
+\contentsline {todo}{Verify if obtaining real equipment data is feasible}{14}{section*.18}%
+\contentsline {todo}{Make sure this formula makes sense with the rest of the text}{18}{section*.22}%
+\contentsline {todo}{Todo: write about learning rate, overshooting, local/global minima}{18}{section*.23}%
+\contentsline {todo}{Write more about ROI}{27}{section*.35}%
+\contentsline {todo}{Write more about image pyramids}{27}{section*.36}%
+\contentsline {todo}{Perhaps write in greater detail}{27}{section*.38}%
+\contentsline {todo}{mention later: Zhuang2019: TL does not always bring benefit}{32}{section*.45}%
+\contentsline {todo}{Talk about the comment here perhaps}{33}{section*.47}%
+\contentsline {todo}{Perhaps add more math about GRL}{36}{section*.51}%
+\contentsline {todo}{Write more about this as it is key of your method}{36}{section*.52}%
+\contentsline {todo}{This paper review should be rewritten}{38}{section*.54}%
+\contentsline {todo}{perhaps add the final CL graph from Parisi2018}{46}{section*.63}%
+\contentsline {todo}{Talk about this distribution in future work}{49}{section*.67}%
+\contentsline {todo}{perhaps convert iterations to epochs}{55}{section*.75}%
+\contentsline {todo}{make better plots and add AP comparison}{56}{section*.77}%
+\contentsline {todo}{add plots}{59}{section*.80}%
+\contentsline {todo}{add plots}{63}{section*.83}%
+\contentsline {todo}{write about the problem}{63}{section*.84}%
+\contentsline {todo}{write about this and add plots}{63}{section*.85}%
