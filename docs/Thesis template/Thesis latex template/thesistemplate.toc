@@ -39,10 +39,16 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Metrics}{50}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}Naive approach}{52}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Experiments with existing standard domain adaptive methods}{53}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Experiments with an ensembled method}{54}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}Experiments with an ensembled method}{55}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Further experiments with a custom model}{57}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Experiments with continual learning}{60}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Deployment}{63}{subsection.3.6}%
 \contentsline {section}{\numberline {4}Analysis and Discussion}{65}{section.4}%
-\contentsline {section}{\numberline {5}Conclusion and Future Work}{66}{section.5}%
-\contentsline {section}{\numberline {A}Appendices}{74}{appendix.A}%
+\contentsline {section}{\numberline {5}Directions for Future Work}{66}{section.5}%
+\contentsline {subsubsection}{\numberline {5.0.1}Other applications and real world datasets}{66}{subsubsection.5.0.1}%
+\contentsline {subsubsection}{\numberline {5.0.2}Other detectors}{66}{subsubsection.5.0.2}%
+\contentsline {subsubsection}{\numberline {5.0.3}Imbalanced classes}{66}{subsubsection.5.0.3}%
+\contentsline {subsubsection}{\numberline {5.0.4}Multi-source adaptation}{67}{subsubsection.5.0.4}%
+\contentsline {subsubsection}{\numberline {5.0.5}Continual learning}{67}{subsubsection.5.0.5}%
+\contentsline {section}{\numberline {6}Conclusion}{68}{section.6}%
+\contentsline {section}{\numberline {A}Appendices}{76}{appendix.A}%

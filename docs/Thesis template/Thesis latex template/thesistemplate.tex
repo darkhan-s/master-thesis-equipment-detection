@@ -751,6 +751,7 @@ ResNet adopts the VGG-19 architecture, with an exception of the skip connection 
 
 
 \subsection{Object detection}
+\label{obj_detection_section} 
 The problem of object detection is an extended version of the image classification problem. However, unlike image classification, object detection aims to recognize not only the object, but also to localize it. Prior to arrival of deep learning, object detection considered to be a difficult task. With the discovery of the CNN architecture, the traditional computer vision techniques became obsolete. Since then, multiple different detector algorithms emerged. A typical object detection network contains two important modules - the base, or backbone network, and the detector network. A base network is usually one of the pretrained VGG or ResNet models, presented in the previous chapter. A base network acts as a feature extractor, and the features are then passed to a detector. Generally speaking, deep learning based detector networks can be classified into two categories: single- and two-stage detectors. \cite{Zaidi2021} Two-stage object detectors attempt to propose regions of the image that contain an object in the first step, and then run the task of classification and localization on the given proposal region. On the other hand, single-stage detectors try to detect objects directly without running a Region Proposal Network (RPN). Figure \ref{fig:1vs2stage} illustrates the key differences in the structure of the two categories. 
 
 \begin{figure}[htb]
@@ -809,7 +810,7 @@ Unlike the classic R-CNN system, where the components such as the classifier and
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Faster-RCNN}
+\subsubsection{Faster-RCNN} 
 \todo{Perhaps write in greater detail}
 The authors of \cite{ima} discovered that even though Fast-RCNN was significantly faster than the precessor networks, this architecture still had a bottleneck remaining in its region proposal counterpart. Therefore, in \cite{ima} it was suggested to replace the legacy region proposal module with a fully-convoluted architecture called region proposal network(RPN)\cite{Girshick2013}. Instead of using image pyramids to solve the problem as it was proposed in \cite{Girshick2015}, Faster-RCNN \cite{ima} utilizes anchor boxes of different aspect ratios to propose object candidates. Similarly to any other CNN, the features in Faster-RCNN are extracted from the convolutional layers based on a VGG backbone. The features maps are then sent to the RPN, which in practice is a sliding window  of $n\times n (n=3)$ dimensions. At every sliding window position, the $k$ number of object proposals are predicted. Such boxes are called "anchors" as illustrated on Figure \ref{fig:faster_rcnn}. The acquired $2k$ classification predictions whether the proposed region is an object of interest or not and $4$ regression outputs of the bounding box coordinates are then mapped back to the ROI layer and, eventually, to the FC layers that predict the proposed object's class. \cite{ima}
 
@@ -986,7 +987,7 @@ The visual representation of these distribution alignment types are shown on Fig
 
 
 \subsection{Domain adaptive object detection}
-
+\label{DAobj} 
 Next subsection will discuss some of the methods that were proposed at different times to solve the problem of domain shift in object detectors. Oza et al. \cite{Oza2021} have extensively reviewed and grouped the existing approaches into following six categories:
 \begin{enumerate}
 	\item Adversarial feature learning
@@ -1264,10 +1265,11 @@ In the context of the notation defined earlier in the  \nameref{transferLearning
 \section{Research Methodology}
 \label{Methodology}
 
-In this section, an in-depth study will be conducted to solve the challenges outlined in the \nameref{objective}. The section will first discuss the process of dataset selection. Next, several object detection candidates will be analyzed. Finally, the section will conclude with 
+In this section, an in-depth study will be conducted to solve the challenges outlined in the \nameref{objective}. The section will first discuss the process of dataset selection. Next, several object detection candidates will be analyzed.  The selected object detection method will be examined in multiple domain-adaptive setups. Upon analyzing the exisiting DA methods, one candidate will be studied in greater detail to propose a novel architecture. Finally, continual learning will be investigated in the selected cross-domain object detection model. 
+
 
 \subsection{Dataset}
-
+\label{datasets} 
 Initially, one of the objectives of this thesis was to implement an equipment identification system using images of the installed equipment and images of the 3D models to expand the dataset. Images of the 3D equipment parts could potentially be the main source of the dataset and they could be obtained from the 3D model of the gold refining plant of the customer of Metso Outotec. The entire plant's model is stored in Autodesk Navisworks in \texttt{.nwd} format and contains thousands of different equipment parts. It was discovered that Navisworks offers a possibility of rendering both images and videos of the desired equipment. However, in order to make the process of data collection scalable, it was proposed to use Navisworks API to automate the process. Following the documentation of the API \cite{navisworks}, a simple script with an extra toolbox were added Navisworks to filter out the required model, render and export its images in \texttt{.jpg} format. The results are presented in Figure \ref{navisworks} below.
 
 \begin{figure}[htb]
@@ -1298,7 +1300,7 @@ Ultimately, it was concluded that the dataset named Texture-LESS(T-LESS) \cite{h
 \end{figure}
 \FloatBarrier
 
-The names of the object classes presented in T-LESS, although undisclosed, are irrelevant to this thesis. Therefore, here and in the subsequent sections, when referred to individually, the classes will be named as "Model $N$". Additionally, in the experiments, the datasets with images from the simulator and the images from the real environment setup will be mainly referred to as "source" and "target" datasets, respectively. The images from the source dataset are saved in \texttt{.jpg} format, while the real images are stored as \texttt{.png} files, similarly as in the original T-LESS \cite{hodan2017tless}. Furthermore, for this work, the source dataset will be split in 85\%/15\%  proportion into the training and testing subsets. The distribution of the classes in the source dataset is presented in Figure \ref{tless_distribution}.  
+The names of the object classes presented in T-LESS, although undisclosed, are irrelevant to this thesis. Therefore, here and in the subsequent sections, when referred to individually, the classes will be named as "Model $N$". Additionally, in the experiments, the datasets with images from the simulator and the images from the real environment setup will be mainly referred to as "source" and "target" datasets, respectively. The images from the source dataset are saved in \texttt{.jpg} format, while the real images are stored as \texttt{.png} files, similarly as in the original T-LESS \cite{hodan2017tless}. Furthermore, for this work, the source dataset will be split in 85\%/15\%  proportion into the training and testing subsets. The distribution of the classes in the source dataset is presented in Figure \ref{tless_distribution_rend}.  
 
 \begin{figure}[htb]
 	\begin{center}
@@ -1306,21 +1308,20 @@ The names of the object classes presented in T-LESS, although undisclosed, are i
 	\end{center}
 	\caption{Distribution of the classes in the rendered subset of T-LESS dataset. 42 500 training images and 7 500 testing images. Total number of object instances: 720443}
 	\begin{center}
-		\label{tless_distribution}
+		\label{tless_distribution_rend}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-On the countrary, real images are only used for validation and their distribution by class is shown in Figure \ref{tless_distribution}. The reasons for this will be discussed in later sections. 
+On the countrary, real images are only used for validation and their distribution by class is shown in Figure \ref{tless_distribution_real}. The reasons for this will be discussed in later sections. 
 
-\todo{Talk about this distribution in future work} 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=14cm]{./real_distribution.png}
 	\end{center}
 	\caption{Distribution of the classes in the real subset of T-LESS dataset. Total number of object instances: 10362}
 	\begin{center}
-		\label{tless_distribution}
+		\label{tless_distribution_real}
 	\end{center}
 \end{figure}
 \FloatBarrier
@@ -1525,7 +1526,7 @@ Multiple experiments have been conducted with the architecture defined in Figure
 \todo{add plots} 
 
 \subsection{Experiments with continual learning}
-
+\label{cont_learning_section} 
 Although the pretrained model performs fairly well on the target dataset, it will not be able to predict unknown objects. In order to solve the scalability problem defined in \nameref{objective}, the proposed architecture should be able to keep learning when new data is added. Often such problems are addressed by a special case of transfer learning known as "fine-tuning". A typical example of fine-tuning is done by freezing certain deeper layers and only retrain the top level components of the network. This procedure would enable the network to apply previously learned knowledge on an unknown yet similar problem, while significantly reducing the training time. In regards to the objectives of this thesis, it would allow to utilize the knowledge of the previously learned equipment parts to promptly retrain it and apply it to new classes of objects. 
 In the first set of experiments, a naive fine-tuning approach without freezing was attempted. The model was trained based on the architecture, which was demonstated in \nameref{mainExperiments}. The regular training stage included both source and target datasets that contained classes 1 to 20, while the fine-tuning stage only included the data for classes 21-30 and the pretrained weights file from the previous stage. After the model has been trained on the first 20 classes, the FC layers of the trained model have been removed and replaced with new FC layers that can produce predictions for 30 classes. Both models were trained for the same number of iterations. The results are presented in Table \ref{naive_finetuning}.
 
@@ -1553,10 +1554,10 @@ In the first set of experiments, a naive fine-tuning approach without freezing w
 As can be easily noted, the results dropped significantly even though the initial weights are supposed to give a decent advantage. This setup would not only have low performance on the new data, but also unable to classify and localize original dataset. A few important modifications were considered in the next experiment: 
 
 \begin{enumerate}
-\item In order to fine-tune the network successfully, a freezing process should be carried out on the deeper, more specifically, the backbone layers of the network. Skipping this step is the main result of the performance drop in Table \ref{naive_finetuning}. By freezing deeper parts of the network, key trained features will be preserved, and the number of trainable parameters will be reduced, which will in turn speed up the training time.
+\item In order to fine-tune the network successfully, a freezing process should be carried out on the deeper, more specifically, on the backbone layers of the network. Skipping this step is the main result of the performance drop in Table \ref{naive_finetuning}. By freezing deeper parts of the network, key trained features will be preserved, and the number of trainable parameters will be reduced, which will in turn speed up the training time. 
 \item Too many unfamiliar cases will lead to a higher performance drop. Adding fewer additional classes in each subsequent task will help to maintain the performance drop at the lower level. This has been proven by experiments of Peng et al. \cite{Peng2020}. In other words, instead of retraining the original model with 10 more unknown classes, the model should be retrained with one or two at most. 
-\item Additionally, it was noted that the weights file \texttt{.pth}, which was originally trained for the first $N$ classes, also contained the states of the training process. This included the iteration number and the learning rate at that iteration. Therefore, before proceeding, the optimizer states were deleted from the dictionary. 
-\item Finally, instead of replacing the original FC outputs alltogether, a new architecture is proposed, as illustrated in Figure \ref{continualModel}(b). 
+\item Additionally, it was noted that the weights file \texttt{.pth}, which was originally trained for the first $N$ classes, also contained the states of the optimizer, i.e. of the training process. This included the iteration number and the learning rate at that iteration. As a result, the training process is started from a much lower base LR, as it can be concluded from Figure \ref{lr}. Therefore, before proceeding, the optimizer states were removed from the dictionary of the weights file. 
+\item Finally, instead of replacing the original FC layers alltogether, a new architecture is proposed, as illustrated in Figure \ref{continualModel}(b). 
 \end{enumerate}
 
 \begin{figure}[htb]
@@ -1571,17 +1572,18 @@ As can be easily noted, the results dropped significantly even though the initia
 \FloatBarrier
 
 
-Following the studies presented in \nameref{cont_learning}, the detector head of the custom model is additionally modified to address a scalable training setup. The architecture presented in Figure \ref{continualModel}(b) replicates the method proposed by Rusu et al. \cite{Rusu2016} in a cross-domain mean teacher setup. An overview of this method was shown earlier in Figure \ref{mymodel}, where both detectors of the student and the teacher networks are modified. In this experiment, the original detector head is frozen, which includes both the classifier and the box regressor. Consequently, new output layers are attached to the network. These layers are responsible for the unknown $M$ number of classes. The original detector head predicts an $N+1$ number of classes, which includes the background. Therefore, to preserve data integrity, the additional detector head ignores the background class. \todo{add plots} 
+Following the studies presented in \nameref{cont_learning}, the detector head of the custom model is additionally modified to address a scalable training setup. The architecture presented in Figure \ref{continualModel}(b) replicates the method proposed by Rusu et al. \cite{Rusu2016}, but in a cross-domain mean teacher setup. An overview of this method was shown earlier in Figure \ref{mymodel}, where both detector heads of the student and the teacher networks are modified. In this experiment, the original detector head is frozen, which includes both the classifier and the box regressor. Freezing essentially prevents the weights from being modified by disabling the learning rate updates. Consequently, new output layers are attached to the network. These layers are responsible for the unknown $M$ number of classes and unlike the original detector, they are not frozen. The original detector head classifies an $N+1$ number of objects, which also includes the background. Therefore, to preserve data integrity, the appended detector head ignores the background class and only predicts $M$ new objects. The results of such experiment are presented below\todo{add plots}. 
 
-To tackle this problem \todo{write about the problem}, a new architecture has been introduced in Figure \ref{continualModel}. This model follows the ideas proposed by Donahue et al. \cite{Donahue2013}. \todo{write about this and add plots} 
+To solve this problem\todo{write about the problem}, a new architecture has been introduced in Figure \ref{continualModel}(c). This model further combines the ideas proposed by Rusu et al. \cite{Rusu2016} and Donahue et al. \cite{Donahue2013}, which were introduced in \nameref{cont_learning} section. Instead of completely freezing the original detector weights, the learning rate is reduced for the previously trained objects. The additional FC layers are trained with a standard LR.  According to Parisi et al. \cite{Parisi2018}, reduced learning rate will prevent the model from making significant changes in the original weights, while also learning new data. Meanwhile, the dynamically expanding architecture of Rusu et al. \cite{Rusu2016} will focus on fighting the catastrophic forgetting problem. Ultimately, in the proposed method the model aims to train network expansion along with regularization. 
 
+The results of the proposed method are summarized below. \todo{add plots} 
 
 \subsection{Deployment}
-In order to showcase the performance, a simple web app has been constructed. The app is hosted on a local server and it leverages Flask Application Programming Interface(API) to connect the detector app to the user interface. The results are presented in Figure \ref{demo}. The codebase for this project will shortly be published to \url{https://github.com/darkhan-s/master-thesis-equipment-detection}. However, the access will be restricted and available to certain parties upon request.  
+In order to showcase the performance, a simple web app has been constructed. The app is hosted on a local server and it leverages Flask Application Programming Interface(API) to connect the detector app to the user interface. The results are presented in Figure \ref{demo}. The codebase for this project will shortly be published to \url{https://github.com/darkhan-s/master-thesis-equipment-detection}. However, the access will be restricted and will be available to certain parties upon request.  
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=16cm]{./demo.png}
+		\includegraphics[width=14cm]{./demo.png}
 	\end{center}
 	\caption{A screenshot of the simple web app. The image on the left-hand side is an uploaded target image, and the image on the right-hand side shows a prediction of the objects.}
 	\begin{center}
@@ -1601,12 +1603,41 @@ In order to showcase the performance, a simple web app has been constructed. The
 TODO
 \clearpage
 
-\section{Conclusion and Future Work} 
 
-TODO
+\section{Directions for Future Work}
+Inspired by Oza et al. \cite{Oza2021} and by the \nameref{objective}, this thesis studied multiple research directions in domain adaptation. Oza et al. summarized a few scenarios, where the cross-domain object detection was not researched as extensively. A few of these scenarios overlap with the thesis goals and these will be discussed in the following section. 
+
+\subsubsection{Other applications and real world datasets}
+As it was discussed in \nameref{mainExperiments} section, common DA approaches in object detection address either autonomous navigation, or common day-to-day datasets and to the best of the author's knowledge, no DA work has been conducted on  industrial datasets. Additionally, many of these datasets are barely suitable to reflect the domain gap between the real world and the simulations. This thesis attempts to reduce the knowledge gap by utilizing a relatively industrial dataset. However, the target dataset proposed in \nameref{datasets} was collected in a typical household setup, where the environment has a stable lighting and background. Therefore, for future work, it is advised to experiment with images from a real industrial plant. \todo{Modify if we manage to obtain real equipment pics} 
+
+\subsubsection{Other detectors}
+As it could be noted from the \nameref{DAobj} section, Faster-RCNN is a de-facto object detector framework used in such problems. Oza et al. \cite{Oza2021} suggested to experiment with single-stage object detectors such as YOLO\cite{Redmon2015a}, SSD\cite{Liu2015}, FCOS\cite{Tian2019} and DETR\cite{Carion2020}. In this thesis, two-stage Faster-RCNN was selected due to its simple plug-and-play compatibility with detectron2\cite{wu2019detectron2} and with the existing DA methods. Additionally, the robustness, that single-stage detectors offer, is not as critical in this thesis. However, there is a potential of extending the application to identify the objects in real time. As it was discussed in the \nameref{obj_detection_section} section, single-stage detectors offer a significant improvement over Faster-RCNN. Upon analyzing the feasibility of implementing other detectors in detectron2 \cite{wu2019detectron2} framework, it was identified that FCOS network has already been adapted for detectron2. Hence, it is believed that among the detectors listed, the conversion into the setup proposed in Figure \ref{mymodel} will be the most straightforward with a FCOS-based detector. 
+
+\subsubsection{Imbalanced classes}
+Although the classes were distributed fairly well in the source dataset, huge class imbalance was observed in the target T-LESS dataset, as it can be noted from Figure \ref{tless_distribution_real}. The models 1 and 4 overrepresented and are the largest in the target dataset by a tremendous margin. This could be a potential reason for the performance drop as the disproportionately highly represented classes shifted the alignment of the domains in their favor. Oza et al. proposed re-weighting the classes based on their frequency. However, as the target domain does not contain any labels, it becomes a challenging task to track the frequency \cite{Oza2021}. Luckily, the proposed in the \nameref{mainExperiments} section cross-domain adaptation method leverages pseudo-labels. Therefore, re-weighting the classes can be carried out in stages once pseudo-labeling accuracy improves. 
+
+\subsubsection{Multi-source adaptation}
+Another practical problem formulated by Oza et al. is that often the images can be collected from multiple domains. In the scope of the thesis, this could imply collecting datasets from multiple plants with varying environmental conditions, such as rainy weather, snow, daylight and nighttime. These conditions will dramatically impact the detection results. Therefore, more experiments should be carried out before releasing the application into use. 
+
+
+\subsubsection{Continual learning}
+Although in the \nameref{cont_learning_section} section proposed a solution to the catastrophic forgetting problem in a scalable setup, the experiments were only conducted with well-established and possibly outdated solutions. Moreover, according to Parisi et al. \cite{Parisi2018}, current state-of-the-art contunual learning models are still far from being able to learn new tasks as efficiently as biological systems and to this day it remains a challenging problem. Additionally, the method proposed raise an additional constraint. Although the model is able to adapt to the dynamically expanding dataset, the model will scale linearly as new classes are added. Within this thesis, the model was tested on up to 30 classes and the resulted model files consumed nearly 2GB of storage and a few linear layers appended will not double the already substantial file size. Nevertheless, for the sake of optimization and as new continual learning solutions emerge, it is important to evaluate them in the given setup and explore new possible solutions. 
+
+ 
+
+\clearpage
+
+
+
+\section{Conclusion} 
+In this thesis, a novel cross-domain object detection architecture with continual learning was proposed. The architecture combines the state-of-the-art adaptive  teacher ensembled model and the \todo{write some bs} 
+
 
 
 \clearpage
+
+
+
 
 % changed from plain to ieeetr to sort by the order of appearance 
 \bibliographystyle{ieeetr}
