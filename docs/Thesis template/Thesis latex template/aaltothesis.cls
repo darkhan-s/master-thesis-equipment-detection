@@ -229,11 +229,13 @@
 %
 \setlength{\textheight}{23cm}%
 %
+
 %%%%%%% Float control %%%%%%%
 \renewcommand{\floatpagefraction}{0.1}%
 \renewcommand{\textfraction}{0.1}%
 \renewcommand{\topfraction}{0.9}%
 \renewcommand{\bottomfraction}{0.9}%
+
 %
 %%%%%% Now come all the macros used along with all the required counter, etc.
 %

@@ -24,6 +24,24 @@ M.~Banf and G.~Steinhagen, ``Who supervises the supervisor? model monitoring in
   production using deep feature embeddings with applications to workpiece
   inspection,'' Jan. 2022.
 
+\bibitem{Wu2022}
+J.~Wu, S.~Tang, X.~Li, and Y.~Zhou, ``Industrial equipment detection algorithm
+  under complex working conditions based on roms r-cnn,'' {\em PLOS ONE},
+  vol.~17, p.~e0266444, 04 2022.
+
+\bibitem{MALBURG2021581}
+L.~Malburg, M.-P. Rieder, R.~Seiger, P.~Klein, and R.~Bergmann, ``Object
+  detection for smart factory processes by machine learning,'' {\em Procedia
+  Computer Science}, vol.~184, pp.~581--588, 2021.
+\newblock The 12th International Conference on Ambient Systems, Networks and
+  Technologies (ANT) / The 4th International Conference on Emerging Data and
+  Industry 4.0 (EDI40) / Affiliated Workshops.
+
+\bibitem{Kim2020}
+J.~Kim, J.~Hwang, S.~Chi, and J.~Seo, ``Towards database-free vision-based
+  monitoring on construction sites: A deep active learning approach,'' {\em
+  Automation in Construction}, vol.~120, p.~103376, 12 2020.
+
 \bibitem{metso_outotec_2022}
 ``{Metso Outotec: Rocksense},'' 2022.
 \newblock \url{https://www.mogroup.com/portfolio/rocksense/}, last accessed on
@@ -39,8 +57,28 @@ M.~Banf and G.~Steinhagen, ``Who supervises the supervisor? model monitoring in
 \newblock \url{https://www.mogroup.com/portfolio/frothsense/}, last accessed on
   2022-06-20.
 
-\bibitem{dummy}
-TempAuthor, ``Tempcitation.''
+\bibitem{ima}
+S.~Ren, K.~He, R.~Girshick, and J.~Sun, ``Faster r-cnn: Towards real-time
+  object detection with region proposal networks,'' June 2015.
+
+\bibitem{Liu2015}
+W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~Reed, C.-Y. Fu, and A.~C. Berg,
+  ``Ssd: Single shot multibox detector,'' Dec. 2015.
+
+\bibitem{He2017}
+K.~He, G.~Gkioxari, P.~Dollár, and R.~Girshick, ``Mask r-cnn,'' Mar. 2017.
+
+\bibitem{Redmon2015a}
+J.~Redmon, S.~Divvala, R.~Girshick, and A.~Farhadi, ``You only look once:
+  Unified, real-time object detection,'' June 2015.
+
+\bibitem{Zhang2021b}
+J.~Zhang, J.~Huang, Z.~Luo, G.~Zhang, and S.~Lu, ``Da-detr: Domain adaptive
+  detection transformer by hybrid attention,'' Mar. 2021.
+
+\bibitem{Tian2019}
+Z.~Tian, C.~Shen, H.~Chen, and T.~He, ``Fcos: Fully convolutional one-stage
+  object detection,'' Apr. 2019.
 
 \bibitem{Ganin2015}
 Y.~Ganin, E.~Ustinova, H.~Ajakan, P.~Germain, H.~Larochelle, F.~Laviolette,
@@ -57,10 +95,6 @@ T.~Hoda{\v{n}}, P.~Haluza, {\v{S}}.~Obdr{\v{z}}{\'a}lek, J.~Matas, M.~Lourakis,
 \bibitem{Li2021}
 Y.-J. Li, X.~Dai, C.-Y. Ma, Y.-C. Liu, K.~Chen, B.~Wu, Z.~He, K.~Kitani, and
   P.~Vajda, ``Cross-domain adaptive teacher for object detection,'' Nov. 2021.
-
-\bibitem{ima}
-S.~Ren, K.~He, R.~Girshick, and J.~Sun, ``Faster r-cnn: Towards real-time
-  object detection with region proposal networks,'' June 2015.
 
 \bibitem{wu2019detectron2}
 Y.~Wu, A.~Kirillov, F.~Massa, W.-Y. Lo, and R.~Girshick, ``Detectron2.''
@@ -193,27 +227,12 @@ A.~Pacha, J.~Hajič, and J.~Calvo-Zaragoza, ``A baseline for general music
 T.-Y. Lin, P.~Goyal, R.~Girshick, K.~He, and P.~Dollár, ``Focal loss for dense
   object detection,'' Aug. 2017.
 
-\bibitem{Liu2015}
-W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~Reed, C.-Y. Fu, and A.~C. Berg,
-  ``Ssd: Single shot multibox detector,'' Dec. 2015.
-
-\bibitem{Redmon2015a}
-J.~Redmon, S.~Divvala, R.~Girshick, and A.~Farhadi, ``You only look once:
-  Unified, real-time object detection,'' June 2015.
-
 \bibitem{Girshick2013}
 R.~Girshick, J.~Donahue, T.~Darrell, and J.~Malik, ``Rich feature hierarchies
   for accurate object detection and semantic segmentation,'' Nov. 2013.
 
 \bibitem{Girshick2015}
 R.~Girshick, ``Fast r-cnn,'' Apr. 2015.
-
-\bibitem{Tian2019}
-Z.~Tian, C.~Shen, H.~Chen, and T.~He, ``Fcos: Fully convolutional one-stage
-  object detection,'' Apr. 2019.
-
-\bibitem{He2017}
-K.~He, G.~Gkioxari, P.~Dollár, and R.~Girshick, ``Mask r-cnn,'' Mar. 2017.
 
 \bibitem{Carion2020}
 N.~Carion, F.~Massa, G.~Synnaeve, N.~Usunier, A.~Kirillov, and S.~Zagoruyko,
@@ -233,15 +252,11 @@ J.~Hosang, R.~Benenson, and B.~Schiele, ``Learning non-maximum suppression,''
 \newblock \url{https://paperswithcode.com/method/faster-r-cnn}, last accessed
   on 2022-06-22.
 
-\bibitem{Redmon2018a}
-J.~Redmon and A.~Farhadi, ``Yolov3: An incremental improvement,'' Apr. 2018.
-
 \bibitem{Redmon2016}
 J.~Redmon and A.~Farhadi, ``Yolo9000: Better, faster, stronger,'' Dec. 2016.
 
-\bibitem{Zhang2021b}
-J.~Zhang, J.~Huang, Z.~Luo, G.~Zhang, and S.~Lu, ``Da-detr: Domain adaptive
-  detection transformer by hybrid attention,'' Mar. 2021.
+\bibitem{Redmon2018a}
+J.~Redmon and A.~Farhadi, ``Yolov3: An incremental improvement,'' Apr. 2018.
 
 \bibitem{Zhuang2019}
 F.~Zhuang, Z.~Qi, K.~Duan, D.~Xi, Y.~Zhu, H.~Zhu, H.~Xiong, and Q.~He, ``A
@@ -315,6 +330,12 @@ Q.~Cai, Y.~Pan, C.-W. Ngo, X.~Tian, L.~Duan, and T.~Yao, ``Exploring object
 Y.-C. Liu, C.-Y. Ma, Z.~He, C.-W. Kuo, K.~Chen, P.~Zhang, B.~Wu, Z.~Kira, and
   P.~Vajda, ``Unbiased teacher for semi-supervised object detection,'' Feb.
   2021.
+
+\bibitem{pytorch}
+``{Pytorch: Illustration of transforms},'' 2022.
+\newblock
+  \url{https://pytorch.org/vision/main/auto_examples/plot_transforms.html#sphx-glr-download-auto-examples-plot-transforms-py/},
+  last accessed on 2022-07-11.
 
 \bibitem{Hnewa2021}
 M.~Hnewa and H.~Radha, ``Multiscale domain adaptive yolo for cross-domain
@@ -411,5 +432,13 @@ C.-D. Xu, X.-R. Zhao, X.~Jin, and X.-S. Wei, ``Exploring categorical
 C.~Peng, K.~Zhao, and B.~C. Lovell, ``Faster ilod: Incremental learning for
   object detectors based on faster rcnn,'' {\em Pattern Recognition Letters},
   vol.~140, pp.~109--115, 2020.
+
+\bibitem{imgaug}
+A.~B. Jung, K.~Wada, J.~Crall, S.~Tanaka, J.~Graving, C.~Reinders, S.~Yadav,
+  J.~Banerjee, G.~Vecsei, A.~Kraft, Z.~Rui, J.~Borovec, C.~Vallentin,
+  S.~Zhydenko, K.~Pfeiffer, B.~Cook, I.~Fernández, F.-M. De~Rainville, C.-H.
+  Weng, A.~Ayala-Acevedo, R.~Meudec, M.~Laporte, {\em et~al.}, ``{imgaug}.''
+  \url{https://github.com/aleju/imgaug}, 2020.
+\newblock Online; accessed 01-Feb-2020.
 
 \end{thebibliography}
