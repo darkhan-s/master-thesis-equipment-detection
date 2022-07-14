@@ -100,6 +100,10 @@ Y.-J. Li, X.~Dai, C.-Y. Ma, Y.-C. Liu, K.~Chen, B.~Wu, Z.~He, K.~Kitani, and
 Y.~Wu, A.~Kirillov, F.~Massa, W.-Y. Lo, and R.~Girshick, ``Detectron2.''
   \url{https://github.com/facebookresearch/detectron2}, 2019.
 
+\bibitem{Chen2018}
+Y.~Chen, W.~Li, C.~Sakaridis, D.~Dai, and L.~V. Gool, ``Domain adaptive faster
+  r-cnn for object detection in the wild,'' Mar. 2018.
+
 \bibitem{Parisi2018}
 G.~I. Parisi, R.~Kemker, J.~L. Part, C.~Kanan, and S.~Wermter, ``Continual
   lifelong learning with neural networks: A review,'' Feb. 2018.
@@ -296,10 +300,6 @@ A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
 \bibitem{Detectron2018}
 R.~Girshick, I.~Radosavovic, G.~Gkioxari, P.~Doll\'{a}r, and K.~He,
   ``Detectron.'' \url{https://github.com/facebookresearch/detectron}, 2018.
-
-\bibitem{Chen2018}
-Y.~Chen, W.~Li, C.~Sakaridis, D.~Dai, and L.~V. Gool, ``Domain adaptive faster
-  r-cnn for object detection in the wild,'' Mar. 2018.
 
 \bibitem{Rezaeianaran2021}
 F.~Rezaeianaran, R.~Shetty, R.~Aljundi, D.~O. Reino, S.~Zhang, and B.~Schiele,

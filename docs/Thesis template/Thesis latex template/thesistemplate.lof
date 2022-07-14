@@ -34,17 +34,21 @@
 \contentsline {figure}{\numberline {33}{\ignorespaces Augmentations used in Unbiased teacher (adapted from the official Pytorch documentation \cite {pytorch})\relax }}{46}{figure.caption.62}%
 \contentsline {figure}{\numberline {34}{\ignorespaces Continual learning approaches \cite {Parisi2018}.\relax }}{47}{figure.caption.63}%
 \contentsline {figure}{\numberline {35}{\ignorespaces Example of the rendered image of an arbitrary model\relax }}{49}{figure.caption.65}%
-\contentsline {figure}{\numberline {36}{\ignorespaces T-LESS real setup, labelled \cite {hodan2017tless}.\relax }}{50}{figure.caption.66}%
+\contentsline {figure}{\numberline {36}{\ignorespaces T-LESS real setup, labeled \cite {hodan2017tless}.\relax }}{50}{figure.caption.66}%
 \contentsline {figure}{\numberline {37}{\ignorespaces Distribution of the classes in the rendered subset of T-LESS dataset. 42 500 training images and 7 500 testing images. Total number of object instances: 720443\relax }}{51}{figure.caption.67}%
 \contentsline {figure}{\numberline {38}{\ignorespaces Distribution of the classes in the real subset of T-LESS dataset. Total number of object instances: 10362\relax }}{52}{figure.caption.68}%
 \contentsline {figure}{\numberline {39}{\ignorespaces Average precision curve \cite {mAp_blog}.\relax }}{54}{figure.caption.70}%
 \contentsline {figure}{\numberline {40}{\ignorespaces Results of the experiments with Adaptive Teacher as it is\relax }}{57}{figure.caption.74}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Visualization on the source dataset}}}{57}{subfigure.40.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Visualization on the target dataset}}}{57}{subfigure.40.2}%
-\contentsline {figure}{\numberline {41}{\ignorespaces LR scheduler, original (blue) and suggested (red)\relax }}{58}{figure.caption.76}%
-\contentsline {figure}{\numberline {42}{\ignorespaces AP50 performance with original configuration(red) against the performance of the suggested scheduler + early stoppage (blue)\relax }}{59}{figure.caption.78}%
-\contentsline {figure}{\numberline {43}{\ignorespaces A proposed architecture for cross-domain object detection. Blue elements represent standard Faster-RCNN components, purple elements - domain adaptation components and yellow elements are Faster-RCNN modified components for continual learning, which will be discussed later.\relax }}{60}{figure.caption.79}%
-\contentsline {figure}{\numberline {44}{\ignorespaces Augmentations used in the experiments.\relax }}{61}{figure.caption.80}%
-\contentsline {figure}{\numberline {45}{\ignorespaces Augmentations used in the experiments.\relax }}{63}{figure.caption.82}%
-\contentsline {figure}{\numberline {46}{\ignorespaces A proposed architecture for continual learning setup. Blue elements represent standard Faster-RCNN components, yellow elements are modified components for continual learning.\relax }}{66}{figure.caption.87}%
-\contentsline {figure}{\numberline {47}{\ignorespaces A screenshot of the simple web app. The image on the left-hand side is an uploaded target image, and the image on the right-hand side shows a prediction of the objects.\relax }}{67}{figure.caption.88}%
+\contentsline {figure}{\numberline {41}{\ignorespaces A proposed architecture for cross-domain object detection. Blue elements represent standard Faster-RCNN components, purple elements - domain adaptation components and yellow elements are Faster-RCNN modified components for continual learning, which will be discussed later.\relax }}{59}{figure.caption.76}%
+\contentsline {figure}{\numberline {42}{\ignorespaces Augmentations used in the experiments.\relax }}{60}{figure.caption.77}%
+\contentsline {figure}{\numberline {43}{\ignorespaces A proposed architecture for continual learning setup. Blue elements represent standard Faster-RCNN components, yellow elements are modified components for continual learning.\relax }}{64}{figure.caption.81}%
+\contentsline {figure}{\numberline {44}{\ignorespaces Results of the original Adaptive teacher model evaluated on the custom T-LESS dataset without any modifications\relax }}{66}{figure.caption.82}%
+\contentsline {figure}{\numberline {45}{\ignorespaces a)The original LR scheduler against b)the proposed LR scheduler \relax }}{67}{figure.caption.84}%
+\contentsline {figure}{\numberline {46}{\ignorespaces a)AP50 from the original model and b) AP50 from the model with an adjusted scheduler\relax }}{67}{figure.caption.85}%
+\contentsline {figure}{\numberline {47}{\ignorespaces a)AP50 from the model with a modified scheduler and b) AP50 from the model with a modified scheduler and two additional augmentations\relax }}{68}{figure.caption.87}%
+\contentsline {figure}{\numberline {48}{\ignorespaces a)AP50 from the model with a modified scheduler and two extra augmentations against b) AP50 from the model with a modified scheduler, two additional augmentations and consistency regularization\relax }}{69}{figure.caption.89}%
+\contentsline {figure}{\numberline {49}{\ignorespaces a)AP50 b)AP50 c)AP50 d)AP50\relax }}{70}{figure.caption.91}%
+\contentsline {figure}{\numberline {50}{\ignorespaces a)AP50 b)AP50 c)AP50 d)AP50\relax }}{71}{figure.caption.93}%
+\contentsline {figure}{\numberline {51}{\ignorespaces A screenshot of the simple web app. The image on the left-hand side is an uploaded target image, and the image on the right-hand side shows a prediction of the objects.\relax }}{72}{figure.caption.94}%
