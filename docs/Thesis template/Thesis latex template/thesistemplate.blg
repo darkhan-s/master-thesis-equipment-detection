@@ -80,7 +80,7 @@ Warning--empty journal in Loshchilov2016
 Warning--empty journal in Xu2020
 You've used 94 entries,
             1876 wiz_defined-function locations,
-            923 strings with 20734 characters,
+            924 strings with 20750 characters,
 and the built_in function-call counts, 19486 in all, are:
 = -- 1400
 > -- 1512

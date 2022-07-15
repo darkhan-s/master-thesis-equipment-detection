@@ -179,6 +179,10 @@
 \usepackage{notoccite}
 \usepackage{placeins}
 \usepackage{subfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{listings}
 
 
 % Select what to do with todonotes: 
@@ -275,14 +279,13 @@
 %% Thesis keywords:
 %% Note! The keywords are separated using the \spc macro
 %%
-\keywords{Computer vision\spc object detection\spc transfer learning\spc domain adaptation\spc cross-domain object detection\spc continual learning}
+\keywords{computer vision\spc object detection\spc transfer learning\spc domain adaptation\spc cross-domain object detection\spc continual learning}
 %%
 
 %% The abstract text. This text is included in the metadata of the pdf file as
 %% well as the abstract page.
 %%
 \thesisabstract{
-TODO
 }
 
 %% Copyright text. Copyright of a work is with the creator/author of the work
@@ -359,9 +362,9 @@ TODO
 %%
 \begin{abstractpage}[english]
 
-Object detection is a rapidly-evolving field with applications varying from medicine to self-driving vehicles. As the performance of the deep learning algorithms grow exponentially, many new object detection applications have emerged. Despite the nearly all-time high demand, object detection is rarely used in industrial applications. Historically, object detection requires an extensive training data in order to produce sufficient results. Collecting huge datasets are often impractical in industrial environment evidently due to the confidentiality restrictions and data accessibility limitations. 
+Object detection is a rapidly-evolving field with applications varying from medicine to self-driving vehicles. As the performance of the deep learning algorithms grow exponentially, countless object detection applications have emerged. Despite the nearly all-time high demand, object detection is rarely used in industrial applications. Historically, object detection requires an extensive training data in order to produce sufficient results. Collecting huge datasets is often impractical in an  industrial environment due to the confidentiality restrictions and data accessibility limitations. 
 
-This thesis attempts to minimize the manual labeling process by proposing a regularized cross-domain adaptive teacher model with continual learning. The model assumes a task that seeks to eliminate the domain shift between industrial datasets from two domains: a larger labeled dataset of rendered images and a smaller unlabeled dataset of real-life images. While the labels for the rendered images can be generated automatically, only a tiny amount of real images should be collected, which is crucial in industrial environments.  
+This thesis attempts to minimize the manual labeling process by proposing a regularized cross-domain adaptive teacher model with continual learning. The model assumes a task that seeks to eliminate the domain shift between industrial datasets: a larger labeled dataset of rendered images and a smaller unlabeled dataset of real-life images. While the labels for the rendered images can be generated automatically, only a tiny amount of real images needs to be collected, which is crucial for the system scalability in industrial environments.  
 
 The model transfers knowledge from one domain to another by means of adversarial domain adaptation and mean teacher training. In an attempt to achieve state-of-the-art results, this thesis proposes to regularize the student and the teacher networks using image-level alignment, instance-level alignment and consistency loss. Additionally, the model adopts a lifelong learning approach that enables the model to be retrainable on a continuously expanding dataset, which further facilitates the scalablity of the system.
 
@@ -469,10 +472,10 @@ RPN			&Region Proposal Network\\
 RCNN		&Regions with CNN features\\
 ROI			&Region of Interest\\
 FPS			&Frames Per Second\\
-FPN			&Feature Pyramid Networks\\
 YOLO		&You Only Look Once \\
 SSD			&Single-shot MultiBox detector\\
 IoU 		&Intersection over Union\\
+AP			&Average Precision\\
 mAP			&Mean Average Precision\\
 NMS			&Non-Maxumum Suppression\\
 TL			&Transfer Learning\\
@@ -483,8 +486,6 @@ GAN			&Generative Adversarial Network\\
 T-LESS		&Texture-LESS\\
 CAD 		&Computer-Aided-Design\\
 API			&Application Programming Interface\\
-AP			&Average Precision\\
-mAP			&mean Average Precision\\
 TP			&True Positive\\
 TN			&True Negative\\
 FP			&False Positive\\
@@ -510,13 +511,12 @@ FN			&False Negative\\
 %% 
 \thispagestyle{empty}
 \subsection{Problem statement}
-In recent years, computer vision algorithms have received much attention due to their potential applications in a vast variety of fields, including security monitoring \cite{Awalgaonkar2020}, medicine \cite{9689485}, and self-driving vehicles \cite{Janai2017, Shan2018}. However, although computer vision has been integrated into industrial applications (e.g., safety and process monitoring)\cite{Awalgaonkar2020, Banf2022}, less research has addressed the issue of industrial equipment detection \cite{Wu2022, MALBURG2021581, Kim2020}. 
+In recent years, computer vision algorithms have received much attention due to their potential applications in a vast variety of fields, including security monitoring \cite{Awalgaonkar2020}, medicine \cite{9689485}, and self-driving vehicles \cite{Janai2017, Shan2018}. However, although computer vision has been integrated into industrial applications (e.g., safety and process monitoring) \cite{Awalgaonkar2020, Banf2022}, less research has addressed the issue of industrial equipment detection \cite{Wu2022, MALBURG2021581, Kim2020}. 
 
 As industrial plants are typically hundreds of meters long, it often becomes frustrating to identify equipment parts for maintenance or replacement. Ore processing plants treat several hundred tons of ore per hour, and the production capacity is constant. Therefore, it is often difficult to properly identify the equipment within a list of thousands of parts in a medium- to large-scale plant.
 
-This work has been commissioned by Metso Outotec Oyj.  Metso Outotec offers digital solutions that enable customers to automate their processes in the mining, aggregates and metals industries. In order to ensure that these processes operate as smoothly as possible, it is important to optimize them at all stages of production. Recently, Metso Outotec has successfully applied computer vision in applications for identifying foreign objects in crushing processes  \cite{metso_outotec_2022}, for detecting defects in copper  molds\cite{metso_outotec_2022_2}, as well as for recognizing froth in flotation cells \cite{metso_outotec_2022_1}, to name a few. However, the company has not yet attempted to apply computer vision for facilitating maintenance. For these reasons, Metso Outotec has requested an application that would further optimize the processes by leveraging state-of-the-art computer vision algorithms in equipment recognition. 
+This work has been commissioned by Metso Outotec Oyj.  Metso Outotec offers digital solutions that enable customers to automate their processes in the mining, aggregates and metals industries. In order to ensure that these processes operate as smoothly as possible, it is important to optimize them at all stages of production. Recently, Metso Outotec has successfully applied computer vision in applications for identifying foreign objects in crushing processes \cite{metso_outotec_2022}, for detecting defects in copper  molds \cite{metso_outotec_2022_2}, as well as for recognizing froth in flotation cells \cite{metso_outotec_2022_1}, to name a few. However, the company has not yet attempted to apply computer vision for facilitating maintenance. For these reasons, Metso Outotec has requested an application that would further optimize the processes by leveraging state-of-the-art computer vision algorithms in equipment recognition. 
 
-\todo{Add missing citations}
 Even though various methods have been implemented for detection of objects in a countless number of fields \cite{ima, Liu2015, He2017, Redmon2015a, Zhang2021b, Tian2019}, these methods heavily rely on extensive data collection and training of models in order to accurately identify objects. Moreover, complications arise, as it is often not possible to collect huge amounts of training images from industrial environments due to privacy and confidentiality issues. Luckily, for this project, the images can rather easily be collected from a 3D simulator model of a gold refining plant. However, using the rendered images from a 3D simulator limits the accuracy of the models, as such models do not perform as well on real images due to the domain shift phenomenon \cite{Ganin2015}, which occurs when the environmental conditions change at the time of capturing training and test images. 
 
 Hence, this thesis proposes a cross-domain object detection approach as a solution to automatically localize and identify the equipment in a large industrial environment in order to minimize the delay in production arising as a result of manual identification. 
@@ -528,37 +528,36 @@ Hence, this thesis proposes a cross-domain object detection approach as a soluti
 
 \subsection{Thesis objective}
 \label{objective} 
-The main goal of this thesis is to identify a suitable state-of-the-art object detection technique and to enhance its performance on the custom equipment dataset. The proposed method should be able to identify an object in a real image given a labeled dataset of rendered images from a 3D equipment model and a smaller unlabeled dataset of real images. Additionally, the developed method should provide a solution for optimizing the laborious process of data collection and labeling. Furthermore, the produced model should address the cases when new objects are incrementally added to the dataset.  Such optimization is important not only because training the model from the scratch is a time-demanding process, but also because large plants contain thousands of objects, thus making scalability a critical requirement. Finally, a minimal proof-of-concept application should be prepared to demonstrate the performance of the proposed detection technique.  
+The main goal of this thesis is to identify a suitable state-of-the-art object detection technique and to enhance its performance on the custom equipment dataset. The proposed method should be able to identify an object in a real image given a labeled dataset of rendered images from a 3D equipment model and a smaller unlabeled dataset of real images. Additionally, the developed method should provide a solution for optimizing the laborious process of data collection and labeling. Furthermore, the produced model should address the cases when new objects are continuously added to the dataset.  Such optimization is important not only because training the model from the scratch is a time-demanding process, but also because large plants contain thousands of objects, thus making scalability a critical requirement. Finally, a minimal proof-of-concept application should be prepared to demonstrate the performance of the proposed detection technique.  
 
 \subsection{Methodology}
-\todo{Refine after all done}
-In order to accomplish these objectives, the thesis will first explore state-of-the-art object detection frameworks, libraries and algorithms. Similarly, domain adaptation algorithms will be analyzed in an object detection setup. The most suitable methodologies will then be used to train a cross-domain object detection model.  
+In order to accomplish these objectives, the thesis will first explore state-of-the-art object detection frameworks, libraries and algorithms. Similarly, domain adaptation algorithms will be analyzed in an object detection setup. The most suitable methodologies will then be then selected to be used in a novel cross-domain object detection model.  
 
 In order to circumvent regulations regarding accessibility and confidentiality, the dataset utilized for training the model in the experimental scenario will be based on the T-LESS open-source dataset \cite{hodan2017tless}. Since the dataset was originally intended for pose estimation in 3D models, it will be converted into formats appropriate for the proposed object detection algorithms.
 
-To achieve higher performance in object detection, the domain shift phenomenon will be addressed using the Adaptive Teacher \cite{Li2021} algorithm for cross-domain object detection, which in turn uses the Faster-RCNN \cite{ima}  implementation in the detectron2 \cite{wu2019detectron2}  framework as a detector base.  The thesis will contribute to current knowledge by introducing an instance-level domain classifier appended to the base network of the Adaptive Teacher algorithm, as suggested by Chen et al. \cite{Chen2018}. Additionally, the study will evaluate the feasibility of other strategies, such as continual learning \cite{Parisi2018}, to further enhance scalability of the model. The model will then be integrated into a prototype web application for demonstration purposes. The produced model will be trained on rendered data from 3D models and evaluated on real images using mean average precision metrics. Finally, the proposed method will be evaluated using one equipment item from a real plant operated by a Metso Outotec client.
+To achieve higher performance in object detection, the domain shift phenomenon will be addressed using the Adaptive Teacher \cite{Li2021} algorithm for cross-domain object detection, which in turn uses the Faster-RCNN \cite{ima} implementation as a detector base in the Detectron2 \cite{wu2019Detectron2} framework.  The thesis will contribute to current knowledge by introducing an instance-level domain classifier appended to the base network of the Adaptive Teacher algorithm, as suggested by Chen et al. \cite{Chen2018}. Additionally, the study will evaluate the feasibility of other strategies, such as continual learning \cite{Parisi2018}, to further enhance scalability of the model. The model will then be integrated into a prototype web application for demonstration purposes. The produced model will be trained on rendered data from 3D models and evaluated on real images using mean average precision metrics. Finally, the proposed method will be evaluated using one equipment item from a real plant operated by a Metso Outotec client.
 \todo{Verify if obtaining real equipment data is feasible}
 
 \clearpage
 
 \subsection{Scope}
 
-The thesis will be limited to proposing a minimal proof-of-concept solution based on analyzing and combining different components of existing state-of-the-art models. In addition, this solution will be wrapped in a prototype web application. However, preparing an actual real-life dataset and implementing the solution for a real plant remains outside the scope of this study due to time constraints. Although the proposed method attempts to optimize the data collection and labeling process, this will in practice require many months before the dataset and the model based on real data would be ready for training. 
+The thesis will be limited to proposing a minimal proof-of-concept solution based on analyzing and combining different components of existing state-of-the-art models. In addition, this solution will be wrapped in a prototype web application. However, preparing an actual real-life dataset and implementing the solution for a real plant remains outside the scope of this study due to the time constraints. Although the proposed method attempts to optimize the data collection and labeling process, this will in practice require many months before the dataset and the model based on real data would be ready for use. 
 
-For the user interface, a prototype will be provided in order to showcase the performance of the model. However, the thesis will primarily focus on deep learning algorithms rather than methods to deploy a model in production. For this reason, the prototype will only offer basic functionality. Finally, due to time constraints, a video-compatible model will remain outside the scope of this work. 
+For the user interface, a prototype will be provided in order to showcase the performance of the model. However, the thesis will primarily focus on deep learning algorithms rather than methods to deploy a model. For this reason, the prototype will only offer basic functionality. Finally, due to time constraints, a video-compatible model will remain outside the scope of this work. 
 
- 
+
 
 \subsection{Structure of the thesis}
-\todo{Check when finilizing. Can chapters 3 and 4 be combined? } 
-The rest of this thesis is divided into four chapters. Chapter 2 reviews the common terminology on deep learning, image classification and object detection. Additionally, the up-to-date literature review is conducted on industrial object detection applications. Finally, domain adaptation, the latest cross-domain object detection techniques, and continual learning implementations are introduced. Chapter 3 defines the dataset and the evaluation metrics used, evaluates the standard object detectors and several cross-domain object detection techniques. Finally, it outlines a proposed novel architecture, which addresses both domain adaptation and contunual learning. Chapter 4 evaluates the solution and compares the results to those of other methods using average precision metrics. Chapter 5 summarizes this work by discussing the proposed architecture and suggesting directions for future work.
+\todo{Check when finalizing. Can chapters 3 and 4 be combined? } 
+The rest of this thesis is divided into four chapters. Chapter 2 reviews the common terminology on deep learning, image classification and object detection. Additionally, the chapter discusses the up-to-date state-of-the art in industrial object detectors. Furthermore, domain adaptation and the latest cross-domain object detection techniques are covered in greater detail. Finally, the topic of continual learning is reviewed. Chapter 3 defines the dataset and the evaluation metrics used, as well as evaluates the standard object detectors and several cross-domain object detection algorithms. Finally, it proposes a novel architecture, which addresses both domain adaptation and continual learning. Chapter 4 evaluates the proposed solution and compares the results to other methods using average precision metrics. Chapter 5 summarizes this work by discussing the proposed architecture and suggesting directions for future work.
 
 %% In a thesis, every section starts a new page, hence \clearpage
 \clearpage
 \section{Background}
-This section of the thesis introduces the key concepts related to the field of study. The section mainly discusses neural networks, object detection, trasnfer learning and domain adaptation. Additionally, the section will familiarize the reader with the relevant terminology and notations used. The section will provide an extensive overview of the latest domain-adaptive object detection methods. Finally, the topic of  continual learning will be introduced. 
+This section of the thesis introduces the key concepts related to the field of study. The section mainly discusses neural networks, object detection, transfer learning and domain adaptation. Additionally, the section will familiarize the reader with the relevant terminology and notations used. Furthermore, this section will briefly introduce the state-of-the-art industrial object detectors. The section will provide an extensive overview of the latest domain-adaptive object detection methods. Finally, the topic of  continual learning will be introduced. 
 \subsection{Deep learning and neural networks}
-Historically, machine learning(ML), a subfield of Artificial Intelligence(AI), has been a highly computational task. The primary cause of it was linked to low hardware performance. According to the Moore's law \cite{Etiemble2022}, in a given number of months, the amount of transistors doubles in a circuit.  As the computational power of the computers grew proportianally to the number of transistors, the results have been steadily improving. The improvement was further facilitated with the discovery of the Graphical Processing Unit(GPU) applicability in ML tasks \cite{Hwang2018}. Few additional critical bottlenecks in ML are caused by suboptimal algorithms and data availability limitations. As the availability of data improved, new fields of applications arose. These and many other advancements made it possible to accelerate the training speed of deep neural networks(DNN).  
+Historically, machine learning(ML), a sub-field of Artificial Intelligence(AI), has been a highly computational task. The primary cause of it was linked to low hardware performance. According to Moore's law \cite{Etiemble2022}, the amount of transistors doubles in a circuit in a given number of months.  As the computational power of the computers grew proportionally to the number of transistors, the results have been steadily improving. The improvement was further facilitated with the discovery of the Graphical Processing Unit(GPU) applicability in ML tasks \cite{Hwang2018}. Additional critical bottlenecks in ML were caused by sub-optimal algorithms and data availability limitations. As the availability of data improved, new fields of applications arose. These and many other advancements made it possible to accelerate the training speed of deep neural networks(DNN).  
 
 \begin{figure}[htb]
 	\begin{center}
@@ -571,20 +570,20 @@ Historically, machine learning(ML), a subfield of Artificial Intelligence(AI), h
 \end{figure}
 \FloatBarrier
 
-The concept of neural networks originates from biology, where a network of neurons is fundamental to the functionality of a brain. In overly simplified terms, such network consists of interconnected neurons that capture an external signal and produce a certain reaction within the brain as a response. Figure \ref{NeuronSchem}(a) illustrates a typical neuron, where the signal flows from dendrites through the cellbody of the neuron. If the signal is strong enough, the neuron activated and passes the signal further to other neurons through the connections called "synapses", as shown in Figure \ref{NeuronSchem}(c). Identical process takes place in remaining neurons, which ultimately forms a neural network \cite{Mehlig_2021}.
+The concept of deep neural networks originates from biology, where a network of neurons is fundamental to the functionality of a brain. In overly simplified terms, such network consists of interconnected neurons that capture an external signal and produce a certain reaction within the brain as a response. Figure \ref{NeuronSchem}(a) illustrates a typical neuron, where the signal flows from dendrites through the cell-body of the neuron. If the signal is strong enough, the neuron activated and passes the signal further to other neurons through the connections called "synapses", as shown in Figure \ref{NeuronSchem}(c). Identical process takes place in remaining neurons, which ultimately forms a neural network \cite{Mehlig_2021}.
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[height=8cm]{./BioNeuronVsArtificial.png}
 	\end{center}
-	\caption{A biological(a) neuron against artificial(b) and biological synapse(c) against artificial(d)\cite{article1}.}
+	\caption{A biological(a) neuron against artificial(b) and biological synapse(c) against artificial(d) \cite{article1}.}
 	\begin{center}
 		\label{NeuronSchem}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-In deep learning(DL), a subfield of ML, this architecture has been borrowed to implement an artificial neural network(ANN), where a neuron is simply a unit that processes an input signal. Figure \ref{NeuronSchem}(b) demonstrates a simplified structure of an artificial neuron. Here, $x_1, x_2..x_n$ represent input signals, while $w_1, w_2, ... w_n$ are the weights of the signal. The higher the weights of the input are, the stronger the influence of the neuron on the output. The weighted sum of the inputs is then passed to the activation function, which essentially determines the output of the node and allows to learn complex patterns in data \cite{Mehlig_2021}. 
+In deep learning(DL), a sub-field of ML, this architecture has been borrowed to implement an artificial neural network(ANN), where a neuron is simply a unit that processes an input signal. Figure \ref{NeuronSchem}(b) demonstrates a simplified structure of an artificial neuron. Here, $x_1, x_2..x_n$ represent input signals, while $\mathcal{W} = w_1, w_2, ... w_n$ are the weights of the signal and $y_i$ is the output of the neuron. The higher the weights of the input are, the stronger the influence of the neuron on the output. The weighted sum of the inputs is then passed to the activation function, which essentially determines the output of the node and ultimately allows to learn complex patterns in data \cite{Mehlig_2021}. 
 
 A few of the most popular non-linear activation functions include a logistic sigmoid, tanh function, softmax and a rectified linear unit(ReLU). Among the four, ReLU has been considered state-of-the-art in the field of deep learning due to the performance in convolutional neural networks(CNN) \cite{Dubey2021} and the simplicity. The logic of ReLU can be represented as follows: 
   
@@ -592,15 +591,14 @@ A few of the most popular non-linear activation functions include a logistic sig
 	\operatorname{ReLU}(x)=\max (0, x)= \begin{cases}x, & \text { if } x \geq 0 \\ 0, & \text { otherwise }\end{cases}
 \end{equation}
 
-Consequently, the output of the activation function is passed to a hidden layer of neurons, as illustrated in Figure \ref{NeuronSchem}(d). The layers in the middle are called hidden due to the fact that both outputs and inputs are masked by the activation function.  The hidden layers will calculate the weighted output of the previous layers until the signal eventually reaches the final output layer of the network. Hidden layers that stack up together to form a classical deep learning architecture \cite{OShea2015}. Such architecture allows to process data in a non-linear pattern. In the original ANN all the layers are fully-connected(FC), meaning that each node of the input vector affects each node of the output vector, as shown in Figure \ref{NeuronSchem}(d).
+Consequently, the output of the activation function is passed to a hidden layer of neurons, as illustrated in Figure \ref{NeuronSchem}(d). The layers in the middle are called "hidden" due to the fact that both outputs and inputs are masked by the activation function.  The hidden layers will calculate the weighted output of the previous layers until the signal eventually reaches the final output layer of the network. Hidden layers that stack up together to form a classical deep learning architecture \cite{OShea2015}. Such architecture allows to process data in a non-linear pattern. In the original ANN all the layers are fully-connected(FC), meaning that each node of the input vector affects each node of the output vector, as shown in Figure \ref{NeuronSchem}(d).
 
 
-Due to the biological nature, neural networks adapt over time by creating new connections between neurons. The neurons in ANN adopted such behaviour by utilizing a backpropogation algorithm \cite{Rumelhart:1986we}. A naive backpropogation approach is illustrated in Figure \ref{fig:backprop}. The algorithm consists of two parts - feed-forward and backward loops. Generally, the main objective of an ANN is to choose such weights that the network produces desired target outputs. The forward pass propagates along the nodes in each layer of the neural network and returns a predicted output. In order to evaluate the quality of the predicted output, it is compared to the target output by using a cost(loss) function. The classic example of a cost function is a mean-squared error (MSE), which is commonly used in regression based problems. The equation to MSE is shown in Equation \ref{MSE_eq}.
+Due to the biological nature, neural networks adapt over time by creating new connections between neurons. The neurons in ANN adopted such behaviour by utilizing a backpropogation algorithm \cite{Rumelhart:1986we}. A naive backpropogation approach is illustrated in Figure \ref{fig:backprop}. The algorithm consists of two parts: feed-forward and backward loops. Generally, the main objective of an ANN is to choose such weights that the network produces desired target outputs. The forward pass propagates along the nodes in each layer of the neural network and returns a predicted output. In order to evaluate the quality of the predicted output, it is compared to the target output by using a cost(loss) function. The classic example of a cost function is a mean-squared error (MSE), which is commonly used in regression based problems. The equation to MSE is shown in Equation \ref{MSE_eq}.
 
 \begin{equation}
-\underset{\theta}{\operatorname{argmin}} \frac{1}{m} \sum_{i=1}^{m}\left(f_{\theta}\left(x_{i}\right)-y_{i}\right)^{2}
-\label{MSE_eq} 
-\end{equation}
+{\operatorname{argmin}} \frac{1}{n} \sum_{i=1}^{n}\left(f\left(x_{i}\right)-y_{i}\right)^{2}
+\end{equation}\label{MSE_eq} 
 
 The MSE cost function attempts to minimize the distance between the predicted output and the target output, while giving more weight to larger distances due to the squared output \cite{Albarghouthi2021}.
 
@@ -610,42 +608,38 @@ The MSE cost function attempts to minimize the distance between the predicted ou
     \subfloat{{\includegraphics[width=10.5cm]{./Backprop1.png} }}%
     \qquad
     \subfloat{{\includegraphics[width=1.5cm]{./Backprop2.png} }}%
-    \caption{Backpropogation algorithm, adapted from \cite{Alber2018}.}
-    \label{fig:backprop}%
+    \caption{Backpropogation algorithm, adapted from \cite{Alber2018}.}\label{fig:backprop}%
 \end{figure}
 \FloatBarrier
 
-In order to minimize the loss function, the algorithm calculates the partial derivative of the loss term $L$ with respect to the weights: $\frac{\partial L(f(x), y)}{\partial W_{i}}$. An algorithm of the gradient descent is commonly used in optimizing such functions and its logic can be generalized as follows: 
+In order to minimize the loss function, the algorithm calculates the partial derivative of the loss term $\mathcal{L}$ with respect to the weights: $\nabla g = \frac{\partial \mathcal{L}(f(x_i), y_i)}{\partial \mathcal{W}}$. The basic algorithm of the gradient descent is commonly used in optimizing such functions and its logic can be generalized as follows: 
 
-\todo{Make sure this formula makes sense with the rest of the text}
 \begin{enumerate}
-  \item Start with $j=0$ and a random value of $\theta$, called $\theta^{0}$.
-  \item Set $\theta^{j+1}$ to $\theta^{j}-\eta\left((\nabla g)\left(\theta^{i}\right)\right)$.
-  \item $j$ to $j+1$ and repeat \cite{Albarghouthi2021}.
+  \item Initialize the algorithm with a random value of $\theta^{i}$, where starts with $i=0$ 
+  \item Define the next $\theta$ value as $\theta^{i+1} = \theta^{i}-\eta\left((\nabla g)\left(\theta^{i}\right)\right)$.
+  \item iterate over the values of $i$ and repeat until convergence \cite{Albarghouthi2021}.
 \end{enumerate} 
 
-\todo{Todo: write about learning rate, overshooting, local/global minima}
-Generally speaking, there are three gradient descent algorithms: batch gradient descent, stochastic gradient descent(SGD) and mini-batch gradient descent. While the batch gradient descent updates the model only after all the samples have been evaluated, the SGD calculates the error for one sample in the dataset and updates the parameters one at the time. On the other hand, the mini-batch gradient descent algorithm splits the data into smaller batches and calculates updates on each of the data subsets. 
+Generally speaking, there are three gradient descent algorithms: batch gradient descent, stochastic gradient descent(SGD) and mini-batch gradient descent. While the batch gradient descent updates the model only after all the samples have been evaluated, the SGD calculates the error for one sample in the dataset and updates the parameters one by one. On the other hand, the mini-batch gradient descent algorithm splits the data into smaller batches and calculates updates on each of the data subsets. 
 
-Finally, by applying the chain rule to the derivatives in a backwards direction, the updates $\Delta W$ are calculated for each of weights the in the layers \cite{Alber2018}. The algorithm is then repeated until convergence. The process of determining the weight values to utilize in each subsequent layer in the neural network by means of backpropogation algorithm is called "training the model".  
+Finally, by applying the chain rule to the derivatives in a backwards-direction, the updates for the matrix $\mathcal{W}$ are calculated for the nodes in the neural network \cite{Alber2018}. The algorithm is then repeated until the global minimum is reached. The process of determining the weight values to utilize in each subsequent layer in the neural network by means of backpropogation algorithm is called "training the model". During training, the value that $\Delta W$ are updated is known as "learning rate" (LR). This hyperparameter of the network typically equals to a small value between 0 and 1. Picking too high LR value would result in overshooting e.g. never finding the global minimum, while too low value will lead to slow convergence and higher computational costs. 
+
 
 \subsection{Neural networks in computer vision}
 \label{neural_nets} 
-With the discovery of DNN, many of the popular computer vision techniques became obsolete. Specifically, the introduction of CNNs was an important milestone in boosting machine perception performance \cite{Mahony2019}. Nowadays, CNNs are typically used to tackle various pattern recognition and computer vision tasks. Some of the tasks  include:
+With the discovery of DNN, many of the popular computer vision techniques became obsolete. Specifically, the introduction of CNNs was an important milestone in boosting machine perception performance \cite{Mahony2019}. Nowadays, CNNs are typically used to address various pattern recognition and computer vision tasks. Some of the tasks  include:
 
 \begin{itemize}
 	\item Image Classification
 	\item Object Detection
 	\item Segmentation
-	\item Facial Recognition and Modelling
+	\item Facial Recognition
 	\item Domain Adaptation
 	\item Image Reconstruction
-	\item and with many others \cite{paperswithcode:2022}.
+	\item and many others \cite{paperswithcode:2022}.
 \end{itemize}
 
-For addressing the objectives of this work, the thesis will extensively cover image classification, object detection and domain adaptation tasks.
-
-Figure \ref{CNN} illustrates a simplistic CNN architecture approach to the MNIST  \cite{lecun-mnisthandwrittendigit-2010} classification problem. A CNN is essentially a neural network that leverages convolutional layers to produce predictions. Unlike the traditional computer vision methods, CNNs do not need to extract features of the image beforehand due to the logic behind convolution. In classical ML the features are extracted separately, followed by the appropriate algorithms for learning. On the countrary, DL algorithms, such as CNN, learn the features automatically \cite{alom01}.
+For addressing the key objectives of this work (Section \ref{objective}), the thesis will extensively cover image classification, object detection and domain adaptation tasks. Figure \ref{CNN} illustrates a simplistic CNN architecture approach to the MNIST  \cite{lecun-mnisthandwrittendigit-2010} classification problem. A CNN is essentially a neural network that leverages convolutional layers to produce predictions. Unlike the traditional computer vision methods, CNNs do not need to extract features of the image beforehand due to the logic behind convolution. In classical ML the features are extracted separately, followed by the appropriate algorithms for learning. On the contrary, DL algorithms, such as CNN, learn the features automatically \cite{alom01}.
 
 
 \begin{figure}[htb]
@@ -659,7 +653,7 @@ Figure \ref{CNN} illustrates a simplistic CNN architecture approach to the MNIST
 \end{figure}
 \FloatBarrier
 
-To understand the logic of convolutional layers, it is important to discuss the operation of convolution. Convolution  is a mathematical operation of two functions that indicates how the shape of one affected by another. In terms of image processing, convolution is a process, where the kernel moves along the input matrix dimensions. Each output pixel can then be calculated as the dot product of the cropped input and the kernel \cite{Liu2016}. Figure \ref{CNN_1}(a) illustrates the process of convolution in image processing.  
+To understand the logic behind convolutional layers, it is important to discuss the operation of convolution. Convolution is a mathematical operation of two functions that indicates how the shape of one affected by another. In terms of image processing, convolution is a process, where the kernel moves along the input matrix dimensions. Each output pixel can then be calculated as the dot product of the cropped input and the kernel \cite{Liu2016}. Figure \ref{CNN_1}(a) illustrates the process of convolution in image processing.  
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[height=5cm]{./CNN_1.png}
@@ -671,12 +665,13 @@ To understand the logic of convolutional layers, it is important to discuss the 
 \end{figure}
 \FloatBarrier
 
-As a result, the elements of the network  are not densely connected, which allows better generalization and flexibility. This operation in practice allows to extract the important features of the image, such as edges, corners, shapes and many others.  However, unlike in the FC layers, the number of weights is much smaller, which is essential when it comes to high-dimensional images. Following the architecture in Figure \ref{CNN}, the outputs of the convolutional layers are activated with ReLU in a similar manner as in a classical ANN structure. The outputs are then pooled in order to downsample the image and hence reduce the computational costs \cite{Liu2016}. The commonly used max-pooling operation is shown in Figure \ref{CNN_1}(b). Finally, fully-connected layers complete the structure of the basic CNN. FC layers are used to flatten the ouputs from the convolutional layers. This in turn allows, in case of the input in Figure \ref{CNN}, to compute the probability of the input image to represent a number \cite{Mahony2019}.
+As a result, the elements of the network  are not densely connected, which allows better generalization and flexibility. This operation in practice allows to extract the important features of the image, such as edges, corners, shapes and many others.  However, unlike in the FC layers, the number of weights is much smaller, which is essential when it comes to high-dimensional images. Following the architecture in Figure \ref{CNN}, the outputs of the convolutional layers are activated with ReLU in a similar manner as in a classical ANN structure. The outputs are then pooled in order to down-sample the image and hence reduce the computational costs \cite{Liu2016}. The commonly used max-pooling operation is shown in Figure \ref{CNN_1}(b). Finally, fully-connected layers complete the structure of the basic CNN. FC layers are used to flatten the outputs from the convolutional layers. In case of the input in Figure \ref{CNN}, this in turn allowed to compute the probability of the input image to represent a number between 0 and 9 \cite{Mahony2019}.
 
-CNNs boosted the performance in computer vision tasks. However, deep learning methods still required extensive training data. Luckily, multiple algorithms emerged as large datasets became available. The datasets were made public as different image classification challenges appeared. The  datasets commonly used in benchmarking are ImageNet \cite{Russakovsky2014}, PASCAL Visual Object Classes(VOC)\cite{Everingham10} and Common Objects in Context(COCO) \cite{Lin2014}.
+CNNs boosted the performance in computer vision tasks. However, deep learning methods still required extensive training data. Luckily, multiple algorithms emerged as large datasets became available, which were made public as different image classification challenges appeared. The  datasets commonly used in benchmarking are ImageNet \cite{Russakovsky2014}, PASCAL Visual Object Classes(VOC) \cite{Everingham10} and Common Objects in Context(COCO) \cite{Lin2014}. The algorithms that emerged as a result of these challenges will be discussed in the following section. 
 
 \subsection{Image classification}
-It is important to understand the concepts of image classification before moving on to object detection principles. Among the three mentioned earlier, ImageNet was chosen to be a de-facto dataset for running benchmarks.  Different CNN-based models were proposed and some of the most popular models include LeNet \cite{lecun-gradientbased-learning-applied-1998}, AlexNet \cite{NIPS2012_c399862d}, VGGNet \cite{Simonyan2014} and Residual Neural Network(ResNet) \cite{He2015}. As it can be concluded from Figure \ref{image_net}, the classification error dropped lower than the error from the human eye with the introduction of ResNet, thus approaching the theoretical limits. 
+\label{classification_section} 
+It is important to understand the concepts of image classification before moving on to object detection principles. Among the three mentioned earlier, ImageNet was chosen to be a de-facto dataset for running benchmarks.  Different CNN-based models were proposed and some of the most popular models include LeNet \cite{lecun-gradientbased-learning-applied-1998}, AlexNet \cite{NIPS2012_c399862d}, VGGNet \cite{Simonyan2014} and Residual Neural Network(ResNet) \cite{He2015}. As it can be concluded from Figure \ref{image_net}, the classification error dropped lower than the error of the manual detection with the introduction of ResNet, thus approaching the theoretical limits. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -690,7 +685,7 @@ It is important to understand the concepts of image classification before moving
 \FloatBarrier
 
 \subsubsection{LeNet}
-LeNet architecture (1998) \cite{lecun-gradientbased-learning-applied-1998} is considered to be a pioneer in the field. Its design inherited the classic CNN architecture, although instead it consisted of 7 layers, as presented in Figure \ref{LeNet}. However, the implementation of the paper was not possible for more than 10 years due to limitations in computing power. 
+LeNet architecture (1998) \cite{lecun-gradientbased-learning-applied-1998} is considered to be a pioneer in the field. Its design inherited the classic CNN architecture, but instead it consisted of 7 layers, as presented in Figure \ref{LeNet}. However, the implementation of the paper was not possible for more than 10 years due to limitations in computing power at the time. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -704,11 +699,12 @@ LeNet architecture (1998) \cite{lecun-gradientbased-learning-applied-1998} is co
 \FloatBarrier
 
 \subsubsection{AlexNet}
+\label{alexnet_section} 
 Consequently, AlexNet paper was introduced, which proved the effectiveness of their model, as it outperformed the state-of-the-art implementations and achieved the error rate of 15.3\% \cite{NIPS2012_c399862d}. Figure \ref{AlexNet} displays the proposed network. The architecture of AlexNet is similar to one of LeNet, though it is substantially deeper and has more than 60 million adjustable parameters. It has 5 convolutional layers of varying kernel size. The convolutional layers are followed byt ReLU activation functions and max-pooling layers. The architecture is finalized by attaching two FC layers with dropout rate of 0.5 and one softmax layer.
 
-During dropout, there is a probability that the neuron will be excluded from computations in the subsequent layer. Utilizing such technique proved to be essential to fight overfitting in FC layers and improve generalization  \cite{JMLR:v15:srivastava14a}. 
+During dropout, there is a probability that the neuron will be excluded from computations in the subsequent layer. Utilizing such technique proved to be essential to fight over-fitting in FC layers and improve generalization  \cite{JMLR:v15:srivastava14a}. 
 
-Overall, AlexNet architecture was the first CNN to split the model into two parts and to leverage mulitple GPUs in training due to GPU memory limitations of 3GB at the time. 
+AlexNet architecture was the first CNN to split the model into two parts and to leverage mulitple GPUs in training due to GPU memory limitations of 3GB at the time \cite{NIPS2012_c399862d}. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -722,7 +718,7 @@ Overall, AlexNet architecture was the first CNN to split the model into two part
 \FloatBarrier
 
 \subsubsection{VGG}
-Another milestone was achieved with the discovery proposed in VGGNet \cite{Simonyan2014}. This work proved that the depth of the network produces a significant impact on the performance of the CNN in classification tasks \cite{alom01}. Three different versions of the model were proposed with 11, 16 and 19 layers, respectively and with the deeper model being the best in performance, but more expensive in terms of computation. Equivalently to AlexNet, the network has blocks of convolutional layers of a mixed kernel size, followed by a ReLU block and max-pooling. The network is finilized with three FC and one softmax layers. 
+Another milestone was achieved with the discovery proposed in VGGNet \cite{Simonyan2014}. This work proved that the depth of the network produces a significant impact on the performance of the CNN in classification tasks \cite{alom01}. Three different versions of the model were proposed with 11, 16 and 19 layers, respectively and with the deeper model being the best in performance, but more expensive in terms of computation. Equivalently to AlexNet, the network has blocks of convolutional layers of a mixed kernel size, followed by a ReLU block and max-pooling. The network is finalized with three FC and one softmax layers. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -736,26 +732,26 @@ Another milestone was achieved with the discovery proposed in VGGNet \cite{Simon
 \FloatBarrier
 
 \subsubsection{ResNet}
-ResNet architecture \cite{He2015}, which was proposed in 2015, discovered that after certain depth, the performance of the model degrades. He et al. suggested that this happens due to the "vanishing gradient" problem. As the model gets deeper, several applications of the chain rule on during backpropogation tend to diminish either all the way to zero or becomes too large. As a result, no update is applied on the weights and hence, no training takes place. He et al. proposed to utilize a residual block, illustrated in Figure \ref{resnet}, which is used to skip some of the layers in between.  This solution essentially mitigates the problem of vanishing gradients by allowing the training loop to skip parts of the network that affect the performance negatively. 
+ResNet architecture \cite{He2015}, which was proposed in 2015, discovered that after reaching certain depth of the network, the performance of the model degrades. He et al. \cite{He2015} suggested that this happens due to the "vanishing gradient" problem. As the model gets deeper, several applications of the chain rule on during backpropogation tend to diminish either all the way to zero or becomes too large. As a result, no update is applied on the weights and hence, no training takes place. He et al. proposed to utilize a residual block, illustrated in Figure \ref{resnet}, which is used to skip some of the layers in between.  This solution essentially mitigates the problem of vanishing gradients by allowing the training loop to skip parts of the network that negatively affect the performance.
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[height=4cm]{./resnet.png}
 	\end{center}
-	\caption{Residual block of ResNet\cite{He2015}.}
+	\caption{Residual block of ResNet \cite{He2015}.}
 	\begin{center}
 		\label{resnet}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-ResNet adopts the VGG-19 architecture, with an exception of the skip connection block added. He et al. implemented multiple versions of the model, including one that is 152 layers deep. Nonetheless, the network has less trainable parameters, which substantially improves the training speed while preserving accuracy due to the residual block. As a result, the proposed model achieved the error of 3.57\% on ImageNet dataset, which is lower than the human error \cite{He2015}.
+ResNet adopts the VGG-19 architecture, but adds a skip connection block. He et al. implemented multiple versions of the model and the largest one is 152 layers deep. Nonetheless, the network has less trainable parameters than VGG, which substantially improves the training speed while preserving accuracy due to the residual block. As a result, the proposed model achieved the error of 3.57\% on ImageNet dataset, which is lower than the human eye error \cite{He2015}.
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=16cm]{./resnetFull.png}
 	\end{center}
-	\caption{ResNet architecture\cite{resnet50}.}
+	\caption{ResNet architecture \cite{resnet50}.}
 	\begin{center}
 		\label{resnetFull}
 	\end{center}
@@ -768,19 +764,7 @@ ResNet adopts the VGG-19 architecture, with an exception of the skip connection 
 
 \subsection{Object detection}
 \label{obj_detection_section} 
-The problem of object detection is an extended version of the image classification problem. However, unlike image classification, object detection aims to recognize not only the object, but also to localize it. Prior to arrival of deep learning, object detection considered to be a difficult task. With the discovery of the CNN architecture, the traditional computer vision techniques became obsolete. Since then, multiple different detector algorithms emerged. A typical object detection network contains two important modules - the base, or backbone network, and the detector network. A base network is usually one of the pretrained VGG or ResNet models, presented in the previous chapter. A base network acts as a feature extractor, and the features are then passed to a detector. Generally speaking, deep learning based detector networks can be classified into two categories: single- and two-stage detectors \cite{Zaidi2021}. Two-stage object detectors attempt to propose regions of the image that contain an object in the first step, and then run the task of classification and localization on the given proposal region. On the other hand, single-stage detectors try to detect objects directly without running a Region Proposal Network (RPN). Figure \ref{fig:1vs2stage} illustrates the key differences in the structure of the two categories. 
-
-\begin{figure}[htb]
-    \centering
-    \subfloat{\raisebox{0.13\height}{\includegraphics[width=6cm]{./1stage.png} }}%
-    \qquad
-    \subfloat{{\includegraphics[width=6cm]{./2stage.png} }}%
-    \caption{A simple single-stage detector(left) compared to a two-stage detector(right)\cite{app8091488}.}
-    \label{fig:1vs2stage}%
-\end{figure}
-\FloatBarrier
-
-Typical examples of the single-stage networks are RetinaNet \cite{Lin2017}, Single-shot detector(SSD) \cite{Liu2015} and You only look once(YOLO) \cite{Redmon2015a}. In two-stage detectors, Region-based CNN(R-CNN) \cite{Girshick2013}, Fast-RCNN \cite{Girshick2015} and Faster-RCNN \cite{ima} are considered to be the most important discoveries. Figure \ref{OD} also mentions detectors such as FCOS \cite{Tian2019}, Mask-RCNN \cite{He2017} and DETR \cite{Carion2020}. Although they show competitive performance, they are not reviewed in the thesis as they are not relevant to the method introduced in the \nameref{Methodology}.  The following subsection will introduce the reader to some of the main concepts of the selected detectors. 
+The problem of object detection is an extended version of the image classification problem. However, unlike image classification, object detection aims to recognize not only the object, but also to localize it. Prior to arrival of deep learning, object detection considered to be a difficult task. With the discovery of the CNN architecture, the traditional computer vision techniques became obsolete. Since then, multiple different detector algorithms emerged. A typical object detection network contains two important modules - the base (or backbone) network  and the detector network. A base network is usually one of the pre-trained VGG or ResNet models, presented in the previous chapter. A base network acts as a feature extractor, and the features are then passed to a detector. Generally speaking, deep learning based detector networks can be classified into two categories: single- and two-stage detectors \cite{Zaidi2021}, as shown in Figure \ref{OD}.  
 
 \begin{figure}[htb]
 	\begin{center}
@@ -793,11 +777,25 @@ Typical examples of the single-stage networks are RetinaNet \cite{Lin2017}, Sing
 \end{figure}
 \FloatBarrier
 
+Two-stage object detectors attempt to propose regions of the image that contain an object first, and then run the task of classification and localization on the proposed region. On the other hand, single-stage detectors try to detect objects directly without running the  Region Proposal Network (RPN). Figure \ref{fig:1vs2stage} illustrates the key differences in the architecture.
+
+\begin{figure}[htb]
+    \centering
+    \subfloat{\raisebox{0.13\height}{\includegraphics[width=6cm]{./1stage.png} }}%
+    \qquad
+    \subfloat{{\includegraphics[width=6cm]{./2stage.png} }}%
+    \caption{A simple single-stage detector(left) compared to a two-stage detector(right) \cite{app8091488}.}\label{fig:1vs2stage}%
+\end{figure}
+\FloatBarrier
+
+Typical examples of the single-stage networks are RetinaNet \cite{Lin2017}, Single-shot detector(SSD) \cite{Liu2015} and You Only Look Once(YOLO) \cite{Redmon2015a}. In two-stage detectors, Region-based CNN(R-CNN) \cite{Girshick2013}, Fast-RCNN \cite{Girshick2015} and Faster-RCNN \cite{ima} are considered to be the most important discoveries. Figure \ref{OD} also mentions detectors such as FCOS \cite{Tian2019}, Mask-RCNN \cite{He2017} and DETR \cite{Carion2020}. Although they show competitive performance, they are not reviewed in the thesis as they are not relevant to the method introduced in the \nameref{Methodology}.  The following subsection will introduce the reader to some of the main concepts of the selected detectors. 
+
+
 \subsubsection{R-CNN}
 
-Figure \ref{rcnn} shows the structure of the R-CNN network \cite{Girshick2013}. R-CNN has been one of the first CNN-based models to be introduced \cite{Zaidi2021}. Girshick et al. essentially suggested to use an module that extracts the object proposals and then to pass it to a CNN. The CNN would then extract the features relevant, which would in turn allow to classify the proposed region as well as to localize it. In their original experiments, the selective search algorithm  \cite{Uijlings13} was used to produce roughly 2000 regions. AlexNet  \cite{NIPS2012_c399862d} was used as a backbone CNN to extract vectors of 4096 size dimensions. The features were then passed to binary classifers that are bound to a certain class. As multiple regions are returned, non-maxumum suppression(NMS) \cite{Hosang2017}  is used to identify the best proposal for the object. 
+Figure \ref{rcnn} shows the structure of the R-CNN network \cite{Girshick2013}. R-CNN has been one of the first CNN-based models to be introduced \cite{Zaidi2021}. Girshick et al. essentially suggested to use a module that extracts the object proposals and then to pass it to a CNN. The CNN would then extract the features relevant, which would in turn allow to classify the proposed region as well as to localize it. In their original experiments, the selective search algorithm  \cite{Uijlings13} was used to produce roughly 2000 regions. AlexNet  \cite{NIPS2012_c399862d} was used as a backbone CNN to extract vectors of 4096 size dimensions. The features were then passed to binary classifiers that are bound to a certain class. As multiple regions are returned, non-maximum suppression(NMS) \cite{Hosang2017}  is used to identify the best proposal for the object. 
 
-Unfortunately, the inference process in R-CNN took a whole 47 seconds per image \cite{Girshick2013}, which was not fast enough to be remain relevant in object detection field. 
+Unfortunately, the inference process in R-CNN took a whole 47 seconds per image \cite{Girshick2013}, which was not fast enough to be remain relevant in the object detection field. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -811,24 +809,20 @@ Unfortunately, the inference process in R-CNN took a whole 47 seconds per image 
 
 
 \subsubsection{Fast-RCNN}
-\todo{Write more about ROI}
-Unlike the classic R-CNN system, where the components such as the classifier and the regressor have to be trained separately, the same authors of the RCNN  model also introduced a Fast-RCNN model \cite{Girshick2015}, which proposed an end-to-end trainable system. Additionally, the region-of-interest(ROI) pooling layer was proposed. The architecture of the Fast-RCNN shown in Figure \ref{fast_rcnn} below. The ROI layer receives max-pooled feature maps that were generated by the backbone CNN and then for every proposed region, a fixed size feature vector is extracted from the map. This allows the rest of the network to focus purely on the features extracted for the proposed regions. Finally, two additional FC output layers are appended, where the first one classifies the features by returning one of the object classes K in range (0, K+1], thus including the background class as well. The other one returns 4 real values for each feature vector, which denote the boudning box corner coordinates excluding the background class \cite{Girshick2015}. Fast-RCNN showed a significant(x146) speed improvement as compared to the R-CNN, thus allowing it to be used in real-time applications \cite{Girshick2013}.
-\todo{Write more about image pyramids}
+Unlike the classic R-CNN system, where the components such as the classifier and the regressor have to be trained separately, the same authors of the RCNN  model also introduced a Fast-RCNN model \cite{Girshick2015}, which proposed an end-to-end trainable system. Additionally, the region-of-interest(ROI) pooling layer was proposed. This ROI component essentially divides the image into a grid of a fixed size and applies average pooling. The resulted one-level pyramid of the image is used as a feature map for the detector head. This allows the rest of the network to focus purely on the features extracted for the proposed regions. Finally, two additional FC output layers are appended, where the first one classifies the features by returning the probability of N object classes in range $(0, N+1]$, which includes the background class as well. The other one returns a vector of a size $(0, 4\times N]$, thus including the bounding box coordinates for the foreground classes only \cite{Girshick2015}. Fast-RCNN showed a significant($\times 146$) speed improvement as compared to the R-CNN, thus allowing it to be used in real-time applications \cite{Girshick2013}. The original architecture of Fast-RCNN is shown in Figure \ref{fast_rcnn} below. 
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=10cm]{./fast_rcnn.png}
 	\end{center}
-	\caption{Fast-RCNN overview\cite{Girshick2015}.}
+	\caption{Fast-RCNN overview \cite{Girshick2015}.}\label{fast_rcnn}
 	\begin{center}
-		\label{fast_rcnn}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
 \subsubsection{Faster-RCNN} 
-\todo{Perhaps write in greater detail}
-Ren et al. \cite{ima} discovered that even though Fast-RCNN was significantly faster than the precessor networks, this architecture still had a bottleneck remaining in its region proposal counterpart. Therefore, in the novel Faster-RCNN \cite{ima} it was suggested to replace the legacy region proposal module with a fully-convoluted architecture called region proposal network(RPN) \cite{Girshick2013}. Instead of using image pyramids to solve the problem as it was proposed by Girshick et al. \cite{Girshick2015}, Faster-RCNN utilizes anchor boxes of different aspect ratios to propose object candidates. Similarly to any other CNN, the features in Faster-RCNN are extracted from the convolutional layers based on a VGG backbone. The features maps are then sent to the RPN, which in practice is a sliding window  of $n\times n (n=3)$ dimensions. At every sliding window position, the $k$ number of object proposals are predicted. Such boxes are called "anchors" as illustrated in Figure \ref{fig:faster_rcnn}. The acquired $2k$ classification predictions whether the proposed region is an object of interest or not and $4$ regression outputs of the bounding box coordinates are then mapped back to the ROI layer and, eventually, to the FC layers that predict the proposed object's class \cite{ima}. 
+Ren et al. \cite{ima} discovered that even though Fast-RCNN was significantly faster than the preceding networks, the region proposing process was still causing a bottleneck. Therefore, in the novel Faster-RCNN \cite{ima} architecture it was suggested to replace the legacy region proposal module with a fully-convoluted architecture called region proposal network(RPN) \cite{Girshick2013}. Instead of using the one-level image pyramid to solve the problem as it was proposed by Girshick et al. \cite{Girshick2015}, Faster-RCNN utilizes anchor boxes of different aspect ratios to propose object candidates. Similarly to any other CNN, the features in Faster-RCNN are extracted from the convolutional layers based on a VGG backbone. The features maps are then sent to the RPN, which in practice is a sliding window  of $n\times n$ $(n=3)$ dimensions. At every sliding window position, the $k$ number of object proposals are predicted. Such boxes are called "anchors" as illustrated in Figure \ref{fig:faster_rcnn}. The acquired $2k$ classification predictions whether the proposed region is an object of interest or not and $4$ regression outputs of the bounding box coordinates are then mapped back to the ROI layer and, eventually, to the FC layers that predict the class of the proposed object \cite{ima}. 
 
 
 \begin{figure}[htb]
@@ -851,13 +845,13 @@ L\left(\left\{p_{i}\right\},\left\{t_{i}\right\}\right)=\frac{1}{N_{c l s}} \sum
 \cite{ima},
 \end{equation}
 
-where $p_i$ is a probability of the predicted anchor $i$ to be an object,  $p_{i}^{*}$ is a ground-truth label from 0 to 1 , $t_i$ is a vector with 4 coordinates of the bounding box and $t_{i}^{*}$ is its corresponding ground-truth vector. $\lambda$ is a trade-off between the $L_{cls}$ and $L_{reg}$, where $L_{c l s}$ is calculated as a binary log loss and $L_{reg}$ uses a smooth $L_1$ loss that was introduced in Fast-RCNN \cite{Girshick2015}.  
+where $p_i$ is a probability of the predicted anchor $i$ to be an object,  $p_{i}^{*}$ is a ground-truth label from 0 to 1, $t_i$ is a vector with 4 coordinates of the bounding box and $t_{i}^{*}$ is its corresponding ground-truth vector. $\lambda$ is a trade-off between the $L_{cls}$ and $L_{reg}$, where $L_{c l s}$ is calculated as a binary log loss and $L_{reg}$ uses a smooth $L_1$ loss that was introduced in Fast-RCNN \cite{Girshick2015}.  
 
 
 
 
 This implementation, unlike Fast-RCNN, allowed to return predictions nearly in real time with the breakthrough of 5 frames per second(FPS) \cite{ima}.
-Although the two-stage Faster-RCNN detector is nearly 7 years old at the time of writing this thesis, it is still one of the most widely used detectors in the field, as can be noticed from Figure \ref{popularity}. In later chapters, this work will focus on the Faster-RCNN implementation. Nevertheless, it is worth mentioning single-stage competitors. Often they are slightly weaker in terms of accuracy, compared to two-stage detectors. However, these detectors offer a significant improvement in real-timeness as compared even to the fastest one of the two-stage detectors, Faster-RCNN. 
+Although the two-stage Faster-RCNN detector is nearly 7 years old at the time of writing this thesis, it is still one of the most widely used detectors in the field, as can be noticed from Figure \ref{popularity}. In later chapters, this work will focus on the Faster-RCNN implementation. Nevertheless, it is worth mentioning single-stage competitors. Often they are slightly weaker in terms of accuracy, compared to two-stage detectors. However, these detectors offer a significant improvement in robustness as compared even to the fastest one of the two-stage detectors, Faster-RCNN. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -874,15 +868,15 @@ Although the two-stage Faster-RCNN detector is nearly 7 years old at the time of
 \subsubsection{YOLO}
 \label{yolo_section} 
 
-Unlike the two-stage methods presented, You Only Look Once(YOLO) \cite{Redmon2015a} algorithm attempts to solve the object detection problem purely as a regression problem by predicting the bounding boxes of the objects directly without region proposals. The YOLO network instead splits the image into a grid of $S\times S$ cells, for which a $B$ number of boundning boxes and $C$ probabilities of the class and  are predicted \cite{Redmon2015a}. The overview of the detection process is shown in Figure \ref{yolo}. The principle of the YOLO grid component is broadly similar the one of R-CNN \cite{Girshick2013}, where the algorithm of selective search \cite{Uijlings13} is used to propose regions. However, instead of proposing more than 2000 regions, YOLO only returns 98 proposal boxes per image. This, along with having an optimized single-stage detection process, allowed YOLO to achieve impressive nearly real-time FPS results. Redmon et al. reported YOLO to sustain the average FPS of 45, while the most accurate version of the Faster-RCNN network had 7 FPS \cite{Redmon2015a}. However, the proposed network still has multiple limitations, which were addressed in later iterations of the paper  \cite{Redmon2016, Redmon2018a}.
+Unlike the two-stage methods presented, You Only Look Once(YOLO) \cite{Redmon2015a} algorithm attempts to solve the object detection problem purely as a regression problem by predicting the bounding boxes of the objects directly without region proposals. The YOLO network instead splits the image into a grid of $S\times S$ cells, for which a $B$ number of bounding boxes and $C$ probabilities of the class and  are predicted \cite{Redmon2015a}. The overview of the detection process is shown in Figure \ref{yolo}. The principle of the YOLO grid component is broadly similar the one of R-CNN \cite{Girshick2013}, where the algorithm of selective search \cite{Uijlings13} is used to propose regions. However, instead of proposing more than 2000 regions, YOLO only returns 98 proposal boxes per image. This, along with having an optimized single-stage detection process, allowed YOLO to achieve impressive nearly real-time FPS results. Redmon et al. reported YOLO to sustain the average FPS of 45, while the most accurate version of the Faster-RCNN network had 7 FPS \cite{Redmon2015a}. However, the proposed network still has multiple limitations, which were addressed in later iterations of the paper  \cite{Redmon2016, Redmon2018a}.
 
-The architecture consists of 24 cascaded convolutional and 2 FC layers.The convolutional layers are first pretrained on the ImageNet dataset \cite{Russakovsky2014}. The image size is reduced by applying $1\times1$ convolutional layers in between, also referred to as "reduction layers"  \cite{Redmon2015a}. The simplified architecture is presented in Figure \ref{ssd}.
+The architecture consists of 24 cascaded convolutional and 2 FC layers. The convolutional layers are first pre-trained on the ImageNet dataset \cite{Russakovsky2014}. The image size is reduced by applying $1\times1$ convolutional layers in between, also referred to as "reduction layers"  \cite{Redmon2015a}. The simplified architecture is presented in Figure \ref{ssd}.
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=12cm]{./yolo.png}
 	\end{center}
-	\caption{YOLO overview\cite{Redmon2015a}.}
+	\caption{YOLO overview \cite{Redmon2015a}.}
 	\begin{center}
 		\label{yolo}
 	\end{center}
@@ -905,21 +899,21 @@ The architecture consists of 24 cascaded convolutional and 2 FC layers.The convo
 
 
 \subsubsection{SSD}
-Another implementation of a single-stage network worth mentioning is a Single-Shot MultiBox detector(SSD) \cite{Liu2015}. The differences in architectures of SSD and YOLO are displayed in Figure \ref{ssd}. Liu et al. proposed a model that detects objects in real-time while preserving the accuracy. First, the image is fed into the backbone CNN, in the original experiments - VGG-16. The SSD head layers added after the backbone network are convolutional as well. Similarly to YOLO, the image is split into a grid of $n\times n$ size, where it benetits from the anchor boxes of varying aspect ratio. 
+Another implementation of a single-stage network worth mentioning is a Single-Shot MultiBox detector(SSD) \cite{Liu2015}. The differences in architectures of SSD and YOLO are displayed in Figure \ref{ssd}. Liu et al. proposed a model that detects objects in real-time while preserving the accuracy. First, the image is fed into the backbone CNN, in the original experiments - VGG-16. The SSD head layers added after the backbone network are convolutional as well. Similarly to YOLO, the image is split into a grid of $n\times n$ size, where it benefits from the anchor boxes of varying aspect ratio. 
 
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=14cm]{./ssd_yolo.png}
 	\end{center}
-	\caption{SSD compared to YOLO\cite{Liu2015}.}
+	\caption{SSD compared to YOLO \cite{Liu2015}.}
 	\begin{center}
 		\label{ssd}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-However, as the objects might not always be within the grid boundaries, as can be noticed from Figure \ref{ssd_boxes}. Therefore, SSD paper introduced a concept of anchor boxes with an offset. The anchor boxes with offsets that have the highest overlap with the ground truth box of the object are then oassed to FC layers to predict the class and the location of the object. 
+However, as the objects might not always be within the grid boundaries, as can be noticed from Figure \ref{ssd_boxes}. Therefore, SSD paper introduced a concept of anchor boxes with offsets. The anchor boxes with offsets that have the highest overlap with the ground truth box of the object are then passed to FC layers to predict the class and the location of the object. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -935,7 +929,7 @@ However, as the objects might not always be within the grid boundaries, as can b
 The key object detection models of the last decade are presented in the Table \ref{detectorsTable} below. As it can be deducted from the table, Faster-RCNN shows the best performance on the PASCAL VOC dataset, while YOLO demonstrated the highest FPS. The survey of Zaidi et al. \cite{Zaidi2021} also discusses lightweight models. However, for the purpose of this study, the detection accuracy is the primary focus rather than speed, thus their review will be omitted. 
 
 \begin{table}[htb]
-	\captionof{table}{Overview of object detectors\cite{Zaidi2021}. }
+	\captionof{table}{Overview of object detectors \cite{Zaidi2021}. }
 	\begin{center}
 		\includegraphics[width=16cm]{./detectorsTable.png}
 	\end{center}
@@ -948,14 +942,14 @@ The key object detection models of the last decade are presented in the Table \r
 As it can be seen from the Table \ref{detectorsTable}, there are multiple models that are not covered in this section. Additionally, there are several detectors that show promising results in the domain-adaptive object detection setup, such as FCOS \cite{Tian2019} and DETR \cite{Zhang2021b}. However, as their performance is not yet extensively evaluated, they will be omitted from this thesis. 
 
 \subsection{Object detection in industrial environments}
-Although object detection is an extremely diverse field with applications varying from medicine \cite{9689485} to self-driving vehicles \cite{Janai2017, Shan2018}, the industrial object detection is mostly limited to safety and process monitoring \cite{Awalgaonkar2020, Banf2022}. Fewer research has addressed the topic of industrial object detection. In general, many of the introduced object detection methods can be applied to this problem directly as it is. Malburg et al. \cite{MALBURG2021581} has evaluated multiple different versions of object detection models such as YOLO \cite{Redmon2015a} in an industrial setup. However, often in industrial environments severe challenges such as overlapping and occlusion take place. Moreover, the object instances often are represented in multiple scales. Therefore, it is often impossible to obtain reliable results using a standard object detector architecture. Wu et al. \cite{Wu2022} has recently addressed the problem of industrial object detection using an R-CNN based approach that leverages Feature Pyramid Networks to improve detection at multiple scales and NMS with penalty factors to eliminate occlusion problem. However, the proposed method does not consider the data availability limitations and confidenciality issues that were outlined in the \nameref{objective}. On the other hand, Kim et al. \cite{Kim2020} minimized the need for labeling from a human by utilizing a deep active learning approach. While the core of this approach is a standard Faster-RCNN \cite{ima} network, Kim et al. also proposed to utilize uncertainty evaluation in order to enable the model to label images interactively over time. As the training advances, the model evaluates whether the predicted bounding boxes are reliable or not using the sum of entropy for each bounding box. In the subsequent stage the model requests the user to manually label 10\% of the data with highest uncertainty. The model is then retrained with the updated knowledge. Although this approach seems promising, it  does not consider the domain shift phenomenon that takes place in the setup defined by the thesis objectives. Later sections of the thesis will address this phenomenon. 
+Although object detection is an extremely diverse field with applications varying from medicine \cite{9689485} to self-driving vehicles \cite{Janai2017, Shan2018}, the industrial object detection is mostly limited to safety and process monitoring \cite{Awalgaonkar2020, Banf2022}. Fewer research has addressed the topic of industrial object detection. In general, many of the introduced object detection methods can be applied to this problem directly as it is. Malburg et al. \cite{MALBURG2021581} has evaluated multiple different versions of object detection models such as YOLO \cite{Redmon2015a} in an industrial setup. However, often in industrial environments severe challenges such as overlapping and occlusion take place. Moreover, the object instances often are represented in multiple scales. Therefore, it is often impossible to obtain reliable results using a standard object detector architecture. Wu et al. \cite{Wu2022} has recently addressed the problem of industrial object detection using an R-CNN based approach that leverages Feature Pyramid Networks to improve detection at multiple scales and NMS with penalty factors to eliminate occlusion problem. However, the proposed method does not consider the data availability limitations and confidentiality issues that were outlined in the \nameref{objective}. On the other hand, Kim et al. \cite{Kim2020} minimized the need for labeling from a human by utilizing a deep active learning approach. While the core of this approach is a standard Faster-RCNN \cite{ima} network, Kim et al. also proposed to utilize uncertainty evaluation in order to enable the model to label images interactively over time. As the training advances, the model evaluates whether the predicted bounding boxes are reliable or not using the sum of entropy for each bounding box. In the subsequent stage the model requests the user to manually label 10\% of the data with highest uncertainty. The model is then retrained with the updated knowledge. Although this approach seems promising, it  does not consider the domain shift phenomenon that takes place in the setup defined by the \nameref{objective}. Later sections of the thesis will address this phenomenon. 
 
-\todo{Write more about the active learning method if there is time} 
+\todo{Write more about this active learning method if there is time} 
 
 
 \subsection{Transfer learning}
 \label{transferLearning} 
-In this section, the multiple transfer learning(TL) techniques will be introduced. Despite the fact that the methods discussed in previous chapters have been successfully implemented in various scenarios, ML in general often struggles to apply such methods in real life. This is normally caused by insufficient training data, as it is often expensive to collect it, both in terms of time, financially, and sometimes simply not possible at all \cite{Zhuang2019}. Moreover, the requirement of having to train the models on new massive datasets often make ML solutions inefficient in practice. For this reason, TL concepts have been found advantageous as it addresses transferring knowledge learned from one task, domain or distribution to another. Here and in the subsequent sections, the notations are identical to those outlined by Pan et al. \cite{Pan2010} and are introduced as follows:  
+In this section, the multiple transfer learning(TL) techniques will be introduced. Despite the fact that the methods discussed in previous chapters have been successfully implemented in various scenarios, ML in general often struggles to apply such methods in real life. This is normally caused by insufficient training data, as it is often expensive to collect it, both in terms of time, financially, and sometimes simply not possible at all due to data accessibility issues \cite{Zhuang2019}. Moreover, the requirement of having to train the models on new massive datasets often make ML solutions inefficient in practice. For this reason, TL concepts have been found advantageous as it addresses transferring knowledge learned from one task, domain or distribution to another. Here and in the subsequent sections, the notations are identical to those outlined by Pan et al. \cite{Pan2010} and are introduced as follows:  
 
 \todo{mention later: Zhuang2019: TL does not always bring benefit}
 
@@ -970,22 +964,21 @@ In this section, the multiple transfer learning(TL) techniques will be introduce
 	\begin{center}
 		\includegraphics[width=16cm]{./TL.png}
 	\end{center}
-	\caption{Comparison of ML to TL\cite{Pan2010}.}
+	\caption{Comparison of ML to TL \cite{Pan2010}.}
 	\begin{center}
 		\label{TL}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-Sun et al. \cite{SUN201584} describes TL as a method to transfer knowledge when the feature space between the two given source and target domains is different, meaning that $\mathcal{X}_{S} \neq \mathcal{X}_{T}$. Pan et al. \cite{Pan2010} mentions that transfer learning can be also defined when the marginal probability is different, meaning that $P_{S}(X) \neq P_{T}(X)$. Similarly, transfer learning can be applied when $\mathcal{T}_{S} \neq \mathcal{T}_{T}$. An example of a simple TL problem is training a model that was trained for classifying cats, but instead is  required to learn a new task such as classifying dogs. However, in various scenarios, the task is essentially the same but the domain is similar yet different. For instance, a model that was trained to identify cats in sketches, is instead required to identify cats in real images. Solving such tasks is the main focus of domain adaptation(DA). Often the terms "domain adaptation" and "transfer learning" are used interchangeably. However, according to Wang et al. \cite{Wang2018} and Zhang et al. \cite{Zhang2021}, domain adaptation(DA) is a special case of TL. In scientific terms, the problem that DA attempts to solve can be defined when the source and target feature spaces are the same $\mathcal{X}_{S}=\mathcal{X}_{T}$, but the marginal probability distribution is not $P\left(\mathcal{X}_{S}\right) \neq P\left(\mathcal{X}_{T}\right)$\cite{SUN201584}. This is not to be confused with semi-supervised machine learning, where both labeled and unlabeled data is typically supplied from one domain \cite{SUN201584}. 
+Sun et al. \cite{SUN201584} describes TL as a method to transfer knowledge when the feature space between the two given source and target domains is different, meaning that $\mathcal{X}_{S} \neq \mathcal{X}_{T}$. Pan et al. \cite{Pan2010} mentions that transfer learning can be also defined when the marginal probability is different, meaning that $P_{S}(X) \neq P_{T}(X)$. Similarly, transfer learning can be applied when $\mathcal{T}_{S} \neq \mathcal{T}_{T}$. An example of a simple TL problem is training a model that was trained for classifying cats, but instead is  required to learn a new task such as classifying dogs. However, in various scenarios, the task is essentially the same but the domain is similar yet different. For instance, a model that was trained to identify cats in sketches, is instead required to identify cats in real images. Solving such tasks is the main focus of domain adaptation(DA). Often the terms "domain adaptation" and "transfer learning" are used interchangeably. However, according to Wang et al. \cite{Wang2018} and Zhang et al. \cite{Zhang2021}, domain adaptation(DA) is a special case of TL. In scientific terms, the problem that DA attempts to solve can be defined when the source and target feature spaces are the same $\mathcal{X}_{S}=\mathcal{X}_{T}$, but the marginal probability distribution is not $P\left(\mathcal{X}_{S}\right) \neq P\left(\mathcal{X}_{T}\right)$ \cite{SUN201584}. This is not to be confused with semi-supervised machine learning, where both labeled and unlabeled data is typically supplied from one domain \cite{SUN201584}. 
 
-\todo{Talk about the comment here perhaps} 
 %https://www.v7labs.com/blog/transfer-learning-guide
 
 
 \subsubsection{Domain adaptation}
 \label{DA_section} 
-DA has lately been gaining popularity in both image classification and object detection tasks \cite{Zhang2021}. Typically, DA is used to predict a label given the data from a source domain and limited or no data from the target domain. Most importantly, DA addresses the domain shift problem \cite{Zhang2021}. In a DA problem, a domain shift, also known as a distributional shift or dataset bias, can be defined as a change in distribution of data between source and target domains. 
+Domain Adaptation (DA) has lately been gaining popularity in both image classification and object detection tasks \cite{Zhang2021}. Typically, DA is used to predict a label given the data from a source domain and limited or no data from the target domain. Most importantly, DA addresses the domain shift problem \cite{Zhang2021}. In a DA problem, a domain shift, also known as a distributional shift or dataset bias, can be defined as a change in distribution of data between source and target domains. 
 
 
 Zhang et al. \cite{Zhang2021} classify DA methods into three categories that are similar to ML types - supervised, semi-supervised, and unsupervised DA. Alternatively, Oza et al. \cite{Oza2021} classify the collected DA methods into semi-supervised, weakly-supervised and unsupervised DA. Indeed, supervised DA is not commonly used since the primary goal of DA is to reduce the domain shift when the data availability is limited. 
@@ -1025,18 +1018,18 @@ Many of the methods collected by Oza et al. overlap with each other and fall int
 	\begin{center}
 		\includegraphics[width=16cm]{./UDA_OD.png}
 	\end{center}
-	\caption{Unsupervised Domain Adaptative Object Detection}
+	\caption{Unsupervised Domain Adaptive Object Detection}
 	\begin{center}
 		\label{UDA_OD}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-In the following methods, it will be assumed that $\mathcal{D_S}$ and $\mathcal{D_T}$ originate from similar yet different distributions. Additionally, the papers introduced in the following section mainly address the more complex, unsupervised domain adaptation(UDA) problem.
+In the following methods, it will be assumed that $\mathcal{D_S}$ and $\mathcal{D_T}$ originate from similar yet different distributions. Additionally, the papers introduced in the following section address unsupervised domain adaptation(UDA) problem, which is naturally more sophisticated than a supervised DA.
 
 \subsubsection{Gradient reversal layer}
 
-One of the key components in a typical domain adaptive setup for both image classification and object detection problems is a gradient reversal layer(GRL) that has been proposed by Ganin et al. \cite{Ganin2015}. The authors suggest that in order to successfully solve the domain adaptation problem, the prediction should be based on the features that cannot differentiate between the source and target domains. In other words, the network should propose features that are common for both domains. Figure \ref{DANN} illustrates the Domain-Adversarial Neural Network, or DANN \cite{Ganin2015}. 
+One of the key components in a typical domain adaptive setup for both image classification and object detection problems is a gradient reversal layer(GRL) that has been proposed by Ganin et al. \cite{Ganin2015}. The authors suggest that in order to successfully solve the domain adaptation problem, the prediction should be based on the features that cannot differentiate between the source and target domains. In other words, the network should propose features that are common for both domains. Figure \ref{DANN} illustrates the Domain-Adversarial Neural Network (DANN) proposed by Ganin et al. \cite{Ganin2015}. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -1048,6 +1041,7 @@ One of the key components in a typical domain adaptive setup for both image clas
 	\end{center}
 \end{figure}
 \FloatBarrier
+
 The network is essentially a simple feed-forward network with a feature extractor and a predictor that classifies the input. Two additional components are appended to the last layer of the feature extractor - a gradient reversal layer(GRL) and a domain classifier. On the forward pass of the DANN, the network attempts to predict the class and the domain labels and GRL acts as an identity function. During the backpropogation, the GRL multiplies the gradient of the domain classifier by a fixed negative weight constant $\lambda$. This enables the domain classier to maximize the domain classification loss and, therefore, "confuse" the feature extractor and force it to generate only domain invariant features \cite{Ganin2015}. 
 \todo{Perhaps add more math about GRL} 
 
@@ -1055,25 +1049,24 @@ The network is essentially a simple feed-forward network with a feature extracto
 \subsubsection{Adversarial feature learning}
 \label{adv_approach} 
 
-Although DANN is an implementation of a domain adaptive image classification, GRL is a fundamental component in adversarial feature learning of object detectors and will be referenced in the subsequent sections of the thesis. 
+Although DANN implementation is originally meant for domain adaptive image classification, GRL is a fundamental component in adversarial feature learning of object detectors and will be referenced in the subsequent sections of the thesis. 
 
-The majority of the methods, collected by Oza et al.\cite{Oza2021}, are based on the two-stage object detectors and Faster-RCNN \cite{ima} in particular. This has been presumably facilitated by Pytorch \cite{NEURIPS2019_9015} package in Python and frameworks such as Detectron \cite{Detectron2018} and Detectron2 \cite{wu2019detectron2} that enabled researchers to extend the possibilities of Faster-RCNN and improve its scalability. With the arrival of the mentioned tools and their pre-trained models, Faster-RCNN became a good starting point to experiment with new tasks, which was done by replacing backbone networks and adding new components. 
+The majority of the methods, collected in the survey by Oza et al. \cite{Oza2021}, are based on the two-stage object detectors and Faster-RCNN \cite{ima} in particular. This has been presumably facilitated by Pytorch \cite{NEURIPS2019_9015} package in Python and frameworks such as Detectron \cite{Detectron2018} and Detectron2 \cite{wu2019Detectron2} that enabled researchers to extend the possibilities of Faster-RCNN and improve its scalability. With the arrival of the mentioned tools and their pre-trained models, Faster-RCNN became a good starting point to experiment with new tasks, which was done by replacing backbone networks and adding new components. 
 
-\todo{Write more about this as it is key of your method} 
-One of the first implementations of such approach in object detectors is presented in the paper by Chen et al. \cite{Chen2018}. The proposed architecture is based on the Faster-RCNN object detector. As it can be seen from Figure \ref{Faster_rcnn_DA}, this method proposed to apply adversarial learning at multiple stages of the detection by applying GRL strategy, namely in the image- and instance-level of the network. To be more precise, a GRL and a domain classifier are appended to the extracted feature map, same way as in Figure \ref{DANN} to form an image-level domain classifier. Similarly, regions predicted by the FC layers follow an equivalent procedure. Finally, the classifiers are regularized using consistency loss.   
+One of the first implementations of such approach in object detectors is presented in the paper by Chen et al. \cite{Chen2018}. The proposed architecture is based on the Faster-RCNN object detector. As it can be seen from Figure \ref{Faster_rcnn_DA}, this method proposed to apply adversarial learning at multiple stages of the detection by applying the GRL strategy, namely in the image- and instance-levels of the network. To be more precise, a GRL and a domain classifier are appended to the extracted feature map, same way as in Figure \ref{DANN} to form an image-level domain classifier. Similarly, regions predicted by the FC layers of the Faster-RCNN network follow an equivalent procedure. Finally, the classifiers are regularized using consistency loss.   
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=16cm]{./faster_rcnn_DA.png}
 	\end{center}
-	\caption{Domain Adaptive Faster R-CNN for Object Detection in the Wild\cite{Chen2018}.}
+	\caption{Domain Adaptive Faster R-CNN for Object Detection in the Wild \cite{Chen2018}.}
 	\begin{center}
 		\label{Faster_rcnn_DA}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-Here, to maximize the domain classification losses $L_{inst}$ and $L_{img}$ , they are calculated as shown in Equation \ref{faster_DA_losses}. 
+Here, to maximize the domain classification losses $L_{inst}$ and $L_{img}$, they are calculated as shown in Equation \ref{faster_DA_losses}. 
 
 \begin{equation}
 \label{faster_DA_losses} 
@@ -1093,9 +1086,9 @@ L_{\text {consistency }}=\sum_{i, j}\left\|\frac{1}{|N|} \sum_{u, v} p_{i}^{(u, 
 \end{equation}
 Due to the fact that the image-level domain classifier produces multiple $N$ predictions per image, first the average of them is calculated, and then the Euclidean (or L2 norm) distance is measured between the predictions of the image- and instance-level domain classifiers \cite{Chen2018}. 
 
-The final objective of the network is then defined by minimizing the detection loss, while maximizing the image-level $\mathcal{L}_{img}$ and instance-level $\mathcal{L}_{inst}$ domain classification losses, while also minimizing the consistency loss $\lambda \mathcal{L}_{\text {consistency }}$ between two classifiers \cite{Chen2018}.
+The final objective of the network is then defined by minimizing the detection loss, while maximizing the image-level $\mathcal{L}_{img}$ and instance-level $\mathcal{L}_{inst}$ domain classification losses. The network additionally aims to minimize the consistency loss $\lambda \mathcal{L}_{\text {consistency }}$ between two classifiers \cite{Chen2018}.
 
-Another most recent state-of-the-art study made by Rezaeianaran et al. \cite{Rezaeianaran2021} proposed different approach that compares the adversarial training to contrastive learning. Similarly to Chen et al. \cite{Chen2018}, the network leverages a Faster-RCNN detector with instance- and image-level losses. The key difference is in the way the latter two losses are calculated. Rezaeianaran et al. attempted to push the features closer if they represent the same class and push them apart otherwise by utilizing max-margin contrastive loss. The margin here denotes how far the features can be in order to be considered the same class. Constrastive loss took the form of Equation \ref{contrastiveL}:
+Another most recent state-of-the-art study made by Rezaeianaran et al. \cite{Rezaeianaran2021} proposed different approach that compares the adversarial training to contrastive learning. Similarly to Chen et al. \cite{Chen2018}, the network leverages a Faster-RCNN detector with instance- and image-level alignments. Rezaeianaran et al. attempted a different approach by pushing the features closer if they represent the same class, and push them apart if otherwise. This is performed by utilizing a max-margin contrastive loss. The margin here denotes how far the features can be in order to be considered to represent the same class. A general constrastive loss term takes the form of Equation \ref{contrastiveL}:
 
 \begin{equation}
 \mathcal{L}_{C L}=\sum_{i}^{C}\left[\left\|F_{S}^{i}-F_{T}^{i}\right\|_{2}^{2}+\sum_{j, j \neq i}^{C} \max \left\{0, m-\left\|F_{S}^{i}-F_{T}^{j}\right\|_{2}^{2}\right\}\right]
@@ -1103,7 +1096,7 @@ Another most recent state-of-the-art study made by Rezaeianaran et al. \cite{Rez
 \cite{Rezaeianaran2021} 
 \end{equation}
 
-Additionally, as the the paper tried to solve UDA, no labels were available from the target domain and, therefore, pseudo-labeling was used to calculate the contrastive loss. \todo{This paper review should be rewritten} 
+Additionally, as the paper tried to solve UDA, no labels were available from the target domain and, therefore, pseudo-labeling was used to calculate the contrastive loss. \todo{This paper review should be rewritten} 
 
 
 \begin{figure}[htb]
@@ -1133,7 +1126,7 @@ Another relatively straightforward method to solve an object detection problem c
 \end{figure}
 \FloatBarrier
 
-In the first stage, the network is treated as a typical Faster-RCNN network that is trained on the source dataset $\mathcal{D_S}$. Next, the pseudo-labels are generated as explained earlier. In the following stage, the proposed regions are fed into a pretrained image classifier, which allows to refine the model.
+In the first stage, the network is treated as a typical Faster-RCNN network that is trained on the source dataset $\mathcal{D_S}$. Next, the pseudo-labels are generated as explained earlier. In the following stage, the proposed regions are fed into a pre-trained image classifier, which allows to refine the model.
 
 For the process of refinement, Khodabandeh et al. proposed to use the Kullback-Leibler divergence and defined the optimization objective for classification as follows: 
 
@@ -1150,7 +1143,7 @@ The third stage of the process finalizes the strategy by retraining the final ne
 
 \subsubsection{Image-to-Image translation}
 \label{imagetoimage} 
-Another category that Oza et al.\cite{Oza2021} outlined is image-to-image translation for UDA. Instead of trying to align features, this group of methods essentially attempt to pull the domains together first. Hsu et al. \cite{Hsu2019} has suggested a Cycle-Generative Adversarial Network(GAN) \cite{Zhu2017} based approach to transform images from the target domain into the source domain alike images. Figure \ref{gan} represents the complete network proposed by Hsu et al. 
+Another category that Oza et al. \cite{Oza2021} outlined is image-to-image translation for UDA. Instead of trying to align features, this group of methods essentially attempt to pull the domains together first. Hsu et al. \cite{Hsu2019} has suggested a Cycle-Generative Adversarial Network(GAN) \cite{Zhu2017} based approach to transform images from the target domain into the source domain alike images. Figure \ref{gan} represents the complete network proposed by Hsu et al. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -1163,7 +1156,7 @@ Another category that Oza et al.\cite{Oza2021} outlined is image-to-image transl
 \end{figure}
 \FloatBarrier
 
-The generator part of the Cycle-GAN in Figure \ref{gan}(a) creates intermediate domain from images in the source domain. The source images are then passed together with the labels to the Faster-RCNN network. The network is then tries to adapt the source domain to the sythetic domain. To further minimize the domain shift, adversarial learning techniques are used, such as a combination of a GRL and a domain classifier \cite{Hsu2019}.
+The generator part of the Cycle-GAN in Figure \ref{gan}(a) creates intermediate domain from images in the source domain. The source images are then passed together with the labels to the Faster-RCNN network. The network is then tries to adapt the source domain to the synthetic domain. To further minimize the domain shift, adversarial learning techniques are used, such as a combination of a GRL and a domain classifier \cite{Hsu2019}.
 
 
 In Figure \ref{gan}(b), the synthetic source-alike images are then passed together with the inherited source labels back to the adaptation network to align the features with the target domain. In the second stage of the training process, Hsu et al. proposed to utilize the weights $w$ from the discriminator of the Cycle-GAN, which is additionally trained to differentiate between source and target domains. Ultimately, such approach allowed to amplify the importance of the synthetic samples that are closer to the target domain. The weighted loss from the discriminator was then summed with the detection loss and the adversarial loss to finally adapt the synthetic domain to target \cite{Hsu2019}. 
@@ -1185,7 +1178,7 @@ Kim et al. proposed a detector network that is based on Faster-RCNN with two add
 \end{figure}
 \FloatBarrier
 
-During Cycle-GAN image generation, two additional loss terms limited the  randomization of an image - color preservation and reconstruction constraints. This was done in order to preserve features of the original image as it would otherwise affect the model negatively \cite{Oza2021}. In the original experiments Kim et al. considered three additional domains: a color preserved domain, a reconstructed domain, and a domain that combines both. Images from all the domains are then fed into the detector along with the inherited source labels   to train a domain-invarian network with help of a multi-class domain classifier and the resulted model was used to verify performance on the target dataset. 
+During Cycle-GAN image generation, two additional loss terms limited the  randomization of an image - color preservation and reconstruction constraints. This was done in order to preserve features of the original image as it would otherwise affect the model negatively \cite{Oza2021}. In the original experiments Kim et al. considered three additional domains: a color preserved domain, a reconstructed domain, and a domain that combines both. Images from all the domains are then fed into the detector along with the inherited source labels   to train a domain-invariant network with help of a multi-class domain classifier and the resulted model was used to verify performance on the target dataset. 
 
 \subsubsection{Mean Teacher and Graph Reasoning}
 \label{mean_teacher} 
@@ -1195,17 +1188,17 @@ Another common approach utilized in domain adaptation and transfer learning in g
 	\begin{center}
 		\includegraphics[width=16cm]{./graph_teacher.png}
 	\end{center}
-	\caption{Exploring Object Relation in Mean Teacher for Cross-Domain Detection\cite{Cai2019}.}
+	\caption{Exploring Object Relation in Mean Teacher for Cross-Domain Detection \cite{Cai2019}.}
 	\begin{center}
 		\label{graph_MT}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-The term "graphs" represents a complex data structure that contains multiple nodes or vertices connected to each other via edges. In case of an image as a graph, each pixel can be considered a node, which is linked to all of its neighbours. 
+The term "graphs" represents a complex data structure that contains multiple nodes or vertices connected to each other via edges. In case of an image as a graph, each pixel can be considered a node, which is linked to all of its neighbors. 
 The setup developed by Cai et al. \cite{Cai2019} introduces a student-teacher framework based on Faster-RCNN that verifies the consistency of the graphs at three different levels using regional-level consistency, intra-graph consistency and inter-graph consistency. 
 
-The training pipeline is split into two parts. Images from the source domain are trained in a locked student environment in a supervised manner. Images from the target model, on the other hand, are augmented with in two iterations. First, the images are randomly cropped, padded or flipped. These images are passed through the pretrained supervised student model that generates predictions. Meanwhile, the original target images are augmented with color jittering or PCA noise, and this set is send to the teacher model. The teacher model also produces predictions, which are then compared with the set of predictions from the first round of augmented images by utilizing region-level consistency. Essentially, the region-level consistency is calculated as MSE of the region-level prediction error of both the student and the teacher. 
+The training pipeline is split into two parts. Images from the source domain are trained in a locked student environment in a supervised manner.  On the other hand, images from the target domain are augmented in two steps. First, the images are randomly cropped, padded or flipped. These images are passed through the pre-trained supervised student model that generates predictions. Meanwhile, the original target images are augmented with color jittering or corruption with noise. This set is send to the teacher model. The teacher model also produces predictions, which are then compared with the predictions from the first set of augmented images by utilizing region-level consistency. Essentially, the region-level consistency is calculated as MSE of the region-level prediction error in  both the student and the teacher. 
 
 Inter-graph level consistency is used to verify the quality of the two graphs produced by the teacher and student models. It is calculated by means of cosine similarity between the graph representations of the proposed regions. 
 
@@ -1216,9 +1209,8 @@ A purely mean-teacher-based semi-supervised approach has been proposed by Liu et
 	\begin{center}
 		\includegraphics[width=14cm]{./unbiased.png}
 	\end{center}
-	\caption{Unbiased Teacher for Semi-Supervised Object Detection\cite{Liu2021}.}
+	\caption{Unbiased Teacher for Semi-Supervised Object Detection \cite{Liu2021}.}\label{unbiased}
 	\begin{center}
-		\label{unbiased}
 	\end{center}
 \end{figure}
 \FloatBarrier
@@ -1253,7 +1245,7 @@ Liu et al. \cite{Liu2021} specified that the teacher model is supplied with weak
 	\begin{center}
 		\includegraphics[width=10cm]{./augmentations.png}
 	\end{center}
-	\caption{Augmentations used in Unbiased teacher (adapted from the official  Pytorch documentation \cite{pytorch})}
+	\caption{Augmentations used in Unbiased teacher (adapted from the official Pytorch documentation \cite{pytorch})}
 	\begin{center}
 		\label{augmentations}
 	\end{center}
@@ -1280,12 +1272,12 @@ Similarly to the human brain, ANNs in object detectors tend to forget old knowle
 \end{figure}
 \FloatBarrier
 
-The methods proposed in Figure \ref{continual}(a) attempt to solve catastrophic forgetting by means of regularization. In these group of methods, the algorithm seeks to penalize the modifications in the model of the originally trained task. A simplistic approach of such method method was presented by Razavian et al.  \cite{Razavian2014}, where the gradients calculation for the parameters of the original is disabled completely. Slightly modified version of this method was also proposed by Donahue et al. \cite{Donahue2013}, where the LR was decreased to minimize the parameter update instead of blocking the update alltogether. 
+The methods proposed in Figure \ref{continual}(a) attempt to solve catastrophic forgetting by means of regularization. In these group of methods, the algorithm seeks to penalize the modifications in the model of the originally trained task. A simplistic approach of such method was presented by Razavian et al.  \cite{Razavian2014}, where the gradients calculation for the parameters of the original is disabled completely. Slightly modified version of this method was also proposed by Donahue et al. \cite{Donahue2013}, where the LR was decreased to minimize the parameter update instead of blocking the update altogether. 
 
 
 In simplistic terms, the method of training with expansion denotes retraning the original network with an additional number of layers appended. A typical example of such a method was proposed by Rusu et al. \cite{Rusu2016}, where the network was trained on the initial task. As $N$ new tasks were added, $N$ number of layers were appended to the network, as shown in Figure \ref{continual}(b). The parameters of the original network were left unchanged, and only the additional connections were trained. Although the disadvantage of this method was that the network complexity would grow linearly over time as new tasks are added, the experiments delivered sufficient performance. 
 
-The method proposed by Yoon et al. \cite{Yoon2017} falls into the third category, which is illustrated in Figure \ref{continual}(c). The concept is fundamentally similar to the one suggested by Rusu et al. \cite{Rusu2016}, with the exception that their model selectively retrains the network from the original task. Connecting the neurons sparsely reduced the computational overhead, as well as allowed the network to retain the previously learned tasks. Parisi et al. have collected many other promising contunual learning methods and the reader is advised to refer to the original paper.   
+The method proposed by Yoon et al. \cite{Yoon2017} falls into the third category, which is illustrated in Figure \ref{continual}(c). The concept is fundamentally similar to the one suggested by Rusu et al. \cite{Rusu2016}, with the exception that their model selectively retrains the network from the original task. Connecting the neurons sparsely reduced the computational overhead, as well as allowed the network to retain the previously learned tasks. Parisi et al. \cite{Parisi2018} have collected many other promising continual learning methods and the reader is advised to refer to the original survey for more details.   
 
 In the context of the notation defined earlier in the \nameref{transferLearning} subsection, continual learning can be expressed as training on the task $\mathcal{T}_n$ given the task $\mathcal{T}_{n-1}$ within the same domain or a set of domains $\mathcal{D}_{n} = \mathcal{D}_{n-1}$.   
 
@@ -1297,7 +1289,7 @@ In the context of the notation defined earlier in the \nameref{transferLearning}
 \section{Research Methodology}
 \label{Methodology}
 
-In this section, an in-depth study will be conducted to solve the challenges outlined in the \nameref{objective}. The section will first discuss the process of dataset selection. Next, several object detection candidates will be analyzed.  The selected object detection method will be examined in multiple domain-adaptive setups. Upon analyzing the exisiting DA methods, one candidate will be studied in greater detail to propose a novel architecture. Finally, continual learning will be investigated in the selected cross-domain object detection model. 
+In this section, an in-depth study will be conducted to solve the challenges outlined in the \nameref{objective}. The section will first discuss the process of dataset selection. Next, several object detection candidates will be analyzed.  The selected object detection method will be examined in multiple domain-adaptive setups. Upon analyzing the existing DA methods, one candidate will be studied in greater detail to propose a novel architecture. Finally, continual learning will be investigated in the selected cross-domain object detection model. 
 
 
 \subsection{Dataset}
@@ -1309,8 +1301,7 @@ Initially, one of the objectives of this thesis was to implement an equipment id
     \subfloat{{\includegraphics[width=6cm]{./toolbox.png} }}%
     \qquad
     \subfloat{{\includegraphics[width=6cm]{./model.png} }}%
-    \caption{Example of the rendered image of an arbitrary model}
-    \label{navisworks}%
+    \caption{Example of the rendered image of an arbitrary model}\label{navisworks}%
 \end{figure}
 \FloatBarrier
 
@@ -1367,7 +1358,7 @@ Additionally, YOLOv3 \cite{Redmon2018a} was considered. However, unlike Faster-R
 \subsubsection{Metrics}
 \label{metrics_section} 
 
-As for the detection evaluation, here and in the further experiments and in order to match the selected dataset format, the metrics were employed in accordance with the mean average precision metric(mAP) of the PASCAL VOC \cite{Everingham10} challenge. In order to measure the mAP, first the confusion matrix should be calculated. Confusion matrix is a generic performance measurement tool in ML. According to PASCAL VOC, precision and recall are the most important terms in object detection tasks that can be extracted from the confusion matrix and their equations are shown in Table \ref{confusion}.
+As for the detection evaluation, here and in the further experiments and in order to match the selected dataset format, the metrics were employed in accordance with the mean average precision metric(mAP) of the PASCAL VOC \cite{Everingham10} challenge. In order to measure the mAP, first the confusion matrix should be calculated. Confusion matrix is a generic performance measurement tool in ML. According to PASCAL VOC, precision and recall are the most important terms in object detection tasks that can be extracted from the confusion matrix. The equations for precision and recall are outlined in Table \ref{confusion}.
 
 \begin{table}[htb]
 	\captionof{table}{Definition of confusion matrix and some of its terms, adapted from \cite{mAp_blog}.}
@@ -1381,7 +1372,7 @@ As for the detection evaluation, here and in the further experiments and in orde
 \FloatBarrier
 
 
-To calculate precision and recall, it is important to define how the True Positive(TP) term is calculated. This is essentially done by measuring the  Intersection-over-Union(IoU) metric. As the model proposes an anchor box, the classifier ouputs a confidence score. The confidence score is a probability of the box to contain an object. The region is then additionally compared against the ground truth bounding box labels using the Equation \ref{iou}. Finally, if the IoU ratio, also known as Jaccard distance, is above the pre-defined threshold, the predicted object is considered to be a TP. In PASCAL VOC evaluation, the default threshold is 0.5 \cite{mAp_blog} and only predictions with the highest confidence score count. 
+To calculate precision and recall, it is important to define how the True Positive (TP) term is calculated. Unlike, in image classification tasks, this calculation is not as straightforward. Since the objects need to be localized correctly as well as identified, comparing ground-truth labels against the predicted classes is not enough. This issue was addressed in COCO challenge \cite{Lin2014} by measuring the Intersection-over-Union (IoU) metric. As the model proposes an anchor box, the classifier outputs a confidence score. The confidence score is a probability of the box to contain an object. The region is then additionally compared against the ground truth bounding box labels using the Equation \ref{iou}. Finally, if the IoU ratio, also known as Jaccard distance, is above the pre-defined threshold, the predicted object is considered to be a TP. In PASCAL VOC evaluation, the default threshold is 0.5 \cite{mAp_blog} and only predictions with the highest confidence scores count. 
 
 The prediction is labeled as False Positive(FP) when either the predicted class is wrong or its IoU is below the threshold. Otherwise, if the confidence score of the proposed region is lower than the threshold, the value is labeled as False Negative(FN). Next, precision and recall values are calculated as specified in Figure \ref{confusion}.
 
@@ -1416,9 +1407,10 @@ In the subsequent sections, \texttt{AP50} and \texttt{AP75} denote average preci
 
 \subsubsection{Naive object detection approach}
 \label{naive} 
-After directly applying Faster-RCNN detector\cite{ima} in detectron2 \cite{wu2019detectron2} framework to the prepared dataset and evaluating it using the metrics presented earlier, it quickly became evident that the solution has to be more complex in order to solve the challenges outlined in the \nameref{objective}. 
+Due to the simplicity of setup, Faster-RCNN \cite{ima} was selected as  candidate for object detection pipeline. In this setup, Faster-RCNN detector in Detectron2  \cite{wu2019Detectron2} was applied to the dataset presented in the \nameref{datasets} section. 
 
-For the initial experiments, a Faster-RCNN network with a ResNet backbone was used. The ResNet architecture had 50 layers. The training has been conducted in three stages. First, the model was trained on the source dataset. Next, the trained model was evaluated on the real images of the same classes. Finally, identical model has been trained on the target dataset for comparison. After training the model for a short duration, corresponding to 20 000 iterations and the base LR of 0.00125, the following results were obtained: 
+For the initial experiments, a Faster-RCNN network with a ResNet backbone was used as it was concluded to be the best among the networks listed in the section \nameref{classification_section}. The ResNet architecture had 50 layers. The training has been conducted in three stages. First, the model was trained on the source dataset. Next, the trained model was evaluated on the real images of the same classes. Finally, identical model has been trained on the target dataset for comparison. The evaluation in all three stages followed the metrics outlined in the section \nameref{metrics_section}. After training the model for a short duration, corresponding to 20 000 iterations and the base LR of 0.00125, it quickly became evident that the solution has to be more complex in order to solve the challenges outlined in the \nameref{objective}. The results of the initial experiments are shown in Figure \ref{faster_init}.
+
 
 \begin{table}[htb]
 	\captionof{table}{Experiments with a simple Faster-RCNN model. }
@@ -1431,12 +1423,12 @@ For the initial experiments, a Faster-RCNN network with a ResNet backbone was us
 \end{table}
 \FloatBarrier
 
-As it can be concluded, there is a significant performance drop when the environment is slighly changed. This is essentially a result of two related problems combined: overfitting and domain shift. Naturally, two datasets are originated from different environments and not only their background, but also their lighting conditions, positioning and textures deviate from one another. 
+As it can be concluded, there is a significant performance drop when the environment is slightly changed. This is essentially a result of two related problems combined: over-fitting and domain shift. Naturally, the regular detector fails when two datasets originate from different environments and not only their background, but also their lighting conditions, positioning and textures deviate from one another. Moreover, because the target dataset is substantially smaller, there is a chance that the model overfits in the third training stage. To conclude, it is believed that with right hyperparameters and a carefully refined training  process with longer training time, the results can be improved, though not significantly. 
 
 \subsubsection{Experiments with classical domain adaptive methods}
 To overcome the domain shift phenomenon, it was proposed to experiment with domain adaptation applications. For these experiments, two existing open-source methods were suggested. 
 
-In the initial study, a model based on decoupled adaptation for cross-domain object detection \cite{Jiang2021} was tested. The model introduced by Jiang et al. essentially proposes an \nameref{adv_approach} approach, where a GRL is applied to the classifier and the box regressor in a decoupled way, i.e. the problem is split into two subproblems to avoid them from interfering with each other. According to Jiang et al., this could improve the discriminability of the detector. Readers can refer to the original paper \cite{Jiang2021} for more information. The results of the experiments are outlined in the Table \ref{dadapt}.
+In the initial study, a model based on decoupled adaptation for cross-domain object detection \cite{Jiang2021} was tested. The model introduced by Jiang et al. essentially proposes an \nameref{adv_approach} approach, where a GRL is applied to the classifier and the box regressor in a decoupled way, i.e. the problem is split into two sub-problems to avoid them from interfering with each other. According to Jiang et al., this could improve the discriminability of the detector. Readers can refer to the original paper \cite{Jiang2021} for more information. The results of the experiments are outlined in the Table \ref{dadapt}.
 
 \begin{table}[htb]
 	\captionof{table}{Results of the experiments with a D-Adapt based method.}
@@ -1449,7 +1441,7 @@ In the initial study, a model based on decoupled adaptation for cross-domain obj
 \end{table}
 \FloatBarrier
 
-First, a model was trained on the source dataset for 4 hours. Similarly to the \nameref{naive}, the performance drops dramatically when testing the model on the target dataset. However, after running the adaptation network for another 4 hours, the results have improved by a considerable margin. The final result on the combined dataset is \texttt{AP50} $= 64.32\%$. Although the result has significantly improved over the experiment without any adaptation presented in Table \ref{faster_init} with \texttt{AP50} $= 13.63\%$, other approaches will also be evaluated.
+First, a model was trained on the source dataset for 4 hours. Similarly to the \nameref{naive}, the performance drops dramatically when testing the model on the target dataset. However, after running the adaptation network for another 4 hours, the results have improved by a considerable margin. The final result on the combined dataset is \texttt{AP50} $= 64.32\%$. The result has significantly improved over the experiment without any adaptation presented in Table \ref{faster_init} with \texttt{AP50} $= 13.63\%$. 
 
 Recently, many open-source solutions proposed \cite{Inoue_2018_CVPR, Chen2020, Arruda2019} an \nameref{imagetoimage} approach in a cross-domain object detection setup. Following Zhu et al., Cycle-GAN \cite{Zhu2017} was used in an attempt to generate an intermediate domain. The results obtained after training the model for 44 epochs(= 36 hours) are compiled in Table \ref{cyclegan}.  
 
@@ -1464,38 +1456,46 @@ Recently, many open-source solutions proposed \cite{Inoue_2018_CVPR, Chen2020, A
 \end{table}
 \FloatBarrier
 
-As it can be noted, even after an extensive training with a massive dataset of nearly 50 000 images, Cycle-GAN still produced fairly low-quality results, especially for the real-alike images. This problem has also been acknowledged by Zhu et al. as a limitations of Cycle-GAN \cite{Zhu2017}, where differences in the distribution characteristics of the training dataset caused comparable artifacts. Due to the low performance on the T-LESS dataset and long training time, this method was excluded from further tests. 
+As it can be noted, even after an extensive training with a massive dataset of nearly 50 000 images, Cycle-GAN still produced fairly low-quality results, especially for the real-alike images. This problem has also been acknowledged by Zhu et al. as a limitation of Cycle-GAN \cite{Zhu2017}, where differences in the distribution characteristics of the training dataset caused similar artifacts. Due to the low performance on the T-LESS dataset and long training time, this method was excluded from further tests. 
 
 
 \subsection{Experiments with Adaptive teacher}
 \label{ensemExp} 
-For the next set of experiments, this thesis proposes an ensembled setup. An ensembled setup is a combination of multiple algorithms that leverage their benefits to produce a superior result. In regards to domain adaptive object detection, such setups were summarized earlier in the \nameref{mean_teacher} section. As a base study for this thesis, the adaptive teacher \cite{Li2021}  framework is studied extensively. Unlike the  previous architectures, mean teacher training frameworks implement multiple adaptation strategies. In case of the adaptive teacher method, Li et al. proposed to use both adversarial and pseudo-labeling techniques. To validate the suitability of this architecture, the codebase has been modified to accept the prepared T-LESS dataset and was trained as it is. Figure \ref{adapt_experiment1} illustrates the results when visualizing the trained model. Similarly, to the previous experiments, the model was based on Faster-RCNN \cite{ima} and a ResNet \cite{He2015} backbone network with 101 layers, which was pretrained on the ImageNet \cite{Russakovsky2014}dataset. Although traditional ML and DL algorithms utilize the term epoch, which stands for one forward and one backward passes of the loop for the entire set of the training samples, detectron2 \cite{wu2019detectron2} uses iterations instead. Iterations denote a number of times to complete the forward and backward passes for a batch of training samples, where a batch is a small subset of data. 
+For the next set of experiments, this thesis proposes an ensembled setup. An ensembled setup is a combination of multiple algorithms that leverage their benefits to produce a superior result. In regards to domain adaptive object detection, such setups were summarized earlier in the \nameref{mean_teacher} section. As a base study for this thesis, the adaptive teacher \cite{Li2021}  framework is studied extensively. Unlike the  previous architectures, mean teacher training frameworks implement multiple adaptation strategies. In case of the adaptive teacher method, Li et al. proposed to use both adversarial and pseudo-labeling techniques. To validate the suitability of this architecture, the code base has been modified to accept the prepared T-LESS dataset and was trained as it is. Figure \ref{adapt_experiment1} illustrates the results when visualizing the trained model. Similarly, to the previous experiments, the model was based on Faster-RCNN \cite{ima} and a ResNet \cite{He2015} backbone network with 101 layers, which was pre-trained on the ImageNet  \cite{Russakovsky2014} dataset. Although traditional ML and DL algorithms utilize the term epoch, which stands for one forward and one backward passes of the loop for the entire set of the training samples, Detectron2 \cite{wu2019Detectron2} uses the term "iterations" instead. Iterations denote a number of times to complete the forward and backward passes for a batch of training samples, where a batch is a small subset of data. 
 
 \begin{figure}[htb]
     \centering
     \subfloat[Visualization on the source dataset]{{\includegraphics[width=6cm]{./experiments_original_1.png} }}%
     \qquad
     \subfloat[Visualization on the target dataset]{{\includegraphics[width=6cm]{./experiments_original_2.png} }}%
-    \caption{Results of the experiments with Adaptive Teacher as it is}
-    \label{adapt_experiment1}%
+    \caption{Results of the experiments with Adaptive Teacher as it is}\label{adapt_experiment1}%
 \end{figure}
 \FloatBarrier
 
 Expectedly, the model performs poorly on the custom dataset without tweaking any hyperparameters. Although the performance on the source dataset is more than satisfactory (Figure \ref{adapt_experiment1}(a)), random artifacts take place in the form of noisy bounding boxes, as can be seen in Figure \ref{adapt_experiment1}(b). For this round of experiments, the number of iterations was set as high as possible in order to explore the limits of the setup. Although the model was trained for 360 000 iterations, such huge values are often redundant as the selected dataset has extensive amount of images and, therefore, less iterations can be used, as will be presented in \nameref{results}. 
 \todo{perhaps convert iterations to epochs} 
 
-To overcome the issue of noisy predictions, two steps have been carried out. First, the LR scheduler has been adjusted in the original Adaptive teacher \cite{Li2021} implemenation. In the original setup, the Adaptive teacher algorithm used a warmup two-stage multi-step scheduler. This scheduler initializes the LR in two stages, where it first gradually increases for a number of warmup iterations $\texttt{WARMUP\textunderscore ITERS} = 1000$, until it reaches the fixed $\texttt{BASE\textunderscore LR} = 0.001$.  Instead, this thesis suggests to use the multi-stage scheduler with a cosine annealing, as suggested by Loshchilov et al. \cite{Loshchilov2016}. In these experiments, the learning rate first slowly ascends to the $\texttt{BASE\textunderscore LR} = 0.001$. However, as the ceiling is reached, it starts to decay to zero by the time of the last iteration $\texttt{MAX\textunderscore ITERS}$ is reached. This in theory allows to protect the scheduler from overshooting as it approaches the global minimum. Although Loshchilov et al. additionally proposes resetting the scheduler after it reaches the minimum, in this thesis such implementation is neglected for the time being. 
+To overcome the issue of noisy predictions, two steps have been carried out. First, the LR scheduler has been adjusted in the original Adaptive teacher \cite{Li2021} implementation. In the original setup, the Adaptive teacher algorithm used a warm-up two-stage multi-step scheduler. This scheduler initializes the LR in two stages, where it first gradually increases for a number of warm-up iterations $\texttt{WARMUP\textunderscore ITERS} = 1000$, until it reaches the fixed $\texttt{BASE\textunderscore LR} = 0.001$.  Instead, this thesis suggests to use the multi-stage scheduler with a cosine annealing, as suggested by Loshchilov et al. \cite{Loshchilov2016}. In these experiments, the learning rate first slowly ascends to the $\texttt{BASE\textunderscore LR} = 0.001$. However, as the ceiling is reached, it starts to decay to zero by the time of the last iteration $\texttt{MAX\textunderscore ITERS}$ is reached. This in theory allows to protect the scheduler from overshooting as it approaches the global minimum. Although Loshchilov et al. additionally proposes resetting the scheduler after it reaches the minimum, in this thesis such implementation is neglected for the time being. Both schedulers are compared against each other and are illustrated in Figure \ref{annealing}.
 
-Another issue that potentially caused the noisy predictions on the real images is overfitting. This might happen when, given the model complexity, the model is trained for an excessive amount of time. As a result, the model would only perform well on the training data. 
-Therefore, in order to identify the suitable number of iterations required for training, an early stoppage algorithm was added. Instead of checking whether the loss keeps decreasing, the \texttt{AP50} metrics is tracked for the validation set at every \texttt{EVAL\textunderscore PERIOD} interval. If the value does not improve for more than $\texttt{EVAL\textunderscore PERIOD} \times \texttt{PATIENCE}$ iterations, the best model is saved and the training is terminated. An example performance of these two suggestions combined are compared against the original model and are illustrated in Figure \ref{exp1}. The results of such modification are presented in the \nameref{results} section.  
+Another issue that potentially caused the noisy predictions on the real images is over-fitting. This might happen when, given the model complexity, the model is trained for an excessive amount of time. As a result, the model would only perform well on the training data. 
+Therefore, in order to identify the suitable number of iterations required for training, an early stoppage algorithm was added. Instead of checking whether the loss keeps decreasing, the \texttt{AP50} metrics is tracked for the validation set at every \texttt{EVAL\textunderscore PERIOD} interval. If the value does not improve for more than $\texttt{EVAL\textunderscore PERIOD} \times \texttt{PATIENCE}$ iterations, the best model is saved and the training is terminated. The results of such modification are presented in the \nameref{results} section.  
 
-
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=14cm]{./LR.jpg}
+	\end{center}
+	\caption{a)The original LR scheduler against b)the proposed LR scheduler }
+	\begin{center}
+		\label{annealing}
+	\end{center}
+\end{figure}
+\FloatBarrier
 
 \subsection{Regularized Cross-Domain Adaptive Teacher}
 \label{mainExperiments} 
 In the subsequent sections, a novel architecture will be introduced. The effectiveness of the existing methods has been evaluated to address domain shift  between various open-source datasets. Most often domain adaptation is performed to transfer knowledge from one dataset for autonomous driving(Cityscapes) to another(Foggy-Cityscapes, Sim10k, KITTI), or to transfer knowledge from one dataset with general objects (PASCAL VOC) to another(Clipart, Watercolor, Clipart) \cite{Oza2021}.  
 
-However, no comprehensive work have addressed the industrial cross-domain object detection. Additionally, motivated by works of Li et al. \cite{Li2021} and Xu et al. \cite{Xu2020}, this thesis assesses the practicality of the categorical regularization in the adaptive teacher framework. Unlike the original architecture of Adaptive teacher \cite{Li2021}, the model is aligned at two stages:  image-level and instance-level. Following Chen et al. \cite{Chen2018} and Xu et al. \cite{Xu2020}, a consistency loss term has been added to regularize both stages. The training process follows the principles outlined in the \nameref{ensemExp} section. The described architecture is presented in Figure \ref{mymodel}. 
+However, no comprehensive work have addressed the industrial cross-domain object detection. Additionally, motivated by works of Li et al. \cite{Li2021} and Xu et al. \cite{Xu2020}, this thesis assesses the practicality of the categorical regularization in the adaptive teacher framework. Unlike the original architecture of Adaptive teacher \cite{Li2021}, the model is aligned at two stages:  image-level and instance-level. Following Chen et al. \cite{Chen2018} and Xu et al. \cite{Xu2020}, a consistency loss term has been added to regularize both stages. The training process follows similar principles to the ones outlined in the \nameref{ensemExp} section. The proposed architecture is presented in Figure \ref{mymodel}. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -1508,7 +1508,7 @@ However, no comprehensive work have addressed the industrial cross-domain object
 \end{figure}
 \FloatBarrier
 
-Chen et al. \cite{Chen2018} was one of the first methods to use a two-level alignment, which was discussed earlier in the \nameref{adv_approach} section. Xu et al. \cite{Xu2020} expanded further on this method by adding a consistency regularizing term. Upon analyzing multiple papers, Xu et al. comments that using only image-level adaptation would result in the alignment of the non-transferrable background regions between the source and target domains, which would in turn result in poor accuracy in the target domain \cite{Xu2020}. Insance-level alignment would allow to reduce the distance between the local features, such as object appearance, size and viewpoint \cite{Chen2018}. On the other hand, it is not possible to omit image-level alignment as it is important to address adaptation of the global features of the image, such as image scales, illumination and style \cite{Chen2018}. 
+Chen et al. \cite{Chen2018} was one of the first methods to use a two-level alignment, which was discussed earlier in the \nameref{adv_approach} section. Xu et al. \cite{Xu2020} expanded further on this method by adding a consistency regularizing term. Upon analyzing multiple papers, Xu et al. comments that using only image-level adaptation would result in the alignment of the non-transferable background regions between the source and target domains, which would in turn result in poor accuracy in the target domain \cite{Xu2020}. Instance-level alignment would allow to reduce the distance between the local features, such as object appearance, size and viewpoint \cite{Chen2018}. On the other hand, it is not possible to omit image-level alignment as it is important to address adaptation of the global features of the image, such as image scales, illumination and style \cite{Chen2018}. 
 
 Therefore, this setup employs a mean teacher based Faster-RCNN \cite{ima} setup with two domain adaptation networks in the student model. Similarly to the preceding architectures \cite{Li2021,Liu2021}, data augmentation is used to assist in the training process, For these experiments, random cropping was excluded from tests as it was negatively affecting the pseudo-labeling. Instead, a few other transformations such as histogram equalizing and sharpness adjustments, were added to strong augmentation. The complete list of used augmentations is shown in Figure \ref{newAugmentations}. It is believed that rotations and random affine transformations are not as important with the T-LESS dataset as the number of images taken in a rotational manner seems to be fairly sufficient.
 
@@ -1523,15 +1523,13 @@ Therefore, this setup employs a mean teacher based Faster-RCNN \cite{ima} setup 
 \end{figure}
 \FloatBarrier
 
-
-Following Li et al. \cite{Li2021}, one adaptation module is attached to the output of a CNN backbone, which was chosen to be ResNet \cite{He2015}. Another domain adaptation network is attached to the output layers of Faster-RCNN. While the backbone generates image-level features, Faster-RCNN outputs the proposed foreground regions. Both modules utilize a standard GRL block \cite{Ganin2015} followed by a domain classifier.
-
+Identically to the earlier experiments, the backbone was chosen to be ResNet \cite{He2015} with 101 layers. Following Li et al. \cite{Li2021}, one adaptation module is attached to the output of a CNN backbone.  Another domain adaptation network is attached to the output layers of Faster-RCNN. While the backbone generates image-level features, Faster-RCNN outputs the proposed foreground regions. Both modules utilize a standard GRL block \cite{Ganin2015} followed by a domain classifier.
 
 
 
-In the experiments, the image-level domain classier was defined in accordance with the setup of Li et al. \cite{Li2021}. It has three convolutional layers with batch normalization and leaky-ReLUs followed by a convolutional classier layer. The instance-level classier resembles the architecture in \cite{Xu2020} and consists of two linear layers with leaky-ReLUs and dropout layers and finalized with a classier and a sigmoid. 
+In this work, the image-level domain classifier is similar to the basic CNN architecture illustrated in Figure \ref{CNN} and it was defined in accordance with the setup of Li et al. \cite{Li2021}. It has three convolutional layers with batch normalization and leaky-ReLUs followed by a convolutional classier layer. The instance-level classier resembles the architecture in \cite{Xu2020} and consists of two linear layers with leaky-ReLUs and dropout layers and finalized with a classier and a sigmoid. Dropout layers were added due to the reasons specified in Section \ref{alexnet_section}. A detailed description of the architecture can be found in the \nameref{appendix}. 
 
-Naturally, both an image and a region proposed by Faster-RCNN should represent the same domain. Similarly to Xu et al., to minimize the difference between predictions of the domain classifiers, they are regularized using $\mathcal{L}_{\text {consist }}$ consistency loss. In these experiments, consistency loss is based on simple MSE loss between instance- and image-level domain classifier loss terms $\mathcal{L}_{\text {ins }}$ and $\mathcal{L}_{\text {img }}$.
+Naturally, both an image and a region proposed by Faster-RCNN should represent the same domain. Similarly to Xu et al., to minimize the difference between predictions of the domain classifiers, they are regularized using $\mathcal{L}_{\text {consist }}$ consistency loss. In these experiments, consistency loss is based on simple MSE loss between instance- and image-level domain classifier loss terms $\mathcal{L}_{\text {ins }}$ and $\mathcal{L}_{\text {img }}$, as it was described in Equation \ref{MSE_eq}.
 
 The calculations of both $\mathcal{L}_{\text {ins }}$ and $\mathcal{L}_{\text {img}}$ follow the practices outlined in Equation \ref{faster_DA_losses}. Additionally,  the consistency loss $\mathcal{L}_{\text {consist }}$ follows the formula in Equation \ref{faster_DA_losses_consist}. However, instead of L2 norm, MSE is utilized.  
 
@@ -1548,13 +1546,13 @@ Pseudo-labels for the unlabeled target dataset are obtained identically as in \c
  
 Multiple experiments have been conducted with the architecture defined in Figure \ref{mymodel}. These experiments will be discussed in the \nameref{results} section.  
 
-In the following section, a proposed continuosly learning domain adaptative object detection setup is introduced. 
+In the following section, a proposed continuously learning domain adaptative object detection setup is introduced. 
 
 
-\subsection{Continuously learning object detection}
+\subsection{Object detection with continual learning}
 \label{cont_learning_section} 
-Although the pretrained model performs fairly well on the target dataset, it will not be able to predict unknown objects. In order to solve the scalability problem defined in the \nameref{objective}, the proposed architecture should be able to keep learning when new data is added. Often such problems are addressed by a special case of transfer learning known as "fine-tuning". A typical example of fine-tuning is done by freezing certain deeper layers and only retrain the top level components of the network. This procedure would enable the network to apply previously learned knowledge on an unknown yet similar problem, while significantly reducing the training time. In regards to the objectives of this thesis, it would allow to utilize the knowledge of the previously learned equipment parts to promptly retrain it and apply it to new classes of objects. 
-In the first set of experiments, a naive fine-tuning approach without freezing was attempted. The model was trained based on the architecture, which was demonstated in the \nameref{mainExperiments}. The regular training stage included both source and target datasets that contained classes 1 to 20, while the fine-tuning stage only included the data for classes 21-30 and the pretrained weights file from the previous stage. After the model has been trained on the first 20 classes, the FC layers of the trained model have been removed and replaced with new FC layers that can produce predictions for 30 classes. Both models were trained for the same number of iterations. The results are presented in Table \ref{naive_finetuning}.
+Although the pre-trained model performs fairly well on the target dataset, it will not be able to predict unknown objects. In order to solve the scalability problem defined in the \nameref{objective}, the proposed architecture should be able to keep learning when new data is added. Often such problems are addressed by a special case of transfer learning known as "fine-tuning". A typical example of fine-tuning is done by freezing certain deeper layers and only retrain the top level components of the network. This procedure would enable the network to apply previously learned knowledge on an unknown yet similar problem, while significantly reducing the training time. In regards to the objectives of this thesis, it would allow to utilize the knowledge of the previously learned equipment parts to promptly retrain it and apply it to new classes of objects. 
+In the first set of experiments, a naive fine-tuning approach without freezing was attempted. The model was trained based on the architecture, which was demonstated in the \nameref{mainExperiments}. The regular training stage included both source and target datasets that contained classes 1 to 20, while the fine-tuning stage only included the data for classes 21-30 and the pre-trained weights file from the previous stage. After the model has been trained on the first 20 classes, the FC layers of the trained model have been removed and replaced with new FC layers that can produce predictions for 30 classes. Both models were trained for the same number of iterations. The results are presented in Table \ref{naive_finetuning}.
 
 \begin{table}[htb]
 \caption{The naive fine-tuning results}
@@ -1582,16 +1580,17 @@ As can be easily noted, the results dropped significantly even though the initia
 \begin{enumerate}
 \item In order to fine-tune the network successfully, a freezing process should be carried out on the deeper, more specifically, on the backbone layers of the network. Skipping this step is the main result of the performance drop in Table \ref{naive_finetuning}. By freezing deeper parts of the network, key trained features will be preserved, and the number of trainable parameters will be reduced, which will in turn speed up the training time. 
 \item Too many unfamiliar cases will lead to a higher performance drop. Adding fewer additional classes in each subsequent task will help to maintain the performance drop at the lower level. This has been proven by experiments of Peng et al. \cite{Peng2020}. In other words, instead of retraining the original model with 10 more unknown classes, the model should be retrained with one or two at most. 
-\item Additionally, it was noted that the weights file \texttt{.pth}, which was originally trained for the first $N$ classes, also contained the states of the optimizer, i.e. of the training process. This included the iteration number and the learning rate at that iteration. As a result, the training process is started from a much lower base LR, as it can be concluded from Figure \ref{lr}. Therefore, before proceeding, the optimizer states were removed from the dictionary of the weights file. 
-\item Finally, instead of replacing the original FC layers alltogether, a new architecture is proposed, as illustrated in Figure \ref{continualModel}(b). 
+\item Additionally, it was noted that the weights file \texttt{.pth}, which was originally trained for the first $N$ classes, also contained the states of the optimizer, i.e. of the training process. This included the iteration number and the learning rate at that iteration. As a result, the training process is started from a much lower base LR. Therefore, before proceeding, the optimizer states were removed from the dictionary of the weights file. 
+\item Finally, instead of replacing the original FC layers altogether, a new architecture is proposed, as illustrated in Figure \ref{continualModel}(b). 
 \end{enumerate}
 
-Following the studies presented in the \nameref{cont_learning} section, the detector head of the custom model is additionally modified to address a scalable training setup. The architecture presented in Figure \ref{continualModel}(b) replicates the method proposed by Rusu et al. \cite{Rusu2016}, but in a cross-domain mean teacher setup. An overview of this method was shown earlier in Figure \ref{mymodel}, where both detector heads of the student and the teacher networks are modified. In this experiment, the original detector head is frozen, which includes both the classifier and the box regressor. Freezing essentially prevents the weights from being modified by disabling the learning rate updates. Consequently, new output layers are attached to the network. These layers are responsible for the unknown $M$ number of classes and unlike the original detector, they are not frozen. The original detector head classifies an $N+1$ number of objects, which also includes the background. Therefore, to preserve data integrity, the appended detector head ignores the background class and only predicts $M$ new objects. The results of such experiment are presented below\todo{add plots}. 
+Following the studies presented in the \nameref{cont_learning} section, the detector head of the custom model is additionally modified to address a scalable training setup. The architecture presented in Figure \ref{continualModel}(b) replicates the method proposed by Rusu et al. \cite{Rusu2016}, but in a cross-domain mean teacher setup. An overview of this method was shown earlier in Figure \ref{mymodel}, where both detector heads of the student and the teacher networks are modified. In this experiment, the original detector head is frozen, which includes both the classifier and the box regressor. Freezing essentially prevents the weights from being modified by disabling the learning rate updates. Consequently, new output layers are attached to the network. These layers are responsible for the unknown $M$ number of classes and unlike the original detector, they are not frozen. The original detector head classifies an $N+1$ number of objects, which also includes the background. Therefore, to preserve data integrity, the appended detector head ignores the background class and only predicts $M$ new objects. 
 
+One potential disadvantage to such approach is that the original detector head is trained to recognize the background as well, which also included the shapes of the new $M$ objects. Moreover, the weights for the original detector are frozen. Therefore, it is believed that the appended detector head will struggle predict the new classes if the original detector forces it to be predicted as "background". 
 
-To solve this problem\todo{write about the problem}, a new architecture has been introduced in Figure \ref{continualModel}(c). This model further combines the ideas proposed by Rusu et al. \cite{Rusu2016} and Donahue et al. \cite{Donahue2013}, which were introduced in the \nameref{cont_learning} section. Instead of completely freezing the original detector weights, the learning rate is reduced for the previously trained objects. The additional FC layers are trained with a standard LR.  According to Parisi et al. \cite{Parisi2018}, reduced learning rate will prevent the model from making significant changes in the original weights, while also learning new data. Meanwhile, the dynamically expanding architecture of Rusu et al. \cite{Rusu2016} will focus on fighting the catastrophic forgetting problem. Ultimately, in the proposed method the model aims to train network expansion along with regularization. 
+To solve this problem, a new architecture has been introduced in Figure \ref{continualModel}(c). This model further combines the ideas proposed by Rusu et al. \cite{Rusu2016} and Donahue et al. \cite{Donahue2013}, which were introduced in the \nameref{cont_learning} section. Instead of completely freezing the original detector weights, the learning rate is reduced for the previously trained objects. The additional FC layers are trained with a standard LR.  According to Parisi et al. \cite{Parisi2018}, reduced learning rate will prevent the model from making significant changes in the original weights, while also learning new data. This might potentially enable the network to slowly be re-trained and learn the difference between the new classes and the background. Meanwhile, the dynamically expanding architecture of Rusu et al. \cite{Rusu2016} will focus on fighting the catastrophic forgetting problem. Ultimately, in the proposed method the model aims to train network expansion along with regularization. 
 
-The results of this such architecture are summarized in the \nameref{results} section. 
+The results of such architecture are summarized in the \nameref{cont_learning_results} section. 
 
 
 \begin{figure}[htb]
@@ -1608,27 +1607,27 @@ The results of this such architecture are summarized in the \nameref{results} se
 
 \clearpage
 
-\section{Results and analysis} 
+\section{Results} 
 \label{results} 
 This section summarizes the key findings of the experiments that were conducted based on the architectures presented in the sections \ref{ensemExp},  \ref{mainExperiments} and \ref{cont_learning_section} of the thesis. Additionally, this section briefly introduces the simplistic UI approach. Finally, the directions for future work are discussed. 
 
-\subsection{Results}
+\subsection{Cross-domain adaptation results}
 
 In order to achieve fair comparison, all experiments obey the following specifications:
+\todo{be consistent with capital or small letters} 
 \begin{enumerate}
 \item According to the setup defined in Figure \ref{mymodel}, the teacher model only accepts the weakly-augmented images from the target domain. Therefore, the primary objective for this ensembled model is to improve the \texttt{AP} on the teacher model. Thus, \texttt{AP50} results from the teacher model evaluation are used as a primary metric. 
 \item The base learning rate is defined as \texttt{BASE\textunderscore LR} = 0.001
-\item The number of iterations is fixed as \texttt{MAX\textunderscore ITER} = 50 000 and the early stopping feature is disabled
-\item The evaluation happens every \texttt{EVAL\textunderscore PERIOD} = 1000 iterations. Considering that there are 50 000 iterations total, that results in 50 points across the graph
-\item Only one NVIDIA A100 GPU unit is in use
+\item The number of iterations is fixed as \texttt{MAX\textunderscore ITER} = 50 000 and the early stopping feature is only enabled in the models described in the \nameref{augmentations_section} and subsequent sections 
+\item The evaluation happens every \texttt{EVAL\textunderscore PERIOD} = 1000 iterations. Considering that there are 50 000 iterations total, that results in 50 evaluation points across the \texttt{AP50} plot
 \end{enumerate}  
 \subsubsection{Scheduler adjustment}
 \label{scheduler_section} 
-First set of experiments was conducted in accordance with the \nameref{ensemExp} section. The original learning rate scheduler was used and its pattern is presented in the bottom-side of the plot. Initially, the Adaptive teacher network was trained as it is. The results are presented in Figure \ref{original_experiment}. The first graph illustrates the evalutaion \texttt{AP50} results for both the teacher and the student models. Although the training process seems idle for the first 20 000 iterations, the model eventually finds better gradients and stabilizes with $max$ \texttt{AP50} = 71.39\% at 31 000 iterations. Even though it might seem that the loss value is decreasing by the end of the training, the \texttt{AP50} value also steadily drops. In order to address the noisy predictions shown earlier in Figure \ref{adapt_experiment1}, the learing rate scheduler has been modified to implement a cosine annealing algorithm without restarts \cite{Loshchilov2016}, as shown in Figure \ref{annealing}. The original warm-up period of \texttt{WARMUP\textunderscore ITERS} = 1000 is preserved. 
+First set of experiments was conducted in accordance with the \nameref{ensemExp} section. The original learning rate scheduler was used and its pattern is presented in the bottom-side of the plot. Initially, the Adaptive teacher network was trained as it is. The results are presented in Figure \ref{original_experiment}. The first graph illustrates the evaluation \texttt{AP50} results for both the teacher and the student models. Although the training process seems idle for the first 20 000 iterations, the model eventually finds better gradients and stabilizes with $max$ (\texttt{AP50}) = 71.39\% at 31 000 iterations. Even though it might seem that the loss value is decreasing by the end of the training, the \texttt{AP50} value also steadily drops. In order to address the noisy predictions shown earlier in Figure \ref{adapt_experiment1}, the learning rate scheduler has been modified to implement a cosine annealing algorithm without restarts \cite{Loshchilov2016}, as shown in Figure \ref{annealing}. The original warm-up period of \texttt{WARMUP\textunderscore ITERS} = 1000 is preserved. 
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=16cm]{./loss_AP50_LR.jpg}
+		\includegraphics[width=16cm]{./loss&AP50_original.jpg}
 	\end{center}
 	\caption{Results of the original Adaptive teacher model evaluated on the custom T-LESS dataset without any modifications}
 	\begin{center}
@@ -1636,25 +1635,15 @@ First set of experiments was conducted in accordance with the \nameref{ensemExp}
 	\end{center}
 \end{figure}
 \FloatBarrier
-Theoretically, this setup would have allowed find better gradients and reduce overshooting. The results achieved after modifying the scheduler are shown in Figure \ref{comparison_1}. Although the \texttt{AP50} value peaked much faster with the new scheduler, it was only able to reach $max$\texttt{AP50} = 62.49\%, which is almost 10\% lower than the original result. \todo{Maybe it is because some models look almost identical?Try regularization}   
+Theoretically, this setup would have allowed find better gradients and reduce overshooting. The results achieved after modifying the scheduler are shown in Figure \ref{comparison_1}. Although the \texttt{AP50} value peaked much faster with the new scheduler, it was only able to reach $max$ (\texttt{AP50}) = 62.49\%, which is almost 10\% lower than the original result. \todo{Maybe it is because some models look almost identical?}   
 
-\begin{figure}[htb]
-	\begin{center}
-		\includegraphics[width=14cm]{./LR.jpg}
-	\end{center}
-	\caption{a)The original LR scheduler against b)the proposed LR scheduler }
-	\begin{center}
-		\label{annealing}
-	\end{center}
-\end{figure}
-\FloatBarrier
 
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=14cm]{./AP50.jpg}
+		\includegraphics[width=14cm]{./AP50_scheduler.jpg}
 	\end{center}
-	\caption{a)AP50 from the original model and b) AP50 from the model with an adjusted scheduler}
+	\caption{a)\texttt{AP50} results of the original model and b) \texttt{AP50} results of the model with an adjusted scheduler}
 	\begin{center}
 		\label{comparison_1}
 	\end{center}
@@ -1663,38 +1652,67 @@ Theoretically, this setup would have allowed find better gradients and reduce ov
 
 \subsubsection{Additional augmentations}
 \label{augmentations_section} 
-Following the ideas proposed in Figure \ref{newAugmentations}, an identical model was trained with two additional strong augmentations. The results of the evaluation process can be found in Figure \ref{augmentation_experiment}.
+Following the ideas proposed in Figure \ref{newAugmentations}, an identical model was trained with two additional strong augmentations. In this experiment, the model leverages the early stopping algorithm with the  \texttt{PATIENCE} value of 10. The results of the evaluation process can be found in Figure \ref{augmentation_experiment}. 
  
-\todo{add text when the plot is ready} 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=14cm]{example-image}
+		\includegraphics[width=14cm]{./AP50_augmentation.jpg}
 	\end{center}
-	\caption{a)AP50 from the model with a modified scheduler and b) AP50 from the model with a modified scheduler and two additional augmentations}
+	\caption{a)\texttt{AP50} from the model with a modified scheduler only and b) \texttt{AP50} results of the model with a modified scheduler and two additional strong augmentations}
 	\begin{center}
 		\label{augmentation_experiment}
 	\end{center}
 \end{figure}
 \FloatBarrier  
 
+By evaluating these results, it can be easily noticed that the model reaches the peak much faster and the maximum value (\texttt{AP50} = 70.53\%) is higher than the equivalent model without additional augmentations (\texttt{AP50} = 62.49\%). 
+
 
 \subsubsection{Instance-level DA and consistency regularization}
-The following set of experiments evaluates the the \nameref{mainExperiments} model that was proposed earlier. The model utilizes the same princinples as in the previous experiment, which includes the adjusted scheduler and additional augmentations. On top of it, in this experiment, an instance-level domain adaptation is added along with the consistency regularization term. Figure \ref{myModel_experiment} presents the comparison between this model and the model presented in section \ref{augmentations_section}.
+The following set of experiments evaluates the custom model presented in Figure \ref{mymodel}. The model utilizes the same principles as in the previous experiment, which includes the adjusted scheduler and additional augmentations. On top of it, in this experiment, an instance-level domain adaptation is added along with the consistency regularization term. Figure \ref{myModel_experiment} presents the comparison between this model and the model presented in Section \ref{augmentations_section}.
 
-\todo{add text when the plot is ready} 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=14cm]{example-image}
+		\includegraphics[width=14cm]{./AP50_Augm_consistency.jpg}
 	\end{center}
-	\caption{a)AP50 from the model with a modified scheduler and two extra augmentations against b) AP50 from the model with a modified scheduler, two additional augmentations and consistency regularization}
+	\caption{a)\texttt{AP50} from the model with a modified scheduler and two extra augmentations against b) \texttt{AP50} from the model with a modified scheduler, two additional augmentations and consistency regularization}
 	\begin{center}
 		\label{myModel_experiment}
 	\end{center}
 \end{figure}
 \FloatBarrier  
 
+Despite the consistency loss and both domain classification losses going down as can be seen in Figure \ref{myModel_constloss}, in this experiment the average precision value \texttt{AP50} = 62.87\%  was lower than it was anticipated. 
 
-\subsubsection{Continual learning results}
+\todo{add more text when the plot is ready} 
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=14cm]{example-image}
+	\end{center}
+	\caption{a)\texttt{AP50} b)\texttt{AP50} c)\texttt{AP50} d)AP50}
+	\begin{center}
+		\label{myModel_constloss}
+	\end{center}
+\end{figure}
+\FloatBarrier  
+
+In order to verify the performance of the components, one last experiment evaluates the network without the cosine scheduler, which seemed to negatively affect the performance of the subsequent experiments (see Figure \ref{comparison_1}). The results of the Regularized Cross-Domain Adaptive Teacher model with original scheduler are presented in Figure \ref{myModel_withOrigSched}.
+
+\todo{add more text when the plot is ready} 
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=14cm]{example-image}
+	\end{center}
+	\caption{a)\texttt{AP50} b)\texttt{AP50} c)\texttt{AP50} d)AP50}
+	\begin{center}
+		\label{myModel_withOrigSched}
+	\end{center}
+\end{figure}
+\FloatBarrier  
+
+
+
+\subsection{Continual learning results}
 \label{cont_learning_results} 
 As it was introduced in Figure \ref{tless_distribution_rend}, the entire T-LESS dataset contains 30 different models with objects named arbitrary as \texttt{Model 1..Model 30}. To evaluate the methodology presented in the \nameref{cont_learning_section} section, the following procedure was applied:
  
@@ -1702,17 +1720,17 @@ As it was introduced in Figure \ref{tless_distribution_rend}, the entire T-LESS 
 \item In the initial experiment, the network was trained on classes \texttt{Model 1..Model 30}
 \item The second network was trained on the classes \texttt{Model 1..Model 20}
 \item The third network was trained only on the class \texttt{Model 21}
-\item Last network was trained to predict the class \texttt{Model 21} in a continuous manner from a pretrained model that was defined in step 2
+\item Last network was trained to predict the class \texttt{Model 21} in a continuous manner from a pre-trained model that was derived in step 2
 \end{enumerate} 
 
-Finally, the performance was evaluated between all four experiments on the single class \texttt{Model 21}. The comparison results are presented in Figure \ref{myModel_continuous_experiment_1}.
+\texttt{Model 21} was selected due to the relatively stable performance during the experiments. Finally, the performance was evaluated between all four experiments on the single class \texttt{Model 21}. The comparison results are presented in Figure \ref{myModel_continuous_experiment_1}.
 
 \todo{add more text when the plot is ready} 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=14cm]{example-image}
 	\end{center}
-	\caption{a)AP50 b)AP50 c)AP50 d)AP50}
+	\caption{a)\texttt{AP50} b)\texttt{AP50} c)\texttt{AP50} d)AP50}
 	\begin{center}
 		\label{myModel_continuous_experiment_1}
 	\end{center}
@@ -1726,7 +1744,7 @@ Naturally, some objects are harder to identify than others. Therefore, steps 3 a
 	\begin{center}
 		\includegraphics[width=14cm]{example-image}
 	\end{center}
-	\caption{a)AP50 b)AP50 c)AP50 d)AP50}
+	\caption{a)\texttt{AP50} b)\texttt{AP50} c)\texttt{AP50} d)AP50}
 	\begin{center}
 		\label{myModel_continuous_experiment_2}
 	\end{center}
@@ -1735,8 +1753,8 @@ Naturally, some objects are harder to identify than others. Therefore, steps 3 a
 
 
 
-\subsubsection{Deployment}
-In order to showcase the performance, a simple web app was prepared. The app was hosted on a local server and it leverages Flask API to attach the detector app to a user interface. The results are presented in Figure \ref{demo}. 
+\subsection{Deployment results}
+In order to showcase the performance, a simple web app was prepared. The app was hosted on a local server and it leverages Flask API to attach the detector app to a user interface. The app utilizes the model \todo{pick a model that performs best} that showed the best performance among the experiments conducted. The results are presented in Figure \ref{demo}. 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -1749,7 +1767,50 @@ In order to showcase the performance, a simple web app was prepared. The app was
 \end{figure}
 
 
+\clearpage
 
+
+\section{Conclusion} 
+
+This thesis proposed a novel cross-domain object detection architecture with continual learning in an industrial setup. The architecture combines the state-of-the-art adaptive teacher model and two-stage regularization using consistency loss. Additionally, the model evaluates the benefits of a scheduler with cosine annealing without restarts. Furthermore, the performance of the model with two additional augmentation methods was verified. Finally, a continual learning approach is proposed in the detector head of the proposed detection model. The model learns new data in the lifelong manner, while preserving the knowledge learned from the previous tasks. The knowledge is conserved by means of regularization and continuous network expansion with partial gradient freezing. The performance of the model was extensively evaluated on the T-LESS dataset using standard mAP metrics. 
+
+The codebase for this project will shortly be published to \url{https://github.com/darkhan-s/master-thesis-equipment-detection}. However, the access will be restricted and will be available to certain parties upon request.  
+\todo{revise after all done or if the real equipment is available} 
+
+\subsection{Summary of the DA results}
+\todo{Write the summary} 
+
+\begin{table}[htb]
+\begin{center}
+%\resizebox{0.5*\textwidth}{!}{%
+\begin{threeparttable}
+\caption{The summary of the DA methods evaluated in this thesis}
+\label{tab:adaptation_results}
+
+\begin{tabular}{|c|c|}
+\hline
+{\ul \textbf{Method}}      & {\ul \textbf{AP50}} \\ \hline
+Faster-RCNN \cite{ima} *              & 13.63 \%                \\ \hline
+D-Adapt \cite{Jiang2021} *                  & 64.32 \%                \\ \hline
+Cycle-GAN \cite{Zhu2017}  *                & N/A                     \\ \hline
+Adaptive Teacher (AT) \cite{Li2021}      & \textbf{71.39 \%}       \\ \hline
+AT with adjusted scheduler & 62.49 \%                \\ \hline
+\begin{tabular}[c]{@{}c@{}}AT with a scheduler  \\ and additional augmentations\end{tabular}                & 70.53 \% \\ \hline
+\begin{tabular}[c]{@{}c@{}}AT with a scheduler, augmentations \\ and instance-level adaptation\end{tabular} & 62.87 \% \\ \hline
+Oracle(Faster-RCNN) \cite{ima}        & 98.19 \%                \\ \hline
+\end{tabular}%
+\begin{tablenotes}
+      \small
+      \item Note: The methods were evaluated on the target dataset and the best \texttt{AP50} scores are compared. For the methods marked with *, only the latest score is recorded, which is achieved at the maximum number of  iterations. 
+    \end{tablenotes}
+  \end{threeparttable}
+%}
+\end{center} 
+\end{table}
+\FloatBarrier 
+
+\subsection{Summary of the continual learning results}
+TODO \todo{TODO} 
 
 \subsection{Directions for future work}
 Inspired by Oza et al. \cite{Oza2021} and by the \nameref{objective}, this thesis studied multiple research directions in domain adaptation. Oza et al. summarized a few scenarios, where the cross-domain object detection was not researched as extensively. A few of these scenarios overlap with the thesis goals and these will be discussed in the following section. 
@@ -1758,7 +1819,7 @@ Inspired by Oza et al. \cite{Oza2021} and by the \nameref{objective}, this thesi
 As it was discussed in \nameref{mainExperiments} section, common DA approaches in object detection address either autonomous navigation, or common day-to-day datasets and to the best of the author's knowledge, no DA work has been conducted on  industrial datasets. Additionally, many of these datasets are barely suitable to reflect the domain gap between the real world and the simulations. This thesis attempts to reduce the knowledge gap by utilizing a relatively industrial dataset. However, the target dataset proposed in the \nameref{datasets} section was collected in a typical household setup, where the environment has a stable lighting and background. Therefore, for future work, it is advised to experiment with images from a real industrial plant. \todo{Modify if we manage to obtain real equipment pics} 
 
 \subsubsection{Other detectors}
-As it could be noted from the \nameref{DAobj} section, Faster-RCNN is a de-facto object detector framework used in such problems. Oza et al. \cite{Oza2021} suggested to experiment with single-stage object detectors such as YOLO\cite{Redmon2015a}, SSD\cite{Liu2015}, FCOS\cite{Tian2019} and DETR\cite{Carion2020}. In this thesis, two-stage Faster-RCNN was selected due to its simple plug-and-play compatibility with detectron2\cite{wu2019detectron2} and with the existing DA methods. Additionally, the robustness that single-stage detectors offer is not as critical in this thesis. However, there is a potential of extending the application to video-stream and identify the objects in real-time. As it was discussed in the \nameref{obj_detection_section} section, single-stage detectors offer a significant speed improvement over Faster-RCNN. Upon analyzing the feasibility of implementing other detectors in detectron2 \cite{wu2019detectron2} framework, it was identified that FCOS network has already been adapted for detectron2. Hence, it is believed that among the detectors listed, the FCOS detector will be the most compatible with the setup proposed in Figure \ref{mymodel}. 
+As it could be noted from the \nameref{DAobj} section, Faster-RCNN is a de-facto object detector framework used in such problems. Oza et al. \cite{Oza2021} suggested to experiment with single-stage object detectors such as YOLO \cite{Redmon2015a}, SSD \cite{Liu2015}, FCOS \cite{Tian2019} and DETR \cite{Carion2020}. In this thesis, two-stage Faster-RCNN was selected due to its simple plug-and-play compatibility with Detectron2 \cite{wu2019Detectron2} and with the existing DA methods. Additionally, the robustness that single-stage detectors offer is not as critical in this thesis. However, there is a potential of extending the application to video-stream and identify the objects in real-time. As it was discussed in the \nameref{obj_detection_section} section, single-stage detectors offer a significant speed improvement over Faster-RCNN. Upon analyzing the feasibility of implementing other detectors in Detectron2 \cite{wu2019Detectron2} framework, it was identified that FCOS network has already been adapted for Detectron2. Hence, it is believed that among the detectors listed, the FCOS detector will be the most compatible with the setup proposed in Figure \ref{mymodel}. 
 
 
 \subsubsection{Improved scheduler}
@@ -1766,7 +1827,7 @@ This thesis have only evaluated the cosine annealing scheduler without restarts.
 
 
 \subsubsection{Imbalanced classes}
-Although the classes were distributed fairly well in the source dataset, huge class imbalance was observed in the target T-LESS dataset, as it can be noted from Figure \ref{tless_distribution_real}. The models 1 and 4 overrepresented and are the largest in the target dataset by a tremendous margin. This could be a potential reason for the performance drop as the disproportionately highly represented classes shifted the alignment of the domains in their favor. Oza et al. proposed re-weighting the classes based on their frequency. However, as the target domain does not contain any labels, it becomes a challenging task to track the frequency \cite{Oza2021}. Luckily, the proposed in the \nameref{mainExperiments} section cross-domain adaptation method leverages pseudo-labels. Therefore, re-weighting the classes can be carried out in stages once pseudo-labeling accuracy improves. 
+Although the classes were distributed fairly well in the source dataset, huge class imbalance was observed in the target T-LESS dataset, as it can be noted from Figure \ref{tless_distribution_real}. The models 1 and 4 over-represented and are the largest in the target dataset by a tremendous margin. This could be a potential reason for the performance drop as the disproportionately highly represented classes shifted the alignment of the domains in their favor. Oza et al. proposed re-weighting the classes based on their frequency. However, as the target domain does not contain any labels, it becomes a challenging task to track the frequency \cite{Oza2021}. Luckily, the proposed in the \nameref{mainExperiments} section cross-domain adaptation method leverages pseudo-labels. Therefore, re-weighting the classes can be carried out in stages once pseudo-labeling accuracy improves. 
 
 On the other hand, it is possible to benefit from the class imbalance. Section \ref{cont_learning_results} discusses objects that are harder to detect. Instead of trying to re-weight imbalanced classes, one could provide a higher number of image samples for the objects that can be classified as "harder to detect", while providing a regular number of samples for the objects that are easier to detect.
 
@@ -1775,16 +1836,10 @@ Another practical problem formulated by Oza et al. is that often the images can 
 
 
 \subsubsection{Continual learning}
-Although the \nameref{cont_learning_section} section addressed the catastrophic forgetting problem in a scalable setup, the experiments were only conducted with well-established and possibly outdated methods. Moreover, according to Parisi et al. \cite{Parisi2018}, current state-of-the-art contunual learning models are still far from being able to learn new tasks as efficiently as biological systems and to this day it remains a challenging problem. Additionally, the method proposed raise an additional constraint. Although the model is able to adapt to the dynamically expanding dataset, the model will scale linearly as new classes are added. Within this thesis, the model was tested on up to 30 classes and the resulted model files consumed nearly 2GB of storage and a few linear layers appended will not double the already substantial file size. Nevertheless, for the sake of optimization and as new continual learning solutions emerge, it is important to evaluate them in the given setup and explore new possible solutions. 
+Although the \nameref{cont_learning_section} section addressed the catastrophic forgetting problem in a scalable setup, the experiments were only conducted with well-established and possibly outdated methods. Moreover, according to Parisi et al. \cite{Parisi2018}, current state-of-the-art continual learning models are still far from being able to learn new tasks as efficiently as biological systems and to this day it remains a challenging problem. Additionally, the method proposed raise an additional constraint. Although the model is able to adapt to the dynamically expanding dataset, the model will scale linearly as new classes are added. Within this thesis, the model was tested on up to 30 classes and the resulted model files consumed nearly 2GB of storage and a few linear layers appended will not significantly affect the already high file size. Nevertheless, for the sake of optimization and as new continual learning solutions emerge, it is important to evaluate them in the given setup and explore new possible solutions. 
 
 
-\clearpage
 
-
-\section{Conclusion} 
-In this thesis, a novel cross-domain object detection architecture with continual learning was proposed. The architecture combines the state-of-the-art adaptive  teacher ensembled model and the \todo{write some stuff} 
-
-The codebase for this project will shortly be published to \url{https://github.com/darkhan-s/master-thesis-equipment-detection}. However, the access will be restricted and will be available to certain parties upon request.  
 
 \clearpage
 
@@ -1802,5 +1857,8 @@ The codebase for this project will shortly be published to \url{https://github.c
 \thesisappendix
 
 \section{Appendices}
-TODO
+\label{appendix} 
+\subsection{Architecture}
+\lstinputlisting[label = {app:architecture}, caption = {The proposed architecture of the added elements (pseudo-code)}, language=Python, frame=single, keepspaces=true, morekeywords={conv1, bn1, conv2, bn2, conv3, bn3, classifier, leaky_relu, fc_1, leaky_relu_1, dropout_1, leaky_relu_2, fc_2, dropout_2, leaky_relu_3, consistency_loss, cls_score, bbox_pred, cls_score_extra_classes, bbox_pred_extra_classes, RCNN_Image_DA, RCNN_Instance_DA, box_predictor, FastRCNNExtendedOutputLayers}, keywordstyle=\color{blue}, numbers=left, breaklines=true]
+{architecture.py}
 \end{document}
