@@ -17,12 +17,19 @@ from detectron2.engine import DefaultPredictor
 from detectron2.utils.visualizer import Visualizer
 
 from adapteacher import add_ateacher_config
-from adapteacher.engine.trainer import ATeacherTrainer, BaselineTrainer
+from adapteacher.engine.trainer import ATeacherTrainer
 
 # hacky way to register
 from adapteacher.modeling.meta_arch.rcnn import DAobjTwoStagePseudoLabGeneralizedRCNN
-from adapteacher.modeling.meta_arch.vgg import build_vgg_backbone  # noqa
 from adapteacher.modeling.proposal_generator.rpn import PseudoLabRPN
+
+from detectron2.modeling.backbone import (
+    ResNet,
+    Backbone,
+    build_resnet_backbone,
+    BACKBONE_REGISTRY
+)
+
 from adapteacher.modeling.roi_heads.roi_heads import StandardROIHeadsPseudoLab
 import adapteacher.data.datasets.builtin
 from adapteacher.data.datasets.builtin import register_all_tless
@@ -39,15 +46,15 @@ class Metadata:
     def get(self, _):
         return TLESS_CLASS_NAMES #your class labels
 
-register_all_tless("/scratch/project_2005695/PyTorch-CycleGAN/datasets/", debug_limit = 0, class_limit = (0,20))
-    
 
 class Detector:
 
     def __init__(self):
 
         # set model and test set
-        self.modelpath = 'faster_rcnn_R101_cross_tless.yaml'
+        self.modelpath = 'faster_rcnn_R101_cross_tless_full.yaml'
+        # self.weights_path = 'output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-origScheduler/model_best.pth'
+        self.weights_path = 'output-original/model_0044999.pth'
 
         # obtain detectron2's default config
         self.cfg = self.setup()
@@ -63,23 +70,21 @@ class Detector:
         cfg.merge_from_file('configs/' + self.modelpath)
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5 
         cfg.MODEL.DEVICE = 'cpu' 
-        #cfg.MODEL.WEIGHTS = 'output-stable/model_best.pth'
-        cfg.MODEL.WEIGHTS = 'output-mymodel-classes-0-20/model_best.pth'
-        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 20
+        cfg.MODEL.WEIGHTS = self.weights_path
+        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 30
         cfg.freeze()
         
         print('Model cfg is all set', file=sys.stdout)
         return cfg
 
     def load_model(self):
-        if self.cfg.SEMISUPNET.Trainer == "ateacher":
-            Trainer = ATeacherTrainer
-        elif self.cfg.SEMISUPNET.Trainer == "baseline":
-            Trainer = BaselineTrainer
-        else:
-            raise ValueError("Trainer Name is not found.")
+        
+        class_names = self.cfg.MODEL.ROI_HEADS.OLD_CLASSES + list(set(self.cfg.MODEL.ROI_HEADS.NEW_CLASSES) - set(self.cfg.MODEL.ROI_HEADS.OLD_CLASSES))
+        TLESS_CLASS_NAMES = class_names
+        register_all_tless("/scratch/project_2005695/PyTorch-CycleGAN/datasets/", class_names, debug_limit = self.cfg.DATALOADER.DEBUG_LIMIT_INPUT)
 
         if self.cfg.SEMISUPNET.Trainer == "ateacher":
+            Trainer = ATeacherTrainer
             model = Trainer.build_model(self.cfg)
             
             model_teacher = Trainer.build_model(self.cfg)
@@ -87,20 +92,15 @@ class Detector:
 
             DetectionCheckpointer(
                 ensem_ts_model, save_dir=self.cfg.OUTPUT_DIR
-            #).load('output-original/model_0029999.pth')
-            ).load('output-mymodel-classes-0-20/model_best.pth')
+            ).load(self.weights_path)
             self.model = ensem_ts_model.modelTeacher
             
-
+            self.model.eval()
+            
+            print('Model .pth is all set', file=sys.stdout)
         else:
-            self.model = Trainer.build_model(self.cfg)
-            DetectionCheckpointer(self.model, save_dir=self.cfg.OUTPUT_DIR).load(
-            #    'output/model_0004999.pth'
-            'output-mymodel-classes-0-20/model_best.pth'
-            )
-        self.model.eval()
-        
-        print('Model .pth is all set', file=sys.stdout)
+            raise ValueError("Trainer Name is not found.")
+      
         #im = cv2.imread("/scratch/project_2005695/PyTorch-CycleGAN/datasets/TLessRendered/JPEGImages/000003_000001.jpg")
 
         #results = predict(im, finalModel)

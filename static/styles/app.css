@@ -6,11 +6,12 @@ nav{
     height: 90px;
     color: white;
     font-size: 1.3em;
+    width: auto;
     /* background: #f34646; */
 }
 
 body{
-    margin: 0;
+    margin-bottom: 100px;
     padding: 0;
 }
 
@@ -50,19 +51,19 @@ form{
     height: 200px;
 }
 form input{
-    margin: 20px;
+    margin: 10px;
 }
 form input:last-child{
-    padding: 8px 30px;
+    padding: 8px 20px;
     font-size: 1.1em;
     background: #ff3300;
     color: white;
     border: 0px;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 .pytorch{
-    width: 120px;
+    width: 60px;
 }
 .body p2{
     color: #ff3300;
