@@ -1,0 +1,119 @@
+
+\section{Conclusion} 
+This section summarizes the results of the thesis. First, the results of the proposed cross-domain object detection approach is presented. Next, the subsequent section discusses the results of the introduced continual learning approach. Finally, this section discusses the directions for future work. 
+
+The codebase for this project will shortly be published to \url{https://github.com/darkhan-s/master-thesis-equipment-detection}. However, the access will be restricted and will be available to certain parties upon request.  
+\todo{revise after all done or if the real equipment is available} 
+
+\subsection{Summary of the DA results}
+
+This thesis evaluates the performance of multiple object detection approaches on a custom T-LESS dataset, which includes images of thirty industry-relevant equipment parts in two different domains. The source domain consists of rendered labeled images from the simulated environment, while the target domain consists of a smaller subset of real unlabeled images. The results of the performances after running the tests with the  standard Faster-RCNN object detector suggested that the distribution between the domains differs, which leads to a significant performance drop. 
+
+In order to address the domain shift problem, several existing domain adaptation methods were suggested. Upon analyzing these methods, this thesis proposed a novel cross-domain object detection architecture. The architecture is primarily based on the Adaptive teacher implementation, which aims to align two domains by means of mean teacher training, adversarial feature learning and pseudo-labeling. In this thesis, multiple versions of the Adaptive teacher model have been evaluated. First, the original LR scheduler has been replaced with the cosine annealing LR scheduler without restarts. Consequently, additional augmentation techniques have been evaluated. Finally, inspired by the two-level adversarial feature learning approach, the Adaptive teacher model has been modified to include two additional components - instance-level domain alignment and consistency loss. Instance-level alignment was used to produce domain invariant features in the proposed regions of the Faster-RCNN network, which is the base detector of the Adaptive teacher model. On the other hand, the consistency loss term was used to minimize the difference between the outputs of the image- and instance-level alignment losses. The discussed modifications have been extensively evaluated on the custom T-LESS dataset using \texttt{AP50}, which is based on the traditional PASCAL VOC 2012 metrics. The summarized results are presented in Table \ref{summary_table_1}. 
+
+The resulted comparison suggests that the original Adaptive teacher network performs the best with $max$ (\texttt{AP50}) = 71.39 \%, followed by the original model with the cosine scheduler and two additional augmentations($max$ (\texttt{AP50}) = 70.53 \%).  However, the proposed architecture with instance-level alignment and consistency regularization shows competitive results ($max$ (\texttt{AP50}) = 69.57 \%) almost twice as faster compared to the original model. The optimal value of $\lambda$ has been identified at  $\lambda = 0.7$. Nevertheless, more additional experiments with the hyperparameters are needed to achieve the best results. 
+
+\begin{table}
+\centering
+\caption{The summary of the DA methods evaluated in this thesis}\label{summary_table_1} 
+\begin{tabularx}{0.95\textwidth}{|X|X|X|X|} 
+        \hline
+        \textbf{Method} & \textbf{Best result, iteration} & \textbf{Best AP50, \%} & \textbf{Notes} \\
+        \hline
+        Faster-RCNN \cite{ima} * & 20 000 & 13.63 \% & \multicolumn{1}{m{3cm}|}{The model was trained on source domain and evaluated on target domain} \\ 
+        \hline
+        Cycle-GAN \cite{Zhu2017} * & N/A & N/A & \multicolumn{1}{m{3cm}|}{No metrics were recorded due to poor performance}\\ 
+        \hline
+        D-Adapt \cite{Jiang2021} * & 30 000 & 64.32 \% & \multicolumn{1}{m{3cm}|}{\todo[inline]{check} } \\ 
+        \hline
+        Adaptive teacher (AT) \cite{Li2021} without modifications & 30 999 & \uline{71.39 \%} & \multicolumn{1}{m{3cm}|}{} \\ 
+        \hline
+        AT with cosine scheduler & 24 999 & 62.49 \% & \multicolumn{1}{m{3cm}|}{Cosine scheduler only} \\ 
+        \hline
+        AT with extra augmentations & 18.999 & 70.53 \% & \multicolumn{1}{m{3cm}|}{Cosine scheduler + Augmentations} \\ 
+        \hline
+        AT with instance-level adaptation and consistency regularization (= \textbf{Custom AT}) & 20 999 & 62.87 \% & \multicolumn{1}{m{3cm}|}{Cosine scheduler + Augmentations + consistency regularization with $\lambda = 0.7$}  \\ 
+        \hline
+        Custom AT with original scheduler & \uline{14 999} & 69.57 \% & \multicolumn{1}{m{3cm}|}{Original scheduler + Augmentations + consistency regularization with $\lambda = 0.7$ } \\ 
+        \hline
+        Oracle (Faster-RCNN) \cite{ima} * & 20 000 & 98.19 \% & \multicolumn{1}{m{3cm}|}{The model was trained on target images and evaluated on the target domain} \\
+        \hline
+\end{tabularx}
+\begin{tablenotes}
+      \small
+      \item Note: The methods were evaluated on the target dataset and the best \texttt{AP50} scores are compared. For the methods marked with *, only the latest score is recorded, which is achieved at the maximum number of  iterations. 
+    \end{tablenotes}
+\end{table}
+\FloatBarrier 
+
+\subsection{Summary of the continual learning results}
+
+In order to address the scalability and to enable the model to learn new objects, this thesis has additionally proposed a continual learning approach. The detector head of the custom Adaptive teacher model has been modified to solve the catastrophic forgetting problem, which happens when older knowledge is replaced by new data. The model attempts to learn new data in a lifelong manner using an continuous network expansion, which appends a new classifier and a regressor to the original detector head every time a new class is added. Additionally, to preserve learned knowledge of the older classes, the learning rate of the original detector head modules is regularized to avoid the catastrophic forgetting phenomenon, while enabling the model to learn new patterns of data. Table \ref{summary_table_2} presents the summarized results of the described continual learning approach.  
+
+
+\begin{table}
+\centering
+\caption{The summary of the continual learning approach}\label{summary_table_2} 
+\begin{tabularx}{\textwidth}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|X|} 
+ \hline
+\multicolumn{4}{c}{\textbf{Results for continual learning on one class}} \\ \hline
+\textbf{Method} & \textbf{Best result, iteration} & \textbf{AP50} & \textbf{Notes} \\
+\hline
+Single class training & \textbf{6999} & 56.10 \% & \multicolumn{1}{m{9cm}|}{Given the \uline{images} for the class \texttt{Model 21} $\rightarrow$ predict \texttt{Model 21}.} \\ 
+\hline
+Training from scratch  & 26999 & \textbf{59.97} \% & \multicolumn{1}{m{9cm}|}{Given the \uline{images} for the classes \texttt{Model 1..Model 30} $\rightarrow$ predict \texttt{Model 21}.} \\ 
+\hline
+Continual learning & 19999 (6000*) & 36.18 \% & \multicolumn{1}{m{9cm}|}{Given the \uline{weights} for the classes  \texttt{Model 1..Model 20} $\rightarrow$ predict \texttt{Model 21} (continuously).} \\ 
+\hline  
+\end{tabularx} 
+\begin{tabularx}{\textwidth}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|X|} 
+\multicolumn{4}{c}{\textbf{Average results for continual learning on 5 classes 21-25}.} \\ 
+\hline
+Single class training  & \textbf{5999} & 63.97 \% & \multicolumn{1}{m{9cm}|}{Given the \uline{images} for the classes \texttt{Model 21..Model 25} $\rightarrow$ predict \texttt{Model 21..Model 25}. The average results for the  separate classes are combined.} \\ 
+\hline
+Training from scratch & 19999 & \textbf{69.66 \%} & \multicolumn{1}{m{9cm}|}{Given the \uline{images} for the class \texttt{Model 1..Model 30} $\rightarrow$ predict \texttt{Model 21..Model 25}. Results filtered and the average value among the classes \texttt{Model 21..Model 25} is collected.} \\ 
+\hline
+Continual learning & 16999 (6000*) & 43.87 \% & \multicolumn{1}{m{9cm}|}{Given the \uline{weights} for the classes \texttt{Model 1..Model 20} $\rightarrow$ predict \texttt{Model 21..Model 25} (continuously). } \\ 
+\hline      
+\end{tabularx}
+\begin{tablenotes}
+\small
+\item Note: 95 \% of the \texttt{AP50} value marked by * is achieved within about 6000 iterations.
+\end{tablenotes}
+\end{table}
+\FloatBarrier 
+
+\subsection{Directions for future work}
+Inspired by Oza et al. \cite{Oza2021} and by the \nameref{objective}, this thesis studied multiple research directions in domain adaptation. Oza et al. summarized a few scenarios, where the cross-domain object detection was not researched as extensively. A few of these scenarios overlap with the thesis goals and these will be discussed in the following section. 
+
+\subsubsection{Other applications and real world datasets}
+As it was discussed in \nameref{mainExperiments} section, common DA approaches in object detection address either autonomous navigation, or common day-to-day datasets and to the best of the author's knowledge, no DA work has been conducted on  industrial datasets. Additionally, many of these datasets are barely suitable to reflect the domain gap between the real world and the simulations. This thesis attempts to reduce the knowledge gap by utilizing an industry-relevant dataset. However, the target dataset proposed in the \nameref{datasets} section was collected in a typical household setup, where the environment has a stable lighting and background. Therefore, for future work, it is advised to experiment with images from a real industrial plant. \todo{Modify if we manage to obtain real equipment pics} 
+
+\subsubsection{Other detectors}
+As it could be noted from the \nameref{DAobj} section, Faster-RCNN is a de-facto object detector framework used in such problems. Oza et al. \cite{Oza2021} suggested to experiment with single-stage object detectors such as YOLO \cite{Redmon2015a}, SSD \cite{Liu2015}, FCOS \cite{Tian2019} and DETR \cite{Carion2020}. In this thesis, two-stage Faster-RCNN was selected due to its simple plug-and-play compatibility with Detectron2 \cite{wu2019Detectron2} and with the existing DA methods. Additionally, the robustness that single-stage detectors offer is not as critical in this thesis. However, there is a potential of extending the application to video-stream and identify the objects in real-time. As it was discussed in the \nameref{obj_detection_section} section, single-stage detectors offer a significant speed improvement over Faster-RCNN. Upon analyzing the feasibility of implementing other detectors in Detectron2 \cite{wu2019Detectron2} framework, it was identified that FCOS network has already been adapted for use in Detectron2. Hence, it is believed that among the detectors listed, the FCOS detector will be the most compatible with the model proposed in Figure \ref{mymodel}. 
+
+
+\subsubsection{Improved scheduler}
+This thesis has only evaluated the cosine annealing scheduler without restarts. One possible way to improve the results presented in the \nameref{scheduler_section} could be achieved by implementing the restart cycles introduced in the original paper by Loschilov et al. \cite{Loshchilov2016}.   
+
+
+\subsubsection{Imbalanced classes}
+Although the classes were distributed fairly well in the source dataset, huge class imbalance was observed in the target T-LESS dataset, as it can be noted from Figure \ref{tless_distribution_real}. The models 1 to 4 over-represented and are the largest in the target dataset by a tremendous margin. This could be a potential reason for the performance drop as the disproportionately highly represented classes shifted the alignment of the domains in their favor. Even though the class-imbalance problem has been briefly discussed in Figure \ref{myModel_withOrigSched_grouped}, more experiments with higher class imbalance are needed.
+
+Oza et al. proposed re-weighting the classes based on their frequency. However, as the target domain does not contain any labels, it becomes a challenging task to track the frequency \cite{Oza2021}. Luckily, the proposed in the \nameref{mainExperiments} section cross-domain adaptation method leverages pseudo-labels. Therefore, re-weighting the classes can be carried out in stages as the pseudo-labeling accuracy improves. 
+
+On the other hand, it is possible to benefit from the class imbalance. Section \ref{cont_learning_results} discusses objects that are harder to detect. Instead of trying to re-weight imbalanced classes, one could provide a higher number of image samples for the objects that can be classified as "hard", while providing a regular number of samples for the objects that are easier to detect.
+
+\subsubsection{Multi-source adaptation}
+Another practical problem formulated by Oza et al. \cite{Oza2021} is that often the images can be collected from multiple domains. In the scope of the thesis, this could imply collecting datasets from multiple plants with varying environmental conditions, such as rainy weather, snow, daylight and nighttime. These conditions will dramatically impact the detection results. Therefore, more experiments should be carried out before releasing the application into use. One suggested approach to this problem could be carried out by using even more sophisticated augmentations such as \cite{imgaug} to simulate such environments. 
+
+
+\subsubsection{Continual learning}
+In Figure \ref{myModel_continuous_experiment_2}, the performance of the proposed continual learning approach has been analyzed for five different classes and their average has been calculated. However, to obtain a better statistical average, more experiments have to be conducted on a dataset with a larger pool of objects. 
+
+Although the \nameref{cont_learning_section} section addressed the catastrophic forgetting problem in a scalable setup, the experiments were only conducted with well-established and possibly outdated methods. Moreover, according to Parisi et al. \cite{Parisi2018}, current state-of-the-art continual learning models are still far from being able to learn new tasks as efficiently as biological systems and to this day it remains a challenging problem. Even though the model is able to adapt to the dynamically expanding dataset, the model will scale linearly as new classes are added. Within this thesis, the model was tested on up to 30 classes and the resulted model files consumed nearly 2GB of storage and a few linear layers appended will not significantly affect the already spacious file size. Nevertheless, for the sake of optimization and as new continual learning solutions emerge, it is important to evaluate them in the given setup and explore new possible solutions. 
+
+
+
+
+\clearpage

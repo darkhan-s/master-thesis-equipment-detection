@@ -1,8 +1,8 @@
 \babel@toc {english}{}\relax 
 \contentsline {section}{Abstract{} }{3}{section*.1}%
-\contentsline {section}{Preface}{4}{section*.3}%
-\contentsline {section}{Contents}{5}{section*.4}%
-\contentsline {section}{Symbols and abbreviations}{11}{section*.8}%
+\contentsline {section}{Preface}{4}{section*.2}%
+\contentsline {section}{Contents}{5}{section*.3}%
+\contentsline {section}{Symbols and abbreviations}{11}{section*.7}%
 \contentsline {section}{\numberline {1}Introduction}{14}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Problem statement}{14}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Thesis objective}{15}{subsection.1.2}%
@@ -60,5 +60,5 @@
 \contentsline {subsubsection}{\numberline {5.3.4}Imbalanced classes}{85}{subsubsection.5.3.4}%
 \contentsline {subsubsection}{\numberline {5.3.5}Multi-source adaptation}{85}{subsubsection.5.3.5}%
 \contentsline {subsubsection}{\numberline {5.3.6}Continual learning}{85}{subsubsection.5.3.6}%
-\contentsline {section}{\numberline {A}Appendices}{93}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Architecture}{93}{subsection.A.1}%
+\contentsline {section}{\numberline {A}Appendices}{94}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Architecture}{94}{subsection.A.1}%

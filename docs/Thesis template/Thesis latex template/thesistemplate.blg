@@ -1,6 +1,16 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesistemplate.aux
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+A level-1 auxiliary file: 01_introduction.aux
+Reallocating 'name_of_file' (item size: 1) to 18 items.
+A level-1 auxiliary file: 02_background.aux
+Reallocating 'name_of_file' (item size: 1) to 19 items.
+A level-1 auxiliary file: 03_methodology.aux
+Reallocating 'name_of_file' (item size: 1) to 15 items.
+A level-1 auxiliary file: 04_results.aux
+Reallocating 'name_of_file' (item size: 1) to 18 items.
+A level-1 auxiliary file: 05_conclusion.aux
 Reallocating 'name_of_file' (item size: 1) to 7 items.
 The style file: ieeetr.bst
 Reallocating 'name_of_file' (item size: 1) to 19 items.
@@ -80,7 +90,7 @@ Warning--empty journal in Loshchilov2016
 Warning--empty journal in Xu2020
 You've used 94 entries,
             1876 wiz_defined-function locations,
-            924 strings with 20750 characters,
+            929 strings with 20835 characters,
 and the built_in function-call counts, 19486 in all, are:
 = -- 1400
 > -- 1512
