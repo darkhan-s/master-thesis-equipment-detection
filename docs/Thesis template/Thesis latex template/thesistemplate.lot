@@ -1,9 +1,9 @@
 \babel@toc {english}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Overview of object detectors \cite {Zaidi2021}. \relax }}{33}{table.caption.34}%
-\contentsline {table}{\numberline {2}{\ignorespaces Definition of confusion matrix and some of its terms, adapted from \cite {mAp_blog}.\relax }}{53}{table.caption.59}%
-\contentsline {table}{\numberline {3}{\ignorespaces Experiments with a simple Faster-RCNN model. \relax }}{56}{table.caption.62}%
+\contentsline {table}{\numberline {1}{\ignorespaces Overview of object detectors \cite {Zaidi2021}. \relax }}{33}{table.caption.33}%
+\contentsline {table}{\numberline {2}{\ignorespaces Definition of confusion matrix and some of its terms, adapted from \cite {mAp_blog}.\relax }}{54}{table.caption.59}%
+\contentsline {table}{\numberline {3}{\ignorespaces Experiments with a simple Faster-RCNN model.\relax }}{56}{table.caption.62}%
 \contentsline {table}{\numberline {4}{\ignorespaces Results of the experiments with a D-Adapt based method.\relax }}{57}{table.caption.63}%
-\contentsline {table}{\numberline {5}{\ignorespaces Results of the experiments with Cycle-GAN\relax }}{57}{table.caption.64}%
-\contentsline {table}{\numberline {6}{\ignorespaces The naive fine-tuning results\relax }}{64}{table.caption.70}%
-\contentsline {table}{\numberline {7}{\ignorespaces The summary of the DA methods evaluated in this thesis\relax }}{82}{table.caption.87}%
-\contentsline {table}{\numberline {8}{\ignorespaces The summary of the continual learning approach\relax }}{83}{table.caption.91}%
+\contentsline {table}{\numberline {5}{\ignorespaces Results of the experiments with Cycle-GAN.\relax }}{57}{table.caption.64}%
+\contentsline {table}{\numberline {6}{\ignorespaces The naive fine-tuning results.\relax }}{64}{table.caption.70}%
+\contentsline {table}{\numberline {7}{\ignorespaces The summary of the DA methods evaluated in this thesis.\relax }}{81}{table.caption.86}%
+\contentsline {table}{\numberline {8}{\ignorespaces The summary of the continual learning approach.\relax }}{82}{table.caption.87}%

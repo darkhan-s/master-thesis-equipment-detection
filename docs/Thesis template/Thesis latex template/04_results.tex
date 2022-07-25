@@ -21,7 +21,7 @@ First set of experiments was conducted in accordance with the \nameref{ensemExp}
 	\begin{center}
 		\includegraphics[width=16cm]{./loss&AP50_original.jpg}
 	\end{center}
-	\caption{Results of the original Adaptive teacher model evaluated on the custom T-LESS dataset without any modifications}
+	\caption{Results of the original Adaptive teacher model evaluated on the custom T-LESS dataset without any modifications.}
 	\begin{center}
 		\label{original_experiment}
 	\end{center}
@@ -35,7 +35,7 @@ Theoretically, this setup would have allowed find better gradients and reduce ov
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_scheduler.jpg}
 	\end{center}
-	\caption{a)\texttt{AP50} results of the original model and b) \texttt{AP50} results of the model with a cosine scheduler}
+	\caption{a)\texttt{AP50} results of the original model and b) \texttt{AP50} results of the model with a cosine scheduler.}
 	\begin{center}
 		\label{comparison_1}
 	\end{center}
@@ -50,7 +50,7 @@ Following the ideas proposed in Figure \ref{newAugmentations}, an identical mode
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_augmentation.jpg}
 	\end{center}
-	\caption{a)\texttt{AP50} from the model with a modified scheduler only and b) \texttt{AP50} results of the model with a cosine scheduler and two additional strong augmentations}
+	\caption{a)\texttt{AP50} from the model with a modified scheduler only and b) \texttt{AP50} results of the model with a cosine scheduler and two additional strong augmentations.}
 	\begin{center}
 		\label{augmentation_experiment}
 	\end{center}
@@ -67,7 +67,7 @@ The following set of experiments evaluates the custom model presented in Figure 
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_Augm_consistency.jpg}
 	\end{center}
-	\caption{a)\texttt{AP50} from the model with a cosine  scheduler and two extra augmentations against b) \texttt{AP50} from the model with a cosine scheduler, two additional augmentations and consistency regularization}
+	\caption{a)\texttt{AP50} from the model with a cosine  scheduler and two extra augmentations against b) \texttt{AP50} from the model with a cosine scheduler, two additional augmentations and consistency regularization.}
 	\begin{center}
 		\label{myModel_experiment}
 	\end{center}
@@ -82,7 +82,7 @@ Figure \ref{myModel_constloss_total} illustrates the instance-level loss and con
 	\begin{center}
 		\includegraphics[width=14cm]{./consistency_loss.jpg}
 	\end{center}
-	\caption{a) The total loss calculation is independent from consistency loss and the instance-level loss terms b) The total loss is proportional to the consistency loss and the instance-level loss terms}
+	\caption{a) The total loss calculation is independent from consistency loss and the instance-level loss terms b) The total loss is proportional to the consistency loss and the instance-level loss terms.}
 	\begin{center}
 		\label{myModel_constloss_total}
 	\end{center}
@@ -95,7 +95,7 @@ A small-scale set of experiments has been additionally carried out in order to i
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_varying_lambda.jpg}
 	\end{center}
-	\caption{\texttt{AP50} values for varying weight parameters of $\lambda_{\text {consist }}$, $\lambda_{\text {ins }}$ and \texttt{BASE\textunderscore LR}}
+	\caption{\texttt{AP50} values for varying weight parameters of $\lambda_{\text {consist }}$, $\lambda_{\text {ins }}$ and \texttt{BASE\textunderscore LR}.}
 	\begin{center}
 		\label{myModel_varying_params}
 	\end{center}
@@ -109,7 +109,7 @@ In order to verify the performance of the components, one last experiment evalua
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_myModel_origScheduler.jpg}
 	\end{center}
-	\caption{a) The custom model with the original scheduler b) The custom model with the cosine scheduler c) Original model without any modifications}
+	\caption{a) The custom model with the original scheduler b) The custom model with the cosine scheduler c) Original model without any modifications.}
 	\begin{center}
 		\label{myModel_withOrigSched}
 	\end{center}
@@ -118,12 +118,13 @@ In order to verify the performance of the components, one last experiment evalua
 
 According to the results from Figure \ref{myModel_withOrigSched}, the model with regularization and custom augmentation shows competitive results compared to the original Adaptive teacher model with $max$ (\texttt{AP50}) = 69.57\%, while also peaking significantly earlier (>15 000 iterations faster).  
 
-Additionally the obtained results were filtered out and the average of the first four classes \texttt{Model 1..Model 4} were compared to the average of the remaining classes \texttt{Model 5..Model 30}. Essentially, this step has been carried out to verify whether the higher distribution of certain classes affects the model performance (see Figure \ref{tless_distribution_real}). The results can be found in Figure \ref{myModel_withOrigSched_grouped}.     
+Additionally the obtained results were filtered out and the average of the first four classes \texttt{Model 1..Model 4} were compared to the average of the remaining classes \texttt{Model 5..Model 30}. Essentially, this step has been carried out to verify whether the higher distribution of certain classes affects the model performance (see Figure \ref{tless_distribution_real}). The results can be found in Figure \ref{myModel_withOrigSched_grouped}. 
+    
 \begin{figure}[htb]
 	\begin{center}
 	\includegraphics[width=14cm]{./AP50_per_class_group.jpg}
 	\end{center}
-	\caption{a)\texttt{AP50}}
+	\caption{a)\texttt{AP50}.}
 	\begin{center}
 	\label{myModel_withOrigSched_grouped}
 	\end{center}
@@ -150,7 +151,7 @@ As it was introduced in Figure \ref{tless_distribution_rend}, the entire T-LESS 
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_continual_21.jpg}
 	\end{center}
-	\caption{The \texttt{AP50} results for class \texttt{Model 21} evaluated on different networks}
+	\caption{The \texttt{AP50} results for class \texttt{Model 21} evaluated on different networks.}
 	\begin{center}
 		\label{myModel_continuous_experiment_1}
 	\end{center}
@@ -162,7 +163,7 @@ As it was introduced in Figure \ref{tless_distribution_rend}, the entire T-LESS 
 	\begin{center}
 		\includegraphics[width=14cm]{./AP50_continual_21_allClasses.jpg}
 	\end{center}
-	\caption{a)The total continual \texttt{AP50} results evaluated on the classes (\texttt{Model 1..Model 21}) b) The total \texttt{AP50} results for the }
+	\caption{a)The total continual \texttt{AP50} results evaluated on the classes (\texttt{Model 1..Model 21}) b) The total \texttt{AP50} results for the .}
 	\begin{center}
 	\label{myModel_continuous_experiment_3}
 	\end{center}
@@ -175,7 +176,7 @@ The model trained purely on the \texttt{Model 21} (Figure \ref{myModel_continuou
 	\begin{center}
 		\includegraphics[width=14cm]{./continualAP_average.jpg}
 	\end{center}
-	\caption{a)The average \texttt{AP50} value for continual learning on classes \texttt{Model 21..Model 25} given the model trained on classes \texttt{Model 1..Model 20}  b)The average \texttt{AP50} value for classes \texttt{Model 21..Model 25} extracted from the regular model trained on classes \texttt{Model 1..Model 30} c) The \texttt{AP50} value for each of the classes \texttt{Model 21..Model 25} when trained only on its own. The values are then averaged out for all 5 classes }
+	\caption{a)The average \texttt{AP50} value for continual learning on classes \texttt{Model 21..Model 25} given the model trained on classes \texttt{Model 1..Model 20}  b)The average \texttt{AP50} value for classes \texttt{Model 21..Model 25} extracted from the regular model trained on classes \texttt{Model 1..Model 30} c) The \texttt{AP50} value for each of the classes \texttt{Model 21..Model 25} when trained only on its own. The values are then averaged out for all 5 classes.}
 	\begin{center}	\label{myModel_continuous_experiment_2}
 	\end{center}
 \end{figure}
@@ -188,7 +189,6 @@ Although the method seems to fail in learning a new class efficiently, it has pr
 \subsection{Deployment results}
 In order to showcase the performance, a simple web app was prepared. The app was hosted on a local server and it leverages Flask API to attach the detector app to a user interface. The app utilizes the model, which was presented in Figure \ref{myModel_withOrigSched} due to its relatively good performance and the fastest training speed. The prototype of the UI is presented in Figure \ref{demo}. 
 
-\todo{update the picture} 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=14cm]{./demo.png}
@@ -199,6 +199,6 @@ In order to showcase the performance, a simple web app was prepared. The app was
 	\end{center}
 \end{figure}
 
-The app sends \texttt{POST} requests to upload an image to localhost via Flask API. The image is then processed in the model and returned to the user interface. The complete app runs on Python 3.9, while the model additionally utilizes packages and frameworks such as Pytorch 1.10.1, CUDA 11.3 and Detectron2 v0.6. For model training, Nvidia A100 GPU units were used. The hardware and the computing resources were provided by CSC - Finnish IT Center for Science. For model interference, a standard CPU node was used. 
+The app sends \texttt{POST} requests to upload an image to localhost via Flask API. The uploaded image is fed to the model and returned to the user interface after running inference on the CPU node. The complete app runs on Python 3.9, while the model additionally utilizes packages and frameworks such as Pytorch 1.10.1, CUDA 11.3 and Detectron2 v0.6. For model training, the app leveraged  Nvidia A100 units. The hardware and the computing resources were provided by CSC - Finnish IT Center for Science. 
 
 \clearpage

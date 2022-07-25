@@ -13,7 +13,7 @@ One of the objectives of this thesis was to implement an identification system u
     \subfloat{{\includegraphics[width=6cm]{./toolbox.png} }}%
     \qquad
     \subfloat{{\includegraphics[width=6cm]{./model.png} }}%
-    \caption{Example of the rendered image of an arbitrary model}\label{navisworks}%
+    \caption{Example of the rendered image of an arbitrary model.}\label{navisworks}%
 \end{figure}
 \FloatBarrier
 
@@ -35,26 +35,26 @@ Ultimately, it was concluded that the dataset named Texture-LESS(T-LESS)  \cite{
 \end{figure}
 \FloatBarrier
 
-The names of the object classes presented in T-LESS, although undisclosed, are irrelevant to this thesis. Therefore, here and in the subsequent sections, when referred to individually, the classes will be named as "Model $N$". Additionally, in the experiments, the datasets with images from the simulator and the images from the real environment setup will be mainly referred to as "source" and "target" datasets, respectively. The images from the source dataset are saved in \texttt{.jpg} format, while the real images are stored as \texttt{.png} files, similarly as in the original T-LESS \cite{hodan2017tless}. Furthermore, for this work, the source dataset will be split in 85\%/15\%  proportion into the training and testing subsets. The distribution of the classes in the source dataset is presented in Figure \ref{tless_distribution_rend}.  
+The names of the object classes presented in T-LESS, although undisclosed, are irrelevant to this thesis. Therefore, here and in the subsequent sections, when referred to individually, the classes will be named as "\texttt{Model $N$}". Additionally, in the experiments, the datasets with images from the simulator and the images from the real environment setup will be mainly referred to as "source" and "target" datasets, respectively. The images from the source dataset are saved in \texttt{.jpg} format, while the real images are stored as \texttt{.png} files, similarly as in the original T-LESS \cite{hodan2017tless} dataset. Figure \ref{tless_distribution_rend} illustrates the distribution of the instances by classes in the source dataset.  
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=14cm]{./rendered_distribution.png}
 	\end{center}
-	\caption{Distribution of the classes in the rendered subset of T-LESS dataset. 42 500 and 7 500 training and testing images, respectively. Total number of object instances: 720443}
+	\caption{Distribution of the classes in the rendered subset of T-LESS dataset. Total number of images: 42 500. Total number of object instances: 661598.}
 	\begin{center}
 		\label{tless_distribution_rend}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-On the countrary, real images are only used for validation and their distribution by class is shown in Figure \ref{tless_distribution_real}. The reasons for this will be discussed in later sections. 
+As can be derived from the \nameref{objective}, the detection accuracy on the source dataset is irrelevant in this thesis. The primary goal is to evaluate the performance for the real images. Therefore, for this work, the source dataset is not divided into the training and testing subsets. On the other hand, the target dataset will be split in 85\%/15\%  proportion. The distribution of classes by instances is presented in Figure \ref{tless_distribution_real} for both subsets.   
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=14cm]{./real_distribution.png}
 	\end{center}
-	\caption{Distribution of the classes in the real subset of T-LESS dataset. Total number of object instances: 10362}
+	\caption{Distribution of the classes in the real subset of T-LESS dataset. 8 568 and 1 512 (85/15 \%) training and testing images, respectively. Total number of object instances: 58845 training and 10362 validation instances.}
 	\begin{center}
 		\label{tless_distribution_real}
 	\end{center}
@@ -126,7 +126,7 @@ For the initial experiments, a Faster-RCNN network with a ResNet backbone was us
 
 
 \begin{table}[htb]
-	\captionof{table}{Experiments with a simple Faster-RCNN model. }
+	\captionof{table}{Experiments with a simple Faster-RCNN model.}
 	\begin{center}
 		\includegraphics[width=14cm]{./initialExp.png}
 	\end{center}
@@ -141,7 +141,7 @@ As it can be concluded, there is a significant performance drop when the environ
 \subsubsection{Experiments with classical domain adaptive methods}
 To overcome the domain shift phenomenon, it was proposed to experiment with domain adaptation applications. For these experiments, two existing open-source methods were suggested. 
 
-In the initial study, a model based on decoupled adaptation for cross-domain object detection \cite{Jiang2021} was tested. The model introduced by Jiang et al. essentially proposes an \nameref{adv_approach} approach, where a GRL is applied to the classifier and the box regressor in a decoupled way, i.e. the problem is split into two sub-problems to avoid them from interfering with each other. According to Jiang et al., this could improve the discriminability of the detector. Readers can refer to the original paper \cite{Jiang2021} for more information. The results of the experiments are outlined in the Table \ref{dadapt}.
+In the initial study, a model based on decoupled adaptation for cross-domain object detection \cite{Jiang2021} was tested. The model introduced by Jiang et al. essentially proposes an \nameref{adv_approach} approach, where a GRL is applied to the classifier and the box regressor in a decoupled way, i.e. the problem is split into two sub-problems to avoid them from interfering with each other. According to Jiang et al., this could improve the discriminability of the detector. Readers can refer to the original paper \cite{Jiang2021} for more information. The results of the experiments are outlined in Table \ref{dadapt}.
 
 \begin{table}[htb]
 	\captionof{table}{Results of the experiments with a D-Adapt based method.}
@@ -159,7 +159,7 @@ First, a model was trained on the source dataset for 4 hours. Similarly to the \
 Recently, many open-source solutions proposed \cite{Inoue_2018_CVPR, Chen2020, Arruda2019} an \nameref{imagetoimage} approach in a cross-domain object detection setup. Following Zhu et al., Cycle-GAN \cite{Zhu2017} was used in an attempt to generate an intermediate domain. The results obtained after training the model for 44 epochs(= 36 hours) are compiled in Table \ref{cyclegan}.  
 
 \begin{table}[htb]
-	\captionof{table}{Results of the experiments with Cycle-GAN}
+	\captionof{table}{Results of the experiments with Cycle-GAN.}
 	\begin{center}
 		\includegraphics[width=16cm]{./cyclegan.png}
 	\end{center}
@@ -181,7 +181,7 @@ For the next set of experiments, this thesis proposes an ensembled setup. An ens
     \subfloat[Visualization on the source dataset]{{\includegraphics[width=6cm]{./experiments_original_1.png} }}%
     \qquad
     \subfloat[Visualization on the target dataset]{{\includegraphics[width=6cm]{./experiments_original_2.png} }}%
-    \caption{Results of the experiments with Adaptive Teacher as it is}\label{adapt_experiment1}%
+    \caption{Results of the experiments with Adaptive Teacher as it is.}\label{adapt_experiment1}%
 \end{figure}
 \FloatBarrier
 
@@ -197,7 +197,7 @@ Therefore, in order to identify the suitable number of iterations required for t
 	\begin{center}
 		\includegraphics[width=14cm]{./LR.jpg}
 	\end{center}
-	\caption{a) The original LR scheduler against b) The proposed cosine annealing LR scheduler without restarts}
+	\caption{a) The original LR scheduler against b) The proposed cosine annealing LR scheduler without restarts.}
 	\begin{center}
 		\label{annealing}
 	\end{center}
@@ -268,7 +268,7 @@ Although the pre-trained model performs fairly well on the target dataset, it wi
 In the first set of experiments, a naive fine-tuning approach without freezing was attempted. The model was trained based on the architecture, which was demonstated in the \nameref{mainExperiments}. The regular training stage included both source and target datasets that contained classes 1 to 20, while the fine-tuning stage only included the data for classes 21-30 and the pre-trained weights file from the previous stage. After the model has been trained on the first 20 classes, the FC layers of the trained model have been removed and replaced with new FC layers that can produce predictions for 30 classes. Both models were trained for the same number of iterations. The results are presented in Table \ref{naive_finetuning}.
 
 \begin{table}[htb]
-\caption{The naive fine-tuning results}
+\caption{The naive fine-tuning results.}
 \label{naive_finetuning}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{l|l|l|ll}
