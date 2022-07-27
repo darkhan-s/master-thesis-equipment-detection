@@ -1,0 +1,49 @@
+<annotation>
+  <folder>TLESS_real_dataset</folder>
+  <filename>000002_000014.png</filename>
+  <source>
+    <database>None</database>
+  </source>
+  <size>
+    <width>720</width>
+    <height>540</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>Model 5</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>406</xmin>
+      <ymin>159</ymin>
+      <xmax>519</xmax>
+      <ymax>307</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>Model 6</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>301</xmin>
+      <ymin>92</ymin>
+      <xmax>381</xmax>
+      <ymax>232</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>Model 7</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>179</xmin>
+      <ymin>230</ymin>
+      <xmax>428</xmax>
+      <ymax>466</ymax>
+    </bndbox>
+  </object>
+</annotation>
