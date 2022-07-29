@@ -374,11 +374,9 @@
 
 Object detection is a rapidly-evolving field with applications varying from medicine to self-driving vehicles. As the performance of the deep learning algorithms grow exponentially, countless object detection applications have emerged. Despite the nearly all-time high demand, object detection is rarely used in industrial applications. Historically, object detection requires extensive training data in order to produce sufficient results. Collecting huge datasets is often impractical in an  industrial environment due to the confidentiality restrictions and data accessibility limitations. 
 
-This thesis attempts to minimize the manual labeling process by proposing a regularized cross-domain adaptive teacher model with continual learning. The model assumes a task that seeks to eliminate the domain shift between industrial datasets: a larger labeled dataset of rendered images and a smaller unlabeled dataset of real-life images. While the labels for the rendered images can be generated automatically, only a tiny amount of real images needs to be collected, which is crucial for the system scalability in industrial environments.  
+This thesis attempts to minimize the manual labeling process by proposing a regularized cross-domain adaptive teacher model with continual learning. The model assumes a task that seeks to eliminate the domain shift between industrial datasets: a larger labeled dataset of rendered images and a smaller unlabeled dataset of real-life images. While the labels for the rendered images can be generated automatically, only a tiny amount of real images needs to be collected, which is crucial for the system scalability in industrial environments. The model transfers knowledge from one domain to another by means of adversarial domain adaptation and mean teacher training. In an attempt to achieve state-of-the-art results, this thesis proposes to regularize the student and the teacher networks using image-and instance-level alignment as well as consistency loss. Additionally, the model adopts a lifelong learning approach with network expansion and gradient regularization that enables the model to be retrainable on a continuously expanding dataset, which further facilitates the scalablity of the system.
 
-The model transfers knowledge from one domain to another by means of adversarial domain adaptation and mean teacher training. In an attempt to achieve state-of-the-art results, this thesis proposes to regularize the student and the teacher networks using image-level alignment, instance-level alignment and consistency loss. Additionally, the model adopts a lifelong learning approach with network expansion and gradient regularization that enables the model to be retrainable on a continuously expanding dataset, which further facilitates the scalablity of the system.
-
-As a result, the proposed  Adaptive teacher model with two-level alignment and additional augmentations achieved competitive results with $max$ (\texttt{AP50}) = 69.57 \% at 14 999 iterations, which is twice as fast compared to the original model with $max$ (\texttt{AP50}) = 71.39 \% at 30 999 iterations. On the other hand, the continual learning experiment with 5 arbitrary classes proved that retraining the model on the entire dataset ($max$ (\texttt{AP50}) = 69.66 \%) brings more benefit than training the model continuously using the proposed approach ($max$ (\texttt{AP50}) = 43.87 \%).
+As a result, the proposed  Adaptive teacher model with two-level alignment achieved competitive results with \texttt{AP50} = 69.57 \% at 14 999 iterations, which is twice as fast compared to the original model with \texttt{AP50} = 71.40 \% at 30 999 iterations. On the other hand, the continual learning experiment with 10 arbitrary classes proved that retraining the model on the entire dataset \texttt{AP50}) = 63.72 \% brings more benefit than training the model continuously using the proposed approach \texttt{AP50}) = 45.56 \%. Finally, the proposed model was evaluated on one Metso Outotec equipment item, which included 1000 labeled rendered images and 28 unlabeled real images. The tests achieved a fair performance of \texttt{AP50} = 85.86 \%.  
 
  
 \end{abstractpage}
@@ -482,7 +480,7 @@ RCNN		&Regions with CNN features\\
 ROI			&Region of Interest\\
 FPS			&Frames Per Second\\
 YOLO		&You Only Look Once \\
-SSD			&Single-shot MultiBox detector\\
+SSD			&Single-shot MultiBox Detector\\
 IoU 		&Intersection over Union\\
 AP			&Average Precision\\
 mAP			&Mean Average Precision\\
@@ -501,8 +499,7 @@ FP			&False Positive\\
 FN			&False Negative\\
 \end{tabular}
  
-\listoftodos
-\todo{dont forget to disable todos}
+%\listoftodos
 
 %% \clearpage is similar to \newpage, but it also flushes the floats (figures
 %% and tables).

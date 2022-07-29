@@ -3,63 +3,65 @@
 \contentsline {section}{Preface}{4}{section*.2}%
 \contentsline {section}{Contents}{5}{section*.3}%
 \contentsline {section}{Symbols and abbreviations}{11}{section*.7}%
-\contentsline {section}{\numberline {1}Introduction}{14}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Problem statement}{14}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Thesis objective}{15}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Methodology}{15}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Scope}{16}{subsection.1.4}%
-\contentsline {subsection}{\numberline {1.5}Structure of the thesis}{16}{subsection.1.5}%
-\contentsline {section}{\numberline {2}Background}{17}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Deep learning and neural networks}{17}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Neural networks in computer vision}{20}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Image classification}{22}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}LeNet}{23}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}AlexNet}{23}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}VGG}{24}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}ResNet}{24}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.4}Object detection}{26}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}R-CNN}{27}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Fast-RCNN}{27}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}Faster-RCNN}{28}{subsubsection.2.4.3}%
-\contentsline {subsubsection}{\numberline {2.4.4}YOLO}{30}{subsubsection.2.4.4}%
-\contentsline {subsubsection}{\numberline {2.4.5}SSD}{31}{subsubsection.2.4.5}%
-\contentsline {subsection}{\numberline {2.5}Object detection in industrial environments}{33}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Transfer learning}{34}{subsection.2.6}%
-\contentsline {subsubsection}{\numberline {2.6.1}Domain adaptation}{36}{subsubsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.7}Domain-adaptive object detection}{36}{subsection.2.7}%
-\contentsline {subsubsection}{\numberline {2.7.1}Gradient reversal layer}{37}{subsubsection.2.7.1}%
-\contentsline {subsubsection}{\numberline {2.7.2}Adversarial feature learning}{38}{subsubsection.2.7.2}%
-\contentsline {subsubsection}{\numberline {2.7.3}Pseudo-labeling based methods}{41}{subsubsection.2.7.3}%
-\contentsline {subsubsection}{\numberline {2.7.4}Image-to-Image translation}{42}{subsubsection.2.7.4}%
-\contentsline {subsubsection}{\numberline {2.7.5}Domain randomization}{43}{subsubsection.2.7.5}%
-\contentsline {subsubsection}{\numberline {2.7.6}Mean Teacher and Graph Reasoning}{44}{subsubsection.2.7.6}%
-\contentsline {subsection}{\numberline {2.8}Continual learning}{48}{subsection.2.8}%
-\contentsline {section}{\numberline {3}Research Methodology}{50}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Dataset}{50}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Preliminary experiments}{53}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Metrics}{53}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Naive object detection approach}{56}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Experiments with classical domain-adaptive methods}{57}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Experiments with Adaptive Teacher}{58}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Regularized Cross-Domain Adaptive Teacher}{60}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Object detection with continual learning}{64}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Results}{68}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Cross-domain adaptation results}{68}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Scheduler adjustment}{68}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Additional augmentations}{70}{subsubsection.4.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.3}Instance-level DA and consistency regularization}{71}{subsubsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.2}Continual learning results}{75}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Deployment results}{79}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Conclusion}{80}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Summary of the DA results}{80}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Summary of the continual learning results}{82}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Directions for future work}{83}{subsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}Other applications and real world datasets}{83}{subsubsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}Other detectors}{83}{subsubsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.3}Improved scheduler}{84}{subsubsection.5.3.3}%
-\contentsline {subsubsection}{\numberline {5.3.4}Imbalanced classes}{84}{subsubsection.5.3.4}%
-\contentsline {subsubsection}{\numberline {5.3.5}Multi-source adaptation}{84}{subsubsection.5.3.5}%
-\contentsline {subsubsection}{\numberline {5.3.6}Group-level alignment}{84}{subsubsection.5.3.6}%
-\contentsline {subsubsection}{\numberline {5.3.7}Continual learning}{85}{subsubsection.5.3.7}%
-\contentsline {section}{\numberline {A}Appendices}{93}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Architecture}{93}{subsection.A.1}%
+\contentsline {section}{\numberline {1}Introduction}{13}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Problem statement}{13}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Thesis objective}{14}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Methodology}{14}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Scope}{15}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Structure of the thesis}{15}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Background}{16}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Deep learning and neural networks}{16}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Neural networks in computer vision}{19}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Image classification}{21}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}LeNet}{22}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}AlexNet}{22}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}VGG}{23}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}ResNet}{23}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}Object detection}{25}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}R-CNN}{26}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Fast-RCNN}{26}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Faster-RCNN}{27}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.4}YOLO}{29}{subsubsection.2.4.4}%
+\contentsline {subsubsection}{\numberline {2.4.5}SSD}{30}{subsubsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.5}Object detection in industrial environments}{32}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Transfer learning}{33}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Domain adaptation}{34}{subsubsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.7}Domain-adaptive object detection}{35}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Gradient reversal layer}{36}{subsubsection.2.7.1}%
+\contentsline {subsubsection}{\numberline {2.7.2}Adversarial feature learning}{37}{subsubsection.2.7.2}%
+\contentsline {subsubsection}{\numberline {2.7.3}Pseudo-labeling based methods}{39}{subsubsection.2.7.3}%
+\contentsline {subsubsection}{\numberline {2.7.4}Image-to-Image translation}{40}{subsubsection.2.7.4}%
+\contentsline {subsubsection}{\numberline {2.7.5}Domain randomization}{41}{subsubsection.2.7.5}%
+\contentsline {subsubsection}{\numberline {2.7.6}Graph reasoning}{43}{subsubsection.2.7.6}%
+\contentsline {subsubsection}{\numberline {2.7.7}Mean teacher training}{44}{subsubsection.2.7.7}%
+\contentsline {subsection}{\numberline {2.8}Continual learning}{46}{subsection.2.8}%
+\contentsline {section}{\numberline {3}Research Methodology}{49}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Dataset}{49}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Preliminary experiments}{52}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Metrics}{52}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Naive object detection approach}{55}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Experiments with classical domain-adaptive methods}{56}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Experiments with Adaptive Teacher}{57}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Regularized Cross-Domain Adaptive Teacher}{59}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Object detection with continual learning}{63}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Results}{67}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Cross-domain adaptation results}{67}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Scheduler adjustment}{67}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Additional augmentations}{69}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Instance-level DA and consistency regularization}{70}{subsubsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.2}Continual learning results}{74}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Deployment results}{78}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Evaluation on the real equipment}{79}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Conclusion}{82}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Summary of the DA results}{82}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Summary of the continual learning results}{84}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Directions for future work}{85}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Other applications and real world datasets}{85}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Other detectors}{85}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Improved scheduler}{86}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Imbalanced classes}{86}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Multi-source adaptation}{86}{subsubsection.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.3.6}Group-level alignment}{86}{subsubsection.5.3.6}%
+\contentsline {subsubsection}{\numberline {5.3.7}Continual learning}{87}{subsubsection.5.3.7}%
+\contentsline {section}{\numberline {A}Appendices}{95}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Architecture}{95}{subsection.A.1}%
