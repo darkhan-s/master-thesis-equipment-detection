@@ -287,6 +287,11 @@ Y.~Zhang, ``A survey of unsupervised domain adaptation for visual
 P.~Oza, V.~A. Sindagi, V.~VS, and V.~M. Patel, ``Unsupervised domain adaptation
   of object detectors: A survey,'' May 2021.
 
+\bibitem{Rezaeianaran2021}
+F.~Rezaeianaran, R.~Shetty, R.~Aljundi, D.~O. Reino, S.~Zhang, and B.~Schiele,
+  ``Seeking similarities over differences: Similarity-based domain alignment
+  for adaptive object detection,'' Oct. 2021.
+
 \bibitem{NEURIPS2019_9015}
 A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
   Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito,
@@ -300,11 +305,6 @@ A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
 \bibitem{Detectron2018}
 R.~Girshick, I.~Radosavovic, G.~Gkioxari, P.~Doll\'{a}r, and K.~He,
   ``Detectron.'' \url{https://github.com/facebookresearch/detectron}, 2018.
-
-\bibitem{Rezaeianaran2021}
-F.~Rezaeianaran, R.~Shetty, R.~Aljundi, D.~O. Reino, S.~Zhang, and B.~Schiele,
-  ``Seeking similarities over differences: Similarity-based domain alignment
-  for adaptive object detection,'' Oct. 2021.
 
 \bibitem{Khodabandeh2019}
 M.~Khodabandeh, A.~Vahdat, M.~Ranjbar, and W.~G. Macready, ``A robust learning
@@ -432,6 +432,11 @@ C.-D. Xu, X.-R. Zhao, X.~Jin, and X.-S. Wei, ``Exploring categorical
 C.~Peng, K.~Zhao, and B.~C. Lovell, ``Faster ilod: Incremental learning for
   object detectors based on faster rcnn,'' {\em Pattern Recognition Letters},
   vol.~140, pp.~109--115, 2020.
+
+\bibitem{2015}
+``{LabelImg}: an annotation tool,'' 2015.
+\newblock \url{https://github.com/tzutalin/labelImg/}, last accessed on
+  2022-07-29.
 
 \bibitem{imgaug}
 A.~B. Jung, K.~Wada, J.~Crall, S.~Tanaka, J.~Graving, C.~Reinders, S.~Yadav,

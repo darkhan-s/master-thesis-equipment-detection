@@ -16,23 +16,25 @@ The style file: ieeetr.bst
 Reallocating 'name_of_file' (item size: 1) to 19 items.
 Database file #1: references_library.bib
 Warning--entry type for "metso_outotec_2022_1" isn't style-file defined
---line 239 of file references_library.bib
+--line 477 of file references_library.bib
 Warning--entry type for "metso_outotec_2022" isn't style-file defined
---line 309 of file references_library.bib
+--line 617 of file references_library.bib
 Warning--entry type for "metso_outotec_2022_2" isn't style-file defined
---line 317 of file references_library.bib
+--line 633 of file references_library.bib
 Warning--entry type for "paperswithcode:2022" isn't style-file defined
---line 420 of file references_library.bib
+--line 839 of file references_library.bib
 Warning--entry type for "resnet50" isn't style-file defined
---line 513 of file references_library.bib
+--line 1025 of file references_library.bib
 Warning--entry type for "paperswithcode_1:2022" isn't style-file defined
---line 647 of file references_library.bib
+--line 1293 of file references_library.bib
 Warning--entry type for "navisworks" isn't style-file defined
---line 1040 of file references_library.bib
+--line 2079 of file references_library.bib
 Warning--entry type for "mAp_blog" isn't style-file defined
---line 1074 of file references_library.bib
+--line 2147 of file references_library.bib
 Warning--entry type for "pytorch" isn't style-file defined
---line 1182 of file references_library.bib
+--line 2363 of file references_library.bib
+Warning--entry type for "2015" isn't style-file defined
+--line 2469 of file references_library.bib
 Warning--empty journal in Awalgaonkar2020
 Warning--empty journal in Janai2017
 Warning--empty journal in Shan2018
@@ -88,36 +90,36 @@ Warning--empty journal in Chen2020
 Warning--empty journal in Arruda2019
 Warning--empty journal in Loshchilov2016
 Warning--empty journal in Xu2020
-You've used 94 entries,
+You've used 95 entries,
             1876 wiz_defined-function locations,
-            929 strings with 20835 characters,
-and the built_in function-call counts, 19486 in all, are:
-= -- 1400
-> -- 1512
+            932 strings with 20947 characters,
+and the built_in function-call counts, 19598 in all, are:
+= -- 1412
+> -- 1513
 < -- 0
-+ -- 539
++ -- 540
 - -- 445
-* -- 1692
-:= -- 3227
-add.period$ -- 108
-call.type$ -- 94
-change.case$ -- 93
+* -- 1695
+:= -- 3238
+add.period$ -- 110
+call.type$ -- 95
+change.case$ -- 94
 chr.to.int$ -- 0
-cite$ -- 149
-duplicate$ -- 855
-empty$ -- 1687
+cite$ -- 150
+duplicate$ -- 859
+empty$ -- 1705
 format.name$ -- 445
-if$ -- 4314
+if$ -- 4346
 int.to.chr$ -- 0
-int.to.str$ -- 94
+int.to.str$ -- 95
 missing$ -- 82
-newline$ -- 299
+newline$ -- 303
 num.names$ -- 91
-pop$ -- 451
+pop$ -- 459
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 391
+skip$ -- 394
 stack$ -- 0
 substring$ -- 358
 swap$ -- 148
@@ -127,6 +129,6 @@ top$ -- 0
 type$ -- 0
 warning$ -- 55
 while$ -- 117
-width$ -- 96
-write$ -- 743
-(There were 64 warnings)
+width$ -- 97
+write$ -- 751
+(There were 65 warnings)
