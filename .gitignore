@@ -1,7 +1,9 @@
 misc/
 bin/
 output/
+output*/
 slurm*.txt
+slurm*.out
 temp*
 
 **/__pycache__/
