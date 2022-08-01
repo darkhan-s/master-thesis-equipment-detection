@@ -1,9 +1,0 @@
-\babel@toc {english}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Overview of object detectors \cite {Zaidi2021}. \relax }}{32}{table.caption.31}%
-\contentsline {table}{\numberline {2}{\ignorespaces Definition of confusion matrix and some of its terms.\relax }}{53}{table.caption.50}%
-\contentsline {table}{\numberline {3}{\ignorespaces Experiments with a simple Faster-RCNN model.\relax }}{56}{table.caption.53}%
-\contentsline {table}{\numberline {4}{\ignorespaces Results of the experiments with a D-Adapt based method.\relax }}{57}{table.caption.54}%
-\contentsline {table}{\numberline {5}{\ignorespaces Results of the experiments with Cycle-GAN.\relax }}{57}{table.caption.55}%
-\contentsline {table}{\numberline {6}{\ignorespaces The naive fine-tuning results.\relax }}{63}{table.caption.60}%
-\contentsline {table}{\numberline {7}{\ignorespaces The summary of the DA methods evaluated in this thesis.\relax }}{83}{table.caption.77}%
-\contentsline {table}{\numberline {8}{\ignorespaces The summary of the continual learning approach.\relax }}{84}{table.caption.78}%
