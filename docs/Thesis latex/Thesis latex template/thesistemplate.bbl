@@ -1,0 +1,449 @@
+\begin{thebibliography}{10}
+
+\bibitem{Awalgaonkar2020}
+N.~M. Awalgaonkar, H.~Zheng, and C.~S. Gurciullo, ``Deeva: A deep learning and
+  iot based computer vision system to address safety and security of production
+  sites in energy industry,'' Mar. 2020.
+
+\bibitem{9689485}
+N.~Saidnassim, B.~Abdikenov, R.~Kelesbekov, M.~T. Akhtar, and P.~Jamwal,
+  ``Self-supervised visual transformers for breast cancer diagnosis,'' in {\em
+  2021 Asia-Pacific Signal and Information Processing Association Annual Summit
+  and Conference (APSIPA ASC)}, pp.~423--427, 2021.
+
+\bibitem{Janai2017}
+J.~Janai, F.~Güney, A.~Behl, and A.~Geiger, ``Computer vision for autonomous
+  vehicles: Problems, datasets and state of the art,'' Apr. 2017.
+
+\bibitem{Shan2018}
+Y.~Shan, W.~F. Lu, and C.~M. Chew, ``Pixel and feature level based domain
+  adaption for object detection in autonomous driving,'' Sept. 2018.
+
+\bibitem{Banf2022}
+M.~Banf and G.~Steinhagen, ``Who supervises the supervisor? model monitoring in
+  production using deep feature embeddings with applications to workpiece
+  inspection,'' Jan. 2022.
+
+\bibitem{Wu2022}
+J.~Wu, S.~Tang, X.~Li, and Y.~Zhou, ``Industrial equipment detection algorithm
+  under complex working conditions based on roms r-cnn,'' {\em PLOS ONE},
+  vol.~17, p.~e0266444, 04 2022.
+
+\bibitem{MALBURG2021581}
+L.~Malburg, M.-P. Rieder, R.~Seiger, P.~Klein, and R.~Bergmann, ``Object
+  detection for smart factory processes by machine learning,'' {\em Procedia
+  Computer Science}, vol.~184, pp.~581--588, 2021.
+\newblock The 12th International Conference on Ambient Systems, Networks and
+  Technologies (ANT) / The 4th International Conference on Emerging Data and
+  Industry 4.0 (EDI40) / Affiliated Workshops.
+
+\bibitem{Kim2020}
+J.~Kim, J.~Hwang, S.~Chi, and J.~Seo, ``Towards database-free vision-based
+  monitoring on construction sites: A deep active learning approach,'' {\em
+  Automation in Construction}, vol.~120, p.~103376, 12 2020.
+
+\bibitem{metso_outotec_2022}
+``{Metso Outotec: Rocksense},'' 2022.
+\newblock \url{https://www.mogroup.com/portfolio/rocksense/}, last accessed on
+  2022-06-20.
+
+\bibitem{metso_outotec_2022_2}
+``{Metso Outotec: MouldSense},'' 2022.
+\newblock \url{https://www.mogroup.com/portfolio/mouldsense/}, last accessed on
+  2022-06-20.
+
+\bibitem{metso_outotec_2022_1}
+``{Metso Outotec: FrothSense},'' 2022.
+\newblock \url{https://www.mogroup.com/portfolio/frothsense/}, last accessed on
+  2022-06-20.
+
+\bibitem{ima}
+S.~Ren, K.~He, R.~Girshick, and J.~Sun, ``Faster r-cnn: Towards real-time
+  object detection with region proposal networks,'' June 2015.
+
+\bibitem{Liu2015}
+W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~Reed, C.-Y. Fu, and A.~C. Berg,
+  ``Ssd: Single shot multibox detector,'' Dec. 2015.
+
+\bibitem{He2017}
+K.~He, G.~Gkioxari, P.~Dollár, and R.~Girshick, ``Mask r-cnn,'' Mar. 2017.
+
+\bibitem{Redmon2015a}
+J.~Redmon, S.~Divvala, R.~Girshick, and A.~Farhadi, ``You only look once:
+  Unified, real-time object detection,'' June 2015.
+
+\bibitem{Zhang2021b}
+J.~Zhang, J.~Huang, Z.~Luo, G.~Zhang, and S.~Lu, ``Da-detr: Domain adaptive
+  detection transformer by hybrid attention,'' Mar. 2021.
+
+\bibitem{Tian2019}
+Z.~Tian, C.~Shen, H.~Chen, and T.~He, ``Fcos: Fully convolutional one-stage
+  object detection,'' Apr. 2019.
+
+\bibitem{Ganin2015}
+Y.~Ganin, E.~Ustinova, H.~Ajakan, P.~Germain, H.~Larochelle, F.~Laviolette,
+  M.~Marchand, and V.~Lempitsky, ``Domain-adversarial training of neural
+  networks,'' {\em Journal of Machine Learning Research 2016, vol. 17, p.
+  1-35}, May 2015.
+
+\bibitem{hodan2017tless}
+T.~Hoda{\v{n}}, P.~Haluza, {\v{S}}.~Obdr{\v{z}}{\'a}lek, J.~Matas, M.~Lourakis,
+  and X.~Zabulis, ``{T-LESS}: An {RGB-D} dataset for {6D} pose estimation of
+  texture-less objects,'' {\em IEEE Winter Conference on Applications of
+  Computer Vision (WACV)}, 2017.
+
+\bibitem{Li2021}
+Y.-J. Li, X.~Dai, C.-Y. Ma, Y.-C. Liu, K.~Chen, B.~Wu, Z.~He, K.~Kitani, and
+  P.~Vajda, ``Cross-domain adaptive teacher for object detection,'' Nov. 2021.
+
+\bibitem{wu2019Detectron2}
+Y.~Wu, A.~Kirillov, F.~Massa, W.-Y. Lo, and R.~Girshick, ``Detectron2.''
+  \url{https://github.com/facebookresearch/detectron2}, 2019.
+
+\bibitem{Chen2018}
+Y.~Chen, W.~Li, C.~Sakaridis, D.~Dai, and L.~V. Gool, ``Domain adaptive faster
+  r-cnn for object detection in the wild,'' Mar. 2018.
+
+\bibitem{Parisi2018}
+G.~I. Parisi, R.~Kemker, J.~L. Part, C.~Kanan, and S.~Wermter, ``Continual
+  lifelong learning with neural networks: A review,'' Feb. 2018.
+
+\bibitem{Etiemble2022}
+D.~Etiemble, ``Technologies and computing paradigms: Beyond moore's law?,''
+  June 2022.
+
+\bibitem{Hwang2018}
+T.~Hwang, ``Computational power and the social impact of artificial
+  intelligence,'' Mar. 2018.
+
+\bibitem{Janiesch2021}
+C.~Janiesch, P.~Zschech, and K.~Heinrich, ``Machine learning and deep
+  learning,'' Apr. 2021.
+
+\bibitem{Mehlig_2021}
+B.~Mehlig, {\em Machine Learning with Neural Networks}.
+\newblock Cambridge University Press, oct 2021.
+
+\bibitem{article1}
+Z.~Meng, Y.~Hu, and C.~Ancey, ``Using a data driven approach to predict waves
+  generated by gravity driven mass flows,'' {\em Water}, vol.~12, 02 2020.
+
+\bibitem{Dubey2021}
+S.~R. Dubey, S.~K. Singh, and B.~B. Chaudhuri, ``A comprehensive survey and
+  performance analysis of activation functions in deep learning,'' Sept. 2021.
+
+\bibitem{OShea2015}
+K.~O'Shea and R.~Nash, ``An introduction to convolutional neural networks,''
+  Nov. 2015.
+
+\bibitem{Rumelhart:1986we}
+D.~E. Rumelhart, G.~E. Hinton, and R.~J. Williams, ``{Learning Representations
+  by Back-propagating Errors},'' {\em Nature}, vol.~323, no.~6088,
+  pp.~533--536, 1986.
+
+\bibitem{Albarghouthi2021}
+A.~Albarghouthi, ``Introduction to neural network verification,'' Sept. 2021.
+
+\bibitem{Alber2018}
+M.~Alber, I.~Bello, B.~Zoph, P.-J. Kindermans, P.~Ramachandran, and Q.~Le,
+  ``Backprop evolution,'' Aug. 2018.
+
+\bibitem{Mahony2019}
+N.~O. Mahony, S.~Campbell, A.~Carvalho, S.~Harapanahalli, G.~Velasco-Hernandez,
+  L.~Krpalkova, D.~Riordan, and J.~Walsh, ``Deep learning vs. traditional
+  computer vision,'' {\em in Advances in Computer Vision Proceedings of the
+  2019 Computer Vision Conference (CVC). Springer Nature Switzerland AG, pp.
+  128-144}, Oct. 2019.
+
+\bibitem{paperswithcode:2022}
+``{Computer Vision},'' June 2022.
+\newblock \url{https://paperswithcode.com/area/computer-vision}, last accessed
+  on 2022-06-20.
+
+\bibitem{lecun-mnisthandwrittendigit-2010}
+Y.~LeCun and C.~Cortes, ``{MNIST} handwritten digit database,'' 2010.
+
+\bibitem{alom01}
+M.~Z. Alom, T.~Taha, C.~Yakopcic, S.~Westberg, P.~Sidike, M.~Nasrin, M.~Hasan,
+  B.~Essen, A.~Awwal, and V.~Asari, ``A state-of-the-art survey on deep
+  learning theory and architectures,'' {\em Electronics}, vol.~8, p.~292, 03
+  2019.
+
+\bibitem{Liu2016}
+M.~Liu, J.~Shi, Z.~Li, C.~Li, J.~Zhu, and S.~Liu, ``Towards better analysis of
+  deep convolutional neural networks,'' Apr. 2016.
+
+\bibitem{Russakovsky2014}
+O.~Russakovsky, J.~Deng, H.~Su, J.~Krause, S.~Satheesh, S.~Ma, Z.~Huang,
+  A.~Karpathy, A.~Khosla, M.~Bernstein, A.~C. Berg, and L.~Fei-Fei, ``Imagenet
+  large scale visual recognition challenge,'' Sept. 2014.
+
+\bibitem{Everingham10}
+M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman, ``The
+  pascal visual object classes (voc) challenge,'' {\em International Journal of
+  Computer Vision}, vol.~88, pp.~303--338, June 2010.
+
+\bibitem{Lin2014}
+T.-Y. Lin, M.~Maire, S.~Belongie, L.~Bourdev, R.~Girshick, J.~Hays, P.~Perona,
+  D.~Ramanan, C.~L. Zitnick, and P.~Dollár, ``Microsoft coco: Common objects
+  in context,'' May 2014.
+\newblock \url{https://cocodataset.org/}, last accessed on 2022-06-30.
+
+\bibitem{lecun-gradientbased-learning-applied-1998}
+Y.~LeCun, L.~Bottou, Y.~Bengio, and P.~Haffner, ``Gradient-based learning
+  applied to document recognition,'' in {\em Proceedings of the IEEE}, vol.~86,
+  pp.~2278--2324, 1998.
+
+\bibitem{NIPS2012_c399862d}
+A.~Krizhevsky, I.~Sutskever, and G.~E. Hinton, ``Imagenet classification with
+  deep convolutional neural networks,'' in {\em Advances in Neural Information
+  Processing Systems} (F.~Pereira, C.~Burges, L.~Bottou, and K.~Weinberger,
+  eds.), vol.~25, Curran Associates, Inc., 2012.
+
+\bibitem{Simonyan2014}
+K.~Simonyan and A.~Zisserman, ``Very deep convolutional networks for
+  large-scale image recognition,'' Sept. 2014.
+
+\bibitem{He2015}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun, ``Deep residual learning for image
+  recognition,'' Dec. 2015.
+
+\bibitem{JMLR:v15:srivastava14a}
+N.~Srivastava, G.~Hinton, A.~Krizhevsky, I.~Sutskever, and R.~Salakhutdinov,
+  ``Dropout: A simple way to prevent neural networks from overfitting,'' {\em
+  Journal of Machine Learning Research}, vol.~15, no.~56, pp.~1929--1958, 2014.
+
+\bibitem{resnet50}
+A.~Rastogi, ``Medium: Resnet50,'' 2022.
+\newblock \url{https://blog.devgenius.io/resnet50-6b42934db431/}, last accessed
+  on 2022-06-20.
+
+\bibitem{Zaidi2021}
+S.~S.~A. Zaidi, M.~S. Ansari, A.~Aslam, N.~Kanwal, M.~Asghar, and B.~Lee, ``A
+  survey of modern deep learning based object detection models,'' Apr. 2021.
+
+\bibitem{app8091488}
+A.~Pacha, J.~Hajič, and J.~Calvo-Zaragoza, ``A baseline for general music
+  object detection with deep learning,'' {\em Applied Sciences}, vol.~8, no.~9,
+  2018.
+
+\bibitem{Lin2017}
+T.-Y. Lin, P.~Goyal, R.~Girshick, K.~He, and P.~Dollár, ``Focal loss for dense
+  object detection,'' Aug. 2017.
+
+\bibitem{Girshick2013}
+R.~Girshick, J.~Donahue, T.~Darrell, and J.~Malik, ``Rich feature hierarchies
+  for accurate object detection and semantic segmentation,'' Nov. 2013.
+
+\bibitem{Girshick2015}
+R.~Girshick, ``Fast r-cnn,'' Apr. 2015.
+
+\bibitem{Carion2020}
+N.~Carion, F.~Massa, G.~Synnaeve, N.~Usunier, A.~Kirillov, and S.~Zagoruyko,
+  ``End-to-end object detection with transformers,'' May 2020.
+
+\bibitem{Uijlings13}
+J.~Uijlings, K.~van~de Sande, T.~Gevers, and A.~Smeulders, ``Selective search
+  for object recognition,'' {\em International Journal of Computer Vision},
+  2013.
+
+\bibitem{Hosang2017}
+J.~Hosang, R.~Benenson, and B.~Schiele, ``Learning non-maximum suppression,''
+  May 2017.
+
+\bibitem{paperswithcode_1:2022}
+``{Faster-RCNN},'' June 2022.
+\newblock \url{https://paperswithcode.com/method/faster-r-cnn}, last accessed
+  on 2022-06-22.
+
+\bibitem{Redmon2016}
+J.~Redmon and A.~Farhadi, ``Yolo9000: Better, faster, stronger,'' Dec. 2016.
+
+\bibitem{Redmon2018a}
+J.~Redmon and A.~Farhadi, ``Yolov3: An incremental improvement,'' Apr. 2018.
+
+\bibitem{Zhuang2019}
+F.~Zhuang, Z.~Qi, K.~Duan, D.~Xi, Y.~Zhu, H.~Zhu, H.~Xiong, and Q.~He, ``A
+  comprehensive survey on transfer learning,'' Nov. 2019.
+
+\bibitem{Pan2010}
+S.~J. Pan and Q.~Yang, ``A survey on transfer learning,'' {\em IEEE
+  Transactions on Knowledge and Data Engineering}, vol.~22, no.~10,
+  pp.~1345--1359, 2010.
+
+\bibitem{SUN201584}
+S.~Sun, H.~Shi, and Y.~Wu, ``A survey of multi-source domain adaptation,'' {\em
+  Information Fusion}, vol.~24, pp.~84--92, 2015.
+
+\bibitem{Wang2018}
+M.~Wang and W.~Deng, ``Deep visual domain adaptation: A survey,'' {\em
+  Neurocomputing, 2018, 312: 135-153}, Feb. 2018.
+
+\bibitem{Zhang2021}
+Y.~Zhang, ``A survey of unsupervised domain adaptation for visual
+  recognition,'' Dec. 2021.
+
+\bibitem{Oza2021}
+P.~Oza, V.~A. Sindagi, V.~VS, and V.~M. Patel, ``Unsupervised domain adaptation
+  of object detectors: A survey,'' May 2021.
+
+\bibitem{Rezaeianaran2021}
+F.~Rezaeianaran, R.~Shetty, R.~Aljundi, D.~O. Reino, S.~Zhang, and B.~Schiele,
+  ``Seeking similarities over differences: Similarity-based domain alignment
+  for adaptive object detection,'' Oct. 2021.
+
+\bibitem{NEURIPS2019_9015}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
+  Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito,
+  M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and
+  S.~Chintala, ``Pytorch: An imperative style, high-performance deep learning
+  library,'' in {\em Advances in Neural Information Processing Systems 32}
+  (H.~Wallach, H.~Larochelle, A.~Beygelzimer, F.~d\textquotesingle
+  Alch\'{e}-Buc, E.~Fox, and R.~Garnett, eds.), pp.~8024--8035, Curran
+  Associates, Inc., 2019.
+
+\bibitem{Detectron2018}
+R.~Girshick, I.~Radosavovic, G.~Gkioxari, P.~Doll\'{a}r, and K.~He,
+  ``Detectron.'' \url{https://github.com/facebookresearch/detectron}, 2018.
+
+\bibitem{Khodabandeh2019}
+M.~Khodabandeh, A.~Vahdat, M.~Ranjbar, and W.~G. Macready, ``A robust learning
+  approach to domain adaptive object detection,'' Apr. 2019.
+
+\bibitem{Hsu2019}
+H.-K. Hsu, C.-H. Yao, Y.-H. Tsai, W.-C. Hung, H.-Y. Tseng, M.~Singh, and M.-H.
+  Yang, ``Progressive domain adaptation for object detection,'' Oct. 2019.
+
+\bibitem{Zhu2017}
+J.-Y. Zhu, T.~Park, P.~Isola, and A.~A. Efros, ``Unpaired image-to-image
+  translation using cycle-consistent adversarial networks,'' Mar. 2017.
+
+\bibitem{Kim2019}
+T.~Kim, M.~Jeong, S.~Kim, S.~Choi, and C.~Kim, ``Diversify and match: A domain
+  adaptive representation learning paradigm for object detection,'' May 2019.
+
+\bibitem{Cai2019}
+Q.~Cai, Y.~Pan, C.-W. Ngo, X.~Tian, L.~Duan, and T.~Yao, ``Exploring object
+  relation in mean teacher for cross-domain detection,'' Apr. 2019.
+
+\bibitem{Liu2021}
+Y.-C. Liu, C.-Y. Ma, Z.~He, C.-W. Kuo, K.~Chen, P.~Zhang, B.~Wu, Z.~Kira, and
+  P.~Vajda, ``Unbiased teacher for semi-supervised object detection,'' Feb.
+  2021.
+
+\bibitem{pytorch}
+``{Pytorch: Illustration of transforms},'' 2022.
+\newblock
+  \url{https://pytorch.org/vision/main/auto_examples/plot_transforms.html#sphx-glr-download-auto-examples-plot-transforms-py/},
+  last accessed on 2022-07-11.
+
+\bibitem{Hnewa2021}
+M.~Hnewa and H.~Radha, ``Multiscale domain adaptive yolo for cross-domain
+  object detection,'' {\em IEEE International Conference on Image Processing
+  (ICIP), 2021, pp. 3323-3327,}, June 2021.
+
+\bibitem{Zhang2021a}
+S.~Zhang, H.~Tuo, J.~Hu, and Z.~Jing, ``Domain adaptive yolo for one-stage
+  cross-domain detection,'' June 2021.
+
+\bibitem{fcos1}
+C.-C. Hsu, Y.-H. Tsai, Y.-Y. Lin, and M.-H. Yang, ``Every pixel matters:
+  Center-aware feature alignment for domain adaptive object detector,'' 2020.
+
+\bibitem{Vidit2021}
+V.~Vidit and M.~Salzmann, ``Attention-based domain adaptation for single stage
+  detectors,'' June 2021.
+
+\bibitem{Razavian2014}
+A.~S. Razavian, H.~Azizpour, J.~Sullivan, and S.~Carlsson, ``Cnn features
+  off-the-shelf: an astounding baseline for recognition,'' Mar. 2014.
+
+\bibitem{Donahue2013}
+J.~Donahue, Y.~Jia, O.~Vinyals, J.~Hoffman, N.~Zhang, E.~Tzeng, and T.~Darrell,
+  ``Decaf: A deep convolutional activation feature for generic visual
+  recognition,'' Oct. 2013.
+
+\bibitem{Rusu2016}
+A.~A. Rusu, N.~C. Rabinowitz, G.~Desjardins, H.~Soyer, J.~Kirkpatrick,
+  K.~Kavukcuoglu, R.~Pascanu, and R.~Hadsell, ``Progressive neural networks,''
+  June 2016.
+
+\bibitem{Yoon2017}
+J.~Yoon, E.~Yang, J.~Lee, and S.~J. Hwang, ``Lifelong learning with dynamically
+  expandable networks,'' Aug. 2017.
+
+\bibitem{navisworks}
+``{Autodesk Navisworks API},'' 2022.
+\newblock
+  \url{https://apidocs.co/apps/navisworks/2018/87317537-2911-4c08-b492-6496c82b3ed0.htm/},
+  last accessed on 2022-06-29.
+
+\bibitem{hodan2018bop}
+T.~Hoda{\v{n}}, F.~Michel, E.~Brachmann, W.~Kehl, A.~Glent~Buch, D.~Kraft,
+  B.~Drost, J.~Vidal, S.~Ihrke, X.~Zabulis, C.~Sahin, F.~Manhardt, F.~Tombari,
+  T.-K. Kim, J.~Matas, and C.~Rother, ``{BOP}: Benchmark for {6D} object pose
+  estimation,'' {\em European Conference on Computer Vision (ECCV)}, 2018.
+
+\bibitem{hodan2018bop_format}
+T.~Hoda{\v{n}}, F.~Michel, E.~Brachmann, W.~Kehl, A.~Glent~Buch, D.~Kraft,
+  B.~Drost, J.~Vidal, S.~Ihrke, X.~Zabulis, C.~Sahin, F.~Manhardt, F.~Tombari,
+  T.-K. Kim, J.~Matas, and C.~Rother, ``{BOP}: Benchmark for {6D} object pose
+  estimation dataset format,'' {\em European Conference on Computer Vision
+  (ECCV)}, 2018.
+\newblock
+  \url{https://github.com/thodan/bop_toolkit/blob/master/docs/bop_datasets_format.md/},
+  last accessed on 2022-06-29.
+
+\bibitem{mAp_blog}
+N.~Zeng, ``{An Introduction to Evaluation Metrics for Object Detection},''
+  2022.
+\newblock
+  \url{https://blog.zenggyu.com/en/post/2018-12-16/an-introduction-to-evaluation-metrics-for-object-detection/},
+  last accessed on 2022-07-04.
+
+\bibitem{Jiang2021}
+J.~Jiang, B.~Chen, J.~Wang, and M.~Long, ``Decoupled adaptation for
+  cross-domain object detection,'' {\em ICLR 2022}, Oct. 2021.
+
+\bibitem{Inoue_2018_CVPR}
+N.~Inoue, R.~Furuta, T.~Yamasaki, and K.~Aizawa, ``Cross-domain
+  weakly-supervised object detection through progressive domain adaptation,''
+  in {\em Proceedings of the IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, June 2018.
+
+\bibitem{Chen2020}
+C.~Chen, Z.~Zheng, X.~Ding, Y.~Huang, and Q.~Dou, ``Harmonizing transferability
+  and discriminability for adapting object detectors,'' Mar. 2020.
+
+\bibitem{Arruda2019}
+V.~F. Arruda, T.~M. Paixão, R.~F. Berriel, A.~F.~D. Souza, C.~Badue, N.~Sebe,
+  and T.~Oliveira-Santos, ``Cross-domain car detection using unsupervised
+  image-to-image translation: From day to night,'' July 2019.
+
+\bibitem{Loshchilov2016}
+I.~Loshchilov and F.~Hutter, ``Sgdr: Stochastic gradient descent with warm
+  restarts,'' Aug. 2016.
+
+\bibitem{Xu2020}
+C.-D. Xu, X.-R. Zhao, X.~Jin, and X.-S. Wei, ``Exploring categorical
+  regularization for domain adaptive object detection,'' Mar. 2020.
+
+\bibitem{Peng2020}
+C.~Peng, K.~Zhao, and B.~C. Lovell, ``Faster ilod: Incremental learning for
+  object detectors based on faster rcnn,'' {\em Pattern Recognition Letters},
+  vol.~140, pp.~109--115, 2020.
+
+\bibitem{2015}
+``{LabelImg}: an annotation tool,'' 2015.
+\newblock \url{https://github.com/tzutalin/labelImg/}, last accessed on
+  2022-07-29.
+
+\bibitem{imgaug}
+A.~B. Jung, K.~Wada, J.~Crall, S.~Tanaka, J.~Graving, C.~Reinders, S.~Yadav,
+  J.~Banerjee, G.~Vecsei, A.~Kraft, Z.~Rui, J.~Borovec, C.~Vallentin,
+  S.~Zhydenko, K.~Pfeiffer, B.~Cook, I.~Fernández, F.-M. De~Rainville, C.-H.
+  Weng, A.~Ayala-Acevedo, R.~Meudec, M.~Laporte, {\em et~al.}, ``{imgaug}.''
+  \url{https://github.com/aleju/imgaug}, 2020.
+\newblock Online; accessed 01-Feb-2020.
+
+\end{thebibliography}
