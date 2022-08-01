@@ -77,6 +77,7 @@ def entry_point():
 			result_img = run_inference(image)
 			#clone_image = cv2.cvtColor(np.array(result_img), cv2.COLOR_RGB2BGR)
 			clone_image = np.array(result_img)
+			print(clone_image.shape)
 			cv2.imwrite(os.path.join(app.config['PREDICTIONS_FOLDER'], file.filename), clone_image)
 			# create file-object in memory
 			file_object = io.BytesIO()
