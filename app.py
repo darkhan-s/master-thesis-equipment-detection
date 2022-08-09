@@ -1,14 +1,15 @@
 import os
-from flask import Flask, render_template,request, send_file,  flash, redirect, url_for
+from flask import Flask, render_template,request,  flash, redirect
 
 from werkzeug.utils import secure_filename
 from Detector import Detector
 import io
 import sys
 import numpy as np
-from PIL import Image
 import traceback
 import cv2
+
+import argparse
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 PREDICTIONS_FOLDER = os.path.join('static', 'predictions')
@@ -21,7 +22,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PREDICTIONS_FOLDER'] = PREDICTIONS_FOLDER
-detector = Detector()
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -30,7 +30,7 @@ def clean_storage(folder):
 	import glob
 	files = glob.glob(folder)
 	for f in files:
-		print(f"Removing old file: {f}")
+		print(f"Removing old files: {f}")
 		os.remove(f)
 
 def allowed_file(filename):
@@ -115,7 +115,39 @@ def run_inference(image):
 	return result_img
 
 
+def default_argument_parser(epilog=None):
+	parser = argparse.ArgumentParser(
+        epilog=epilog,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+	parser.add_argument("--config-file", default="", metavar="FILE", help="path to config file")
+	parser.add_argument('-path', '--dataset_path', help='dataset in VOC format with the path for both domains')
+	parser.add_argument("--weights-file", default="", metavar="FILE", help='path to pretrained .pth weights file')
+	parser.add_argument(
+        '--mode', '-m',
+        help='Set mode for training, 0 is for training TLess, 1 is for training pumps.',
+        default=1,
+        type=int,
+        choices=[0,1],
+    )
+	parser.add_argument(
+        "opts",
+        help="""
+Modify config options at the end of the command. For Yacs configs, use
+space-separated "PATH.KEY VALUE" pairs.
+For python-based LazyConfig, use "path.key=value".
+        """.strip(),
+        default=None,
+        nargs=argparse.REMAINDER,
+    )
+	return parser
+
 if __name__ == '__main__':
+	
+	args = default_argument_parser().parse_args()
+	print("Command Line Args:", args)
+	detector = Detector(args)
+
 	clean_storage(os.path.join(UPLOAD_FOLDER, '*'))
 	clean_storage(os.path.join(PREDICTIONS_FOLDER, '*'))
 	app.run(debug=True,port=os.getenv('PORT',5000))

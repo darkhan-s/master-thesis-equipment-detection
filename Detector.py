@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 
-from typing import final
-
-from matplotlib.transforms import Transform
 import cv2
 import torch
 import numpy as np
@@ -37,36 +34,18 @@ import adapteacher.data.datasets.builtin
 from adapteacher.data.datasets.builtin import register_all_tless, register_pump_datasets
 from adapteacher.modeling.meta_arch.ts_ensemble import EnsembleTSModel
 import detectron2.data.transforms as T
-#from detectron2.data.transforms.augmentation_impl import ResizeShortestEdge
 
 
-TLESS_CLASS_NAMES = ["Model 1", "Model 2", "Model 3", "Model 4", "Model 5",
-        "Model 6", "Model 7", "Model 8", "Model 9", "Model 10", "Model 11",
-        "Model 12", "Model 13", "Model 14", "Model 15", "Model 16", "Model 17",
-        "Model 18", "Model 19", "Model 20", "Model 21", "Model 22", "Model 23",
-        "Model 24", "Model 25", "Model 26", "Model 27", "Model 28", "Model 29", "Model 30"
-        ]
 
-EQUIPMENT_NAMES = ["Pump HM-75S"]
-PUMP_MODEL_PATH = 'output-mymodel-pumps-FINAL-MyModel_withCustomAugmentation/model_best.pth'
-PUMP_CONFIG_FILE = 'faster_rcnn_R101_cross_pump.yaml'
-class Metadata:
-    def get(self, _):
-        #return TLESS_CLASS_NAMES #your class labels
-        return EQUIPMENT_NAMES
 
 class Detector:
 
-    def __init__(self):
+    def __init__(self, args):
+        self.args = args
+        self.modelpath = args.config_file
+        self.weights_path = args.weights_file
 
-        # set model and test set
-        #self.modelpath = 'faster_rcnn_R101_cross_tless_full.yaml'
-        self.modelpath = PUMP_CONFIG_FILE
-
-        # self.weights_path = 'output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-origScheduler/model_best.pth'
-        #self.weights_path = 'output-original/model_0044999.pth'
-        self.weights_path = PUMP_MODEL_PATH
-
+        self.Metadata = {}
         
         # obtain detectron2's default config
         self.cfg = self.setup()
@@ -85,20 +64,23 @@ class Detector:
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5 
         cfg.MODEL.DEVICE = 'cpu' 
         cfg.MODEL.WEIGHTS = self.weights_path
-        #cfg.MODEL.ROI_HEADS.NUM_CLASSES = 30
-        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
         cfg.freeze()
         
-        print('Model cfg is all set', file=sys.stdout)
+        print('Model config file has been loaded succcessfully', file=sys.stdout)
         return cfg
 
     def load_model(self):
         
-        class_names = self.cfg.MODEL.ROI_HEADS.OLD_CLASSES + list(set(self.cfg.MODEL.ROI_HEADS.NEW_CLASSES) - set(self.cfg.MODEL.ROI_HEADS.OLD_CLASSES))
-        TLESS_CLASS_NAMES = class_names
-        #register_all_tless("/scratch/project_2005695/PyTorch-CycleGAN/datasets/", class_names, debug_limit = self.cfg.DATALOADER.DEBUG_LIMIT_INPUT)
-        register_pump_datasets("/scratch/project_2005695/master-thesis-equipment-detection/bin/pumps/", class_names = ["Pump HM-75S"], debug_limit = self.cfg.DATALOADER.DEBUG_LIMIT_INPUT)
-
+        self.class_names = self.cfg.MODEL.ROI_HEADS.OLD_CLASSES + list(set(self.cfg.MODEL.ROI_HEADS.NEW_CLASSES) - set(self.cfg.MODEL.ROI_HEADS.OLD_CLASSES))
+    
+        # switch between datasets. Continual learning not yet tested for pumps as only one object is provided
+        if self.args.mode == 0:
+            register_all_tless(self.args.dataset_path, self.class_names, debug_limit = self.cfg.DATALOADER.DEBUG_LIMIT_INPUT)
+        elif self.args.mode == 1:
+            register_pump_datasets(self.args.dataset_path, self.class_names, debug_limit = self.cfg.DATALOADER.DEBUG_LIMIT_INPUT)
+        
+        self.Metadata["thing_classes"] = self.class_names
+        
         if self.cfg.SEMISUPNET.Trainer == "ateacher":
             Trainer = ATeacherTrainer
             model = Trainer.build_model(self.cfg)
@@ -113,15 +95,10 @@ class Detector:
             
             self.model.eval()
             
-            print('Model .pth is all set', file=sys.stdout)
+            print('Model .pth weights are ready', file=sys.stdout)
         else:
             raise ValueError("Trainer Name is not found.")
-      
-        #im = cv2.imread("/scratch/project_2005695/PyTorch-CycleGAN/datasets/TLessRendered/JPEGImages/000003_000001.jpg")
-
-        #results = predict(im, finalModel)
-        #print(results)
-        #return results
+    
 
     def predict(self, im):
         
@@ -140,10 +117,8 @@ class Detector:
 
                 print(predictions, file=sys.stdout)
 
-                v = Visualizer(im, metadata=Metadata)
-                v = v.draw_instance_predictions(predictions["instances"].to("cpu"))
-                #cv2.imwrite("/scratch/project_2005695/master-thesis-equipment-detection/misc/adaptive_teacher/output/TLessReal_predictions/predictions.jpg", out.get_image()[..., ::-1][..., ::-1])
-                
+                v = Visualizer(im, metadata = self.Metadata)
+                v = v.draw_instance_predictions(predictions["instances"].to("cpu"))                
                 # get image 
                 print('Drawing predictions..', file=sys.stdout)
                 img = Image.fromarray(np.uint8(v.get_image()[:, :, ::-1]))
