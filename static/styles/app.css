@@ -1,0 +1,115 @@
+nav{
+    background-color: white;
+    background-image: linear-gradient(90deg, #ff3300 0%, #000000 100%);
+    display: flex;
+    flex-direction: row;
+    height: 90px;
+    color: white;
+    font-size: 1.3em;
+    width: auto;
+    /* background: #f34646; */
+}
+
+body{
+    margin-bottom: 100px;
+    padding: 0;
+}
+
+ul{
+    display: flex;
+    margin: auto;
+    list-style: none;
+    width: 90%;
+    justify-content: space-between;
+    font-size: 1.2em
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+}
+
+.body{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body h2{
+    color: #ff3300;
+    font-size: 2.8em;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+form input{
+    margin: 10px;
+}
+form input:last-child{
+    padding: 8px 20px;
+    font-size: 1.1em;
+    background: #ff3300;
+    color: white;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.pytorch{
+    width: 60px;
+}
+.body p2{
+    color: #ff3300;
+}
+.body p{
+    color: #ff3300;
+}
+.row {
+    display: flex;
+  }
+  
+.column {
+flex: 50%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+  
+.column {
+background-color: white;
+height: 300px;
+}
+  
+.column:nth-child(2) {
+background-color: white;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.footerholder {
+    background: repeat scroll 0 0 linear-gradient(90deg, #ff3300 0%, #000000 100%);
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+.footer {
+    background: repeat scroll 0 0 ;
+    height: 50px;
+    margin: auto;
+    width: auto;
+}
+    

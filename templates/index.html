@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Equpment detection</title>
+	<link rel="stylesheet" type="text/css"  href="{{url_for('static',filename='styles/app.css')}}">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body
+style="color: #000000">
+
+	<nav>
+		<ul>
+			<li style="margin-top: 25px; font-size: medium;"><a href="/">Equipment identification</a></li>
+			<li><a href="https://www.mogroup.com/"><img alt="MO_logo" src="{{url_for('static',filename='images/logo.png')}}"
+				width=100" height="70"></a></li>
+		</ul>
+	</nav>
+	<div class="body">
+		
+		<img class="pytorch" src="{{url_for('static',filename='images/pytorch-logo.png')}}" alt="pytorch" style="display: inline">
+		<h3 style="color: #ff3300;">Upload an image:</h3>
+		<div class="container">
+			<div class="column">
+				<p>Original image: </p>
+				<img src="{{user_image}}" alt="User Image" onerror="this.onerror=null; this.remove();">
+			</div>
+			<div class="column">
+				<p>Predictions: </p>
+				<img src="{{return_image}}" alt="Predictions" onerror="this.onerror=null; this.remove();">
+			</div>
+		</div>
+		
+		
+		<form method="POST" enctype=multipart/form-data>
+			<dl>
+				<p>
+					<input type="file" name="file" autocomplete="off" required>
+				</p>
+			</dl>
+			<input type="submit" name="upload">
+		</form>
+		
+	</div>
+	<div class="footerholder">
+		<div class="footer">
+			<p style="color: white;">© 2022 Darkhan Saidnassimov, Aalto University</p>
+		</div>
+	</div>
+
+		
+</body>
+</html>

@@ -23,3 +23,5 @@ torch==1.10.1
 torchvision==0.11.2
 tqdm==4.63.0
 yacs==0.1.8
+pycocotools==2.0.4
+Werkzeug==2.0.3

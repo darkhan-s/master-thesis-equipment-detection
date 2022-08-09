@@ -1,0 +1,5 @@
+{
+    "name":"Eqipment detector",
+    "description":"Equipment detector",
+    "keywords":["python","flask","Pytorch", "detectron2", "domain adaptation"]
+}
