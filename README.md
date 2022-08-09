@@ -1,4 +1,5 @@
-# master-thesis-equipment-detection
-Darkhan's Master's thesis repository. The project attempts to tackle the challenge of equipment recognition in an industrial environment using 3D models
+# Master's thesis
+## Equipment identification through image recognition 
+Darkhan's Master's thesis repository. The project attempts to tackle the challenge of equipment recognition in an industrial environment using rendered images from 3D models
 
-# test for overleaf
+Work in progress..
