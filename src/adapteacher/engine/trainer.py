@@ -38,6 +38,7 @@ from adapteacher.engine.hooks import BestTSCheckpointer
 from .probe import OpenMatchTrainerProbe
 import copy
 
+# @darkhan-s minor adjustments to the training loop. Boilerplate baseline trainer code removed
 # Adaptive Teacher Trainer
 class ATeacherTrainer(DefaultTrainer):
     def __init__(self, cfg):
@@ -411,11 +412,12 @@ class ATeacherTrainer(DefaultTrainer):
                         loss_dict[key] = record_dict[key] * self.cfg.SEMISUPNET.DIS_LOSS_WEIGHT #Need to modify defaults and yaml
                     elif (
                         key == "loss_DA_ins_cls" or key == "loss_tgt_DA_ins_cls"
-                    ):  # set weight for instance discriminator
+                    ):  # @darkhan-s set weight for instance discriminator
                         loss_dict[key] = record_dict[key] * self.cfg.SEMISUPNET.DIS_INST_LOSS_WEIGHT #Need to modify defaults and yaml
                     elif (
                         key == "loss_consistency_s" or key == "loss_consistency_t"
-                    ):                        
+                    ):     
+                        # @darkhan-s set consistency weight                
                         loss_dict[key] = record_dict[key] * self.cfg.SEMISUPNET.CONSISTENCY_LOSS_WEIGHT #Need to modify defaults and yaml
 
                     else:  # supervised loss

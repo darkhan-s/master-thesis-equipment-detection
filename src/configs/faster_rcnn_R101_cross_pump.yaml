@@ -23,7 +23,7 @@ MODEL:
     NUM_FC: 2
     POOLER_RESOLUTION: 7
 SOLVER:
-  LR_SCHEDULER_NAME: "WarmupTwoStageMultiStepLR" # was "WarmupTwoStageMultiStepLR"
+  LR_SCHEDULER_NAME: "WarmupTwoStageMultiStepLR" # WarmupTwoStageMultiStepLR in adaptive teacher, was "LRMultiplier" in my recorded experiments
   STEPS: (60000, 80000, 90000, 360000)
   FACTOR_LIST: (1, 1, 1, 1, 1)
   MAX_ITER: 50000 #was 360000, tested with 150000, also check https://stackoverflow.com/questions/63578040/how-many-images-per-iteration-in-detectron2

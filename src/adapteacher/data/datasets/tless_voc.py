@@ -10,6 +10,8 @@ from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.structures import BoxMode
 from detectron2.utils.file_io import PathManager
 
+#@darkhan-s the model loads custom VOC style datasets as defined here  
+
 __all__ = ["load_tless_voc_instances", "register_tless_voc", "register_pumps_voc"]
 
 

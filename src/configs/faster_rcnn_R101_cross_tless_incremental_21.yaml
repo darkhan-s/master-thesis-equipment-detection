@@ -14,12 +14,13 @@ MODEL:
   ROI_HEADS:
     NAME: "StandardROIHeadsPseudoLab"
     LOSS: "CrossEntropy" # variant: "CrossEntropy"
-    NUM_CLASSES: 20 # original number 
+    NUM_CLASSES: 20 # original number of classes
     OLD_CLASSES: ["Model 1", "Model 2", "Model 3", "Model 4", "Model 5",
                       "Model 6", "Model 7", "Model 8", "Model 9", "Model 10", "Model 11",
                       "Model 12", "Model 13", "Model 14", "Model 15", "Model 16", "Model 17",
                       "Model 18", "Model 19", "Model 20"
                       ]
+    # an extra class is appended to the list
     NEW_CLASSES: ["Model 1", "Model 2", "Model 3", "Model 4", "Model 5",
                       "Model 6", "Model 7", "Model 8", "Model 9", "Model 10", "Model 11",
                       "Model 12", "Model 13", "Model 14", "Model 15", "Model 16", "Model 17",
@@ -31,10 +32,10 @@ MODEL:
     NUM_FC: 2
     POOLER_RESOLUTION: 7
 SOLVER:
-  LR_SCHEDULER_NAME: "LRMultiplier" # was "WarmupTwoStageMultiStepLR"
+  LR_SCHEDULER_NAME: "WarmupTwoStageMultiStepLR" # WarmupTwoStageMultiStepLR in adaptive teacher, was "LRMultiplier" in my recorded experiments
   STEPS: (60000, 80000, 90000, 360000)
   FACTOR_LIST: (1, 1, 1, 1, 1)
-  MAX_ITER: 50000 #was 360000, tested with 150000, also check https://stackoverflow.com/questions/63578040/how-many-images-per-iteration-in-detectron2
+  MAX_ITER: 50000 
   IMG_PER_BATCH_LABEL: 1
   IMG_PER_BATCH_UNLABEL: 1
   BASE_LR: 0.0005 # 0.001 worked on stable version

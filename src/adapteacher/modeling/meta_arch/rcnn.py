@@ -45,7 +45,6 @@ class _ImageDA(nn.Module):
 #################################
 
 ############### @darkhan-s Instance level discriminator (based on ROI) ##############
-#TODO: check if this is needed: 
 class _InstanceDA(nn.Module):
     def __init__(self, in_channel):
         super(_InstanceDA, self).__init__()

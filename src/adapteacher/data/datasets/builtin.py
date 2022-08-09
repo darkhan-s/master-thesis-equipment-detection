@@ -111,7 +111,7 @@ register_coco_unlabel(_root)
 
 
 
-# ==== Predefined splits for TLess (PASCAL VOC format) ===========
+# @darkhan-s ==== Predefined splits for TLess (PASCAL VOC format) ===========
 def register_all_tless(root, class_names, debug_limit=0):
     SPLITS = [
         ("tless_rendered_trainval", "TLessRendered", "trainval", ".jpg"),
@@ -124,7 +124,7 @@ def register_all_tless(root, class_names, debug_limit=0):
         register_tless_voc(name, os.path.join(root, dirname), split, year, ext, debug_limit = debug_limit, class_names = class_names)
         MetadataCatalog.get(name).evaluator_type = "pascal_voc_tless"
 
-# ==== Predefined splits for pumps (PASCAL VOC format) ===========
+# @darkhan-s ==== Predefined splits for pumps (PASCAL VOC format) ===========
 def register_pump_datasets(root, class_names, debug_limit=0):
     SPLITS = [
         ("pumps_rendered_trainval", "PumpsRendered", "trainval", ".jpg"),

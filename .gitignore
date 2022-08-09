@@ -28,6 +28,7 @@ runs
 log
 
 *.jpg
+!demo.jpg
 *.json
 data/outcome
 

@@ -136,6 +136,7 @@ class StandardROIHeadsPseudoLab(StandardROIHeads):
         box_features = self.box_pooler(features, [x.proposal_boxes for x in proposals])
         box_features = self.box_head(box_features)
         predictions = self.box_predictor(box_features)
+        #@ darkhan-s dont delete box features because they are needed for instance level alignment
         #del box_features
         if (self.training and compute_loss) or compute_val_loss:  # apply if training loss or val loss
             losses = self.box_predictor.losses(predictions, proposals)

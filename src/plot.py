@@ -542,3 +542,152 @@ if __name__ == "__main__":
         metrics_the_rest.append(Metrics(name, class_id=5+i, main_metric_name=args.metric_name))
     
     plot_for_group_of_classes(metrics_four_classes, metrics_the_rest, args.metric_name)
+
+
+
+
+
+##################################################################
+
+## For plotting training results
+## srun python plot.py \
+    # # --disable_student \
+    # # --title AP50_for_class_21 \
+    # # --path output-mymodel-classes-21only-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Model_trained_on_class_21_only \
+    # # --class_id  21 \
+    # # --path output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-1  \
+    # # --path_name Model_trained_on_all_30_classes \
+    # # --class_id 21 \
+    # # --path output-mymodel-classes-1-20to1-20and21-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Continual_learning_on_class_21 \
+    # # --class_id  21 
+    
+## srun python plot.py \
+    # # --disable_student \
+    # # --path output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-1  \
+    # # --path_name Model_trained_on_all_30_classes \
+    # # --class_id 0 \
+    # # --path output-mymodel-classes-1-20to1-20and21-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Continual_learning_on_class_21 \
+    # # --class_id  0 
+    
+    # # \
+    # # --path output-mymodel-classes-1-20to1-20and21-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Continual_learning_for_21_classes \
+    # # --class_id  0 
+
+
+## srun python plot.py \
+    # # --disable_student \
+    # # --title Consistency_loss \
+    # # --path output-mymodel-classes-1-30-FINAL-withCustomAugmentation \
+    # # --path_name Lambda_=_0 \
+    # # --class_id  0 \
+    # # --path output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-1 \
+    # # --path_name Lambda_=_0.7 \
+    # # --class_id 0 
+
+####--------------------------------------------------------------------------
+### RUN THIS ONE LAST TIME TO FIX THE AVERAGE PLOT!
+## srun python plot.py \
+    # # --disable_student \
+    # # --title Continual_learning \
+    # # --path output-mymodel-classes-1-20to1-20and21-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_21 \
+    # # --class_id  21 \
+    # # --path output-mymodel-classes-1-20to1-20and22-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_22 \
+    # # --class_id  22 \
+    # # --path output-mymodel-classes-1-20to1-20and23-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_23 \
+    # # --class_id  23 \
+    # # --path output-mymodel-classes-1-20to1-20and24-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_24 \
+    # # --class_id  24 \
+    # # --path output-mymodel-classes-1-20to1-20and25-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_25 \
+    # # --class_id  25 \
+    # # --path output-mymodel-classes-1-20to1-20and26-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_26 \
+    # # --class_id  26\
+    # # --path output-mymodel-classes-1-20to1-20and27-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_27 \
+    # # --class_id  27\
+    # # --path output-mymodel-classes-1-20to1-20and28-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_28 \
+    # # --class_id  28\
+    # # --path output-mymodel-classes-1-20to1-20and29-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_29 \
+    # # --class_id  29\
+    # # --path output-mymodel-classes-1-20to1-20and30-FINAL-MyModel_withCustomAugmentation \
+    # # --path_name Class_30 \
+    # # --class_id  30
+
+
+# # python plot.py \
+# #     --title AP50 \
+# #     --disable_student \
+# #     --path output-mymodel-classes-1-30-FINAL-Original_withoutMyComponents \
+# #     --path_name Original_AT \
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-30-FINAL-Original_newScheduler \
+# #     --path_name Original_AT_with_new_scheduler \
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-origScheduler \
+# #     --path_name Custom_AT_with_original_scheduler \
+# #     --class_id  0 
+
+
+## plot to show continual learning results for 21
+# # python plot.py \
+# #     --disable_student \
+# #     --metric_name bbox_teacher/AP50 \
+# #     --title Continual_learning \
+# #     --path output-mymodel-classes-1-20to1-20and21-FINAL-MyModel_withCustomAugmentation \
+# #     --path_name continual_learning_on_class_21 \
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-1 \
+# #     --path_name Trained_on_full_dataset \
+# #     --class_id  0 
+
+## for the pump
+# # python plot.py \
+# #     --disable_student \
+# #     --metric_name bbox_teacher/AP50 \
+# #     --title AP50_for_Pump_HM-75S \
+# #     --path output-mymodel-pumps-FINAL-MyModel_withCustomAugmentation \
+# #     --path_name AP50_for_Pump_HM-75S \
+# #     --class_id  0 
+
+
+# # python plot.py \
+# #     --disable_student \
+# #     --title Varying_lambda \
+# #     --metric_name bbox/AP50 \
+# #     --path output-mymodel-classes-1-20-constLoss_0.25 \
+# #     --path_name L_const_0.25,_L_inst_0.05,_L_img_0.05,_BASE_LR_0.001\
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-20-constLoss-v2 \
+# #     --path_name L_const_0.07,_L_inst_0.07,_L_img_0.07,_BASE_LR_0.001\
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-20-constLoss-v3 \
+# #     --path_name L_const_0.1,_L_inst_0.05,_L_img_0.1,_BASE_LR_0.001\
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-20-constLoss-v4 \
+# #     --path_name L_const_0.1,_L_inst_0.1,_L_img_0.1,_BASE_LR_0.001\
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-20-constLoss-v5 \
+# #     --path_name L_const_0.1,_L_inst_0.1,_L_img_0.1,_BASE_LR_0.0012 \
+# #     --class_id  0 \
+# #     --path output-mymodel-classes-1-20-constLoss-v6.1 \
+# #     --path_name L_const_0.1,_L_inst_0.125,_L_img_0.1,_BASE_LR_0.0008 \
+# #     --class_id  0 
+
+
+## srun python plot.py \
+    # # --disable_student \
+    # # --title Rich_distribution_vs_poor_distribution \
+    # # --path output-mymodel-classes-1-30-FINAL-MyModel_withCustomAugmentation-origScheduler \
+    # # --path_name AP50 \
+    # # --class_id  0 

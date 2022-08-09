@@ -13,7 +13,7 @@ import itertools
 from collections import defaultdict
 from enum import Enum
 from typing import Any, Callable, Dict, Iterable, List, Optional, Set, Type, Union
-
+# @darkhan-s this file is extended from the original detectron2 implementation to include custom logic
 
 _GradientClipperInput = Union[torch.Tensor, Iterable[torch.Tensor]]
 _GradientClipper = Callable[[_GradientClipperInput], None]
